@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>행동유형 진단 — 파일럿 데모</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --canvas:#F7F6F3; --paper:#FFFFFF; --ink:#111111; --ink2:#2F3437; --sub:#787774;
+  --line:#EAEAEA; --line2:#DEDCD7;
+  --D:#9F2F2D; --I:#956400; --S:#346538; --C:#1F6C9F;
+  --Dbg:#FDEBEC; --Ibg:#FBF3DB; --Sbg:#EDF3EC; --Cbg:#E1F3FE;
+  --sh:0 0 0 1px rgba(0,0,0,.05),0 1px 1px -.5px rgba(0,0,0,.06),0 3px 3px -1.5px rgba(0,0,0,.06),0 6px 6px -3px rgba(0,0,0,.06),0 12px 12px -6px rgba(0,0,0,.05);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--canvas);color:var(--ink);
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;font-feature-settings:"tnum"}
+body{padding:0 20px 80px}
+.wrap{max-width:680px;margin:0 auto}
+.mono{font-variant-numeric:tabular-nums;font-family:"SFMono-Regular",ui-monospace,Menlo,monospace}
+.eyebrow{font-size:11px;letter-spacing:.2em;color:var(--sub);text-transform:uppercase;font-weight:600}
+h1{font-size:38px;line-height:1.12;letter-spacing:-.035em;font-weight:800;margin:14px 0 0}
+h2{font-size:22px;line-height:1.25;letter-spacing:-.03em;font-weight:700}
+h3{font-size:15px;letter-spacing:-.02em;font-weight:700}
+p{line-height:1.65;color:var(--ink2)}
+.sub{color:var(--sub)}
+.hr{height:1px;background:var(--line);border:0}
+
+/* ── 인트로 ── */
+#intro{padding:72px 0 0}
+#intro .lead{margin-top:20px;font-size:16px;max-width:34em}
+.verbox{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.ver{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;
+  cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:18px;transition:.15s;font-family:inherit}
+.ver:hover{border-color:var(--line2);box-shadow:var(--sh);transform:translateY(-1px)}
+.ver .n{font-size:12px;font-weight:700;color:var(--sub);padding-top:3px;min-width:26px}
+.ver .t{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.ver .d{font-size:13.5px;color:var(--sub);margin-top:5px;line-height:1.55}
+.ver .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;
+  background:var(--Cbg);color:var(--C);margin-left:8px;vertical-align:2px;letter-spacing:0}
+.note{margin-top:34px;font-size:12.5px;color:var(--sub);line-height:1.7;
+  border-left:2px solid var(--line2);padding-left:14px}
+
+/* ── 문항 ── */
+#quiz{padding:34px 0 0;display:none}
+.bar{height:2px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ink);width:0;transition:width .28s cubic-bezier(.4,0,.2,1)}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.qhead .c{font-size:12px;font-weight:700;color:var(--sub)}
+.qtitle{margin:38px 0 6px;font-size:20px;font-weight:700;letter-spacing:-.03em}
+.qhint{font-size:13.5px;color:var(--sub);margin-bottom:22px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 14px 14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px}
+.opt .w{font-size:16.5px;font-weight:600;letter-spacing:-.02em}
+.pick{display:flex;gap:6px}
+.pick button{font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:-.01em;
+  border:1px solid var(--line);background:#fff;color:var(--sub);border-radius:8px;padding:8px 11px;cursor:pointer;transition:.12s}
+.pick button:hover{border-color:#c9c7c1;color:var(--ink2)}
+.pick button.on[data-k=hi]{background:var(--ink);border-color:var(--ink);color:#fff}
+.pick button.on[data-k=lo]{background:#fff;border-color:var(--ink);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.qfoot{margin-top:26px;display:flex;justify-content:space-between;align-items:center}
+.ghost{font-family:inherit;background:none;border:0;color:var(--sub);font-size:13.5px;cursor:pointer;padding:8px 0;font-weight:600}
+.ghost:hover{color:var(--ink)}
+
+/* ── 결과 ── */
+#result{padding:40px 0 0;display:none}
+.badge{display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:7px 15px 7px 9px;font-size:12.5px;font-weight:700;color:var(--sub)}
+.dots{display:flex;gap:3px}
+.dots i{width:7px;height:7px;border-radius:50%}
+.rtype{font-size:44px;line-height:1.1;letter-spacing:-.04em;font-weight:800;margin:16px 0 0}
+.rline{font-size:17px;line-height:1.6;color:var(--ink2);margin-top:14px;max-width:32em}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 24px;margin-top:14px}
+.sect{margin-top:44px}
+.sect>.eyebrow{display:block;margin-bottom:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:620px){.g3{grid-template-columns:1fr}}
+.gcap{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:2px}
+.gcap b{color:var(--ink)}
+.gnote{font-size:11.5px;color:var(--sub);line-height:1.5;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:11px 6px;border-bottom:1px solid var(--line)}
+th{font-size:11px;letter-spacing:.12em;color:var(--sub);font-weight:700;text-transform:uppercase}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.fk{display:inline-flex;align-items:center;gap:8px;font-weight:700}
+.fk i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.seg{display:inline-block;min-width:20px;text-align:center;font-weight:800;font-size:13px;
+  padding:2px 7px;border-radius:5px}
+ul.pts{list-style:none;display:flex;flex-direction:column;gap:11px}
+ul.pts li{display:flex;gap:11px;font-size:15px;line-height:1.55;color:var(--ink2)}
+ul.pts li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--line2);flex:0 0 5px;margin-top:9px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.two{grid-template-columns:1fr}}
+.btnrow{margin-top:44px;display:flex;flex-wrap:wrap;gap:9px}
+.btn{font-family:inherit;font-size:14.5px;font-weight:700;letter-spacing:-.02em;border-radius:10px;
+  padding:14px 20px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:#fff;transition:.15s}
+.btn:hover{opacity:.86}
+.btn.sec{background:#fff;color:var(--ink);border-color:var(--line2)}
+.btn.sec:hover{border-color:var(--ink);opacity:1}
+.adslot{margin-top:44px;border:1px dashed var(--line2);border-radius:10px;padding:26px;text-align:center;
+  font-size:11.5px;letter-spacing:.14em;color:#b8b6b0;font-weight:700}
+.disc{margin-top:40px;font-size:11.5px;color:var(--sub);line-height:1.75;
+  border-top:1px solid var(--line);padding-top:18px}
+canvas#shot{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ══ 인트로 ══ -->
+<section id="intro">
+  <span class="eyebrow">SigmaAd · 행동유형 진단 파일럿</span>
+  <h1>어떻게 일할 때<br>가장 나다운가</h1>
+  <p class="lead">같은 상황에서도 사람마다 먼저 움직이는 방향이 다릅니다. 이 진단은 성격의 좋고 나쁨을 가르지 않고, <b>일할 때 드러나는 행동 방향</b> 네 가지의 비중을 재어 40개 유형 중 하나로 정리합니다.</p>
+
+  <div class="verbox">
+    <button class="ver" onclick="start(14)">
+      <span class="n mono">14</span>
+      <span>
+        <span class="t">빠른 진단</span><span class="tag">약 3분</span>
+        <span class="d">14문항. 유형과 핵심 성향까지 나옵니다. 처음이면 여기서 시작하세요.</span>
+      </span>
+    </button>
+    <button class="ver" onclick="start(28)">
+      <span class="n mono">28</span>
+      <span>
+        <span class="t">정밀 진단</span><span class="tag">약 7분</span>
+        <span class="d">28문항. 최고치·최소치·차이 그래프 3종을 모두 산출해 대외 행동과 내면 동기의 간극까지 봅니다.</span>
+      </span>
+    </button>
+  </div>
+
+  <p class="note">문항마다 <b>가장 나 같은 말 1개</b>와 <b>가장 나답지 않은 말 1개</b>를 고릅니다. 옳은 답은 없습니다. 오래 고민할수록 정확도가 떨어지니 첫 느낌으로 고르세요.<br>회원가입 없이 진행되며 답변은 브라우저 안에서만 계산되고 서버로 전송되지 않습니다.</p>
+</section>
+
+<!-- ══ 문항 ══ -->
+<section id="quiz">
+  <div class="qhead">
+    <span class="c mono" id="qcount">1 / 14</span>
+    <span class="c" id="qpct">0%</span>
+  </div>
+  <div class="bar"><i id="qbar"></i></div>
+
+  <h2 class="qtitle">아래 넷 중에서</h2>
+  <p class="qhint">가장 나 같은 것에 <b>나 같다</b>, 가장 거리가 먼 것에 <b>아니다</b>를 누르세요.</p>
+
+  <div class="opts" id="opts"></div>
+
+  <div class="qfoot">
+    <button class="ghost" id="btnPrev" onclick="goPrev()">← 이전 문항</button>
+    <button class="ghost" onclick="location.reload()">처음으로</button>
+  </div>
+</section>
+
+<!-- ══ 결과 ══ -->
+<section id="result">
+  <span class="badge"><span class="dots" id="rdots"></span><span id="rcode">D / I</span></span>
+  <h1 class="rtype" id="rname">개척형</h1>
+  <p class="rline" id="rline"></p>
+
+  <div class="sect">
+    <span class="eyebrow">성향 프로파일</span>
+    <div class="card" style="padding:20px 18px">
+      <div class="g3" id="graphs"></div>
+      <p class="gnote" id="gnote"></p>
+    </div>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">요인별 강도</span>
+    <table>
+      <thead><tr><th>요인</th><th class="num">최고치</th><th class="num">최소치</th><th class="num">차이</th><th class="num">구분</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="sect two">
+    <div>
+      <span class="eyebrow">이럴 때 강하다</span>
+      <div class="card"><ul class="pts" id="strong"></ul></div>
+    </div>
+    <div>
+      <span class="eyebrow">이럴 때 걸린다</span>
+      <div class="card"><ul class="pts" id="weak"></ul></div>
+    </div>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">일과 사람</span>
+    <div class="card">
+      <h3>잘 맞는 자리</h3>
+      <p style="margin-top:8px;font-size:15px" id="rjob"></p>
+      <hr class="hr" style="margin:20px 0">
+      <h3>같이 두면 잘 굴러가는 유형</h3>
+      <p style="margin-top:8px;font-size:15px" id="rfit"></p>
+    </div>
+  </div>
+
+  <div class="adslot">AD SLOT · 728 × 90</div>
+
+  <div class="btnrow">
+    <button class="btn" onclick="saveCard()">결과 카드 저장</button>
+    <button class="btn sec" id="upsell" onclick="start(28)">정밀 28문항으로 다시 보기</button>
+    <button class="btn sec" onclick="location.reload()">처음부터</button>
+  </div>
+
+  <p class="disc" id="disc"></p>
+</section>
+
+<canvas id="shot" width="1080" height="1350"></canvas>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   문항 — 자체 개발본 v0.1
+   각 문항은 D·I·S·C 형용사 1개씩으로 구성한다.
+   → 최고치 합 = 최소치 합 = 문항 수 가 자동으로 보장된다.
+   ══════════════════════════════════════════════════════════════ */
+const ITEMS=[
+ ["단호한","활발한","차분한","꼼꼼한"],
+ ["도전적인","낙천적인","인내심 있는","논리적인"],
+ ["결단이 빠른","말을 잘 거는","남을 잘 챙기는","근거를 따지는"],
+ ["경쟁을 즐기는","유쾌한","온화한","체계적인"],
+ ["직설적인","표현이 풍부한","협조적인","원칙을 지키는"],
+ ["추진력 있는","열정적인","잘 들어주는","신중한"],
+ ["과감한","설득력 있는","헌신적인","자료를 찾아보는"],
+ ["승부욕이 강한","사교적인","서두르지 않는","완벽을 추구하는"],
+ ["밀어붙이는","즉흥적인","겸손한","비판적으로 보는"],
+ ["목표부터 세우는","분위기를 띄우는","조용한","규칙을 따르는"],
+ ["결과를 먼저 보는","감정이 잘 드러나는","편안한","세밀한"],
+ ["앞장서는","붙임성 있는","신뢰를 주는","조심스러운"],
+ ["대담한","재미를 찾는","뒤에서 돕는","검증하는"],
+ ["자신만만한","사람을 모으는","다투지 않는","절차를 지키는"],
+ ["통솔하는","칭찬을 잘하는","여유 있는","계획을 세우는"],
+ ["독립적인","상상력이 풍부한","참을성 있는","객관적인"],
+ ["모험을 마다않는","활기찬","오래 곁에 있는","기준이 분명한"],
+ ["즉시 판단하는","처음 본 사람도 반기는","부드러운","실수를 싫어하는"],
+ ["요구가 분명한","이야기를 이끄는","성실한","따져보는"],
+ ["야심 있는","감성적인","갈등을 피하는","정리된"],
+ ["결론부터 말하는","열려 있는","묵묵한","사실을 중시하는"],
+ ["강하게 나가는","밝은","받아주는","깐깐한"],
+ ["속도를 내는","즐거움을 찾는","기다려주는","미리 준비하는"],
+ ["지시가 분명한","표현하는","안정적인","질문이 많은"],
+ ["물러서지 않는","사람을 좋아하는","편들어주는","표준을 지키는"],
+ ["주도하는","말이 많은","배려하는","분석적인"],
+ ["정면돌파하는","인기 있는","꾸준한","정확한"],
+ ["위험을 감수하는","개방적인","온순한","빈틈없는"]
+];
+const F=["D","I","S","C"];
+const FNAME={D:"주도",I:"사교",S:"안정",C:"신중"};
+const FLONG={D:"주도 Dominance",I:"사교 Influence",S:"안정 Steadiness",C:"신중 Conscientiousness"};
+const FCOL={D:"#9F2F2D",I:"#956400",S:"#346538",C:"#1F6C9F"};
+const FBG={D:"#FDEBEC",I:"#FBF3DB",S:"#EDF3EC",C:"#E1F3FE"};
+
+/* 문항별 표시 순서 — 고정 셔플(D가 항상 위에 오지 않게) */
+const ORDER=[[0,1,2,3],[2,0,3,1],[1,3,0,2],[3,2,1,0],[0,3,1,2],[2,1,0,3],[1,0,3,2],[3,1,2,0],
+             [0,2,3,1],[1,2,0,3],[2,3,1,0],[3,0,2,1],[0,1,3,2],[2,0,1,3],[1,3,2,0],[3,2,0,1],
+             [0,3,2,1],[1,0,2,3],[2,1,3,0],[3,1,0,2],[0,2,1,3],[1,2,3,0],[2,3,0,1],[3,0,1,2],
+             [0,1,2,3],[2,0,3,1],[1,3,0,2],[3,2,1,0]];
+
+/* 요인별 서술 사전 */
+const LIB={
+ D:{s:["막힌 상황에서 먼저 결정을 내려 판을 움직인다","성과 목표가 분명할수록 속도가 붙는다","반대 의견 앞에서도 자기 안을 끝까지 밀어붙인다"],
+    w:["결론을 서두르다 근거 확인을 건너뛴다","말이 세게 나가 상대가 지적으로 받아들인다","혼자 정하고 통보하는 형태가 되기 쉽다"]},
+ I:{s:["처음 만난 사람과도 금방 대화의 물꼬를 튼다","분위기가 가라앉은 자리를 되살린다","말과 표정으로 사람을 움직여 협조를 얻어낸다"],
+    w:["말이 앞서 약속한 범위가 커진다","마무리와 기록이 뒤로 밀린다","반응이 없는 상대 앞에서 동력이 급히 떨어진다"]},
+ S:{s:["한번 맡은 일을 오래 같은 품질로 끌고 간다","팀 안의 감정 마찰을 조용히 흡수한다","상대가 말을 다 마칠 때까지 듣는다"],
+    w:["부당한 요구에도 거절을 미룬다","방향이 자주 바뀌면 눈에 띄게 지친다","불만을 말하지 않고 안에 쌓아둔다"]},
+ C:{s:["숫자와 근거를 확인한 뒤에 움직인다","남들이 지나친 예외와 허점을 먼저 찾아낸다","기준을 문서로 만들어 반복 가능한 형태로 남긴다"],
+    w:["기준에 못 미치면 착수 자체를 미룬다","지적이 사람에 대한 평가로 전달된다","완결도를 지키느라 마감이 늦어진다"]}
+};
+const JOB={D:"결정 권한이 있고 성과가 숫자로 찍히는 자리",I:"사람을 계속 만나고 설득이 성과가 되는 자리",
+           S:"관계와 품질을 오래 유지해야 하는 자리",C:"정확도와 기준이 결과를 좌우하는 자리"};
+const FIT={D:"S",I:"C",S:"D",C:"I"};
+const FITWHY={D:"속도만 남지 않게 뒤를 받쳐 주는",I:"벌여 놓은 것을 검증해 마무리해 주는",S:"멈춰 있을 때 먼저 결정을 내려 주는",C:"닫힌 판을 열고 사람을 붙여 주는"};
+
+/* 40유형 — 이름과 한 줄 정의 */
+const TYPES={
+ "D":["돌파형","막힌 일 앞에서 가장 먼저 손을 대는 사람. 결정이 빠르고 책임을 피하지 않는다."],
+ "I":["확산형","사람을 통해 일이 풀린다고 믿는 사람. 분위기를 만들고 그 힘으로 움직인다."],
+ "S":["안정형","같은 자리에서 같은 품질을 지켜내는 사람. 흔들리는 판을 조용히 붙잡는다."],
+ "C":["정밀형","근거가 서야 움직이는 사람. 남들이 넘어간 곳을 다시 들여다본다."],
+ "D/I":["개척형","없던 판을 열고 사람까지 끌어모은다. 시작 국면에서 가장 세다."],
+ "D/S":["관철형","한번 정한 방향을 끝까지 가져간다. 시끄럽지 않게 밀고 나간다."],
+ "D/C":["전략형","이길 수 있는 판인지 먼저 계산하고 들어간다. 근거 있는 승부를 건다."],
+ "I/D":["선동형","말로 판을 만들고 그대로 밀어붙인다. 사람을 움직여 결과를 낸다."],
+ "I/S":["화합형","사람 사이의 온도를 맞춘다. 어느 자리에 두어도 팀이 부드러워진다."],
+ "I/C":["기획형","아이디어를 말로 풀고 형태까지 잡는다. 발상과 정리를 혼자 오간다."],
+ "S/D":["실행형","말보다 먼저 손이 나간다. 맡은 범위를 조용히 끝내 놓는다."],
+ "S/I":["조율형","갈라진 의견 사이에 서서 접점을 만든다. 편을 만들지 않는다."],
+ "S/C":["정착형","한번 만든 기준을 지켜 자리를 잡게 한다. 오래 가는 것을 만든다."],
+ "C/D":["설계형","구조를 먼저 그리고 그대로 밀어붙인다. 틀이 서야 움직인다."],
+ "C/I":["컨설팅형","분석한 것을 상대가 알아듣게 옮긴다. 근거와 설명을 같이 가진다."],
+ "C/S":["관리형","정해진 기준이 흐트러지지 않게 지킨다. 조용히 품질을 붙잡는다."],
+ "D/I/S":["통솔형","앞장서되 사람을 버리지 않는다. 팀 전체를 끌고 간다."],
+ "D/I/C":["사업형","기회를 보고 사람을 붙이고 숫자로 검증한다. 판을 사업으로 만든다."],
+ "D/S/I":["조직형","방향을 정하고 사람을 배치한다. 굴러가는 구조를 만든다."],
+ "D/S/C":["완수형","시작한 것을 끝내는 데 특화돼 있다. 중간에 놓지 않는다."],
+ "D/C/I":["승부형","이길 근거를 만들고 사람을 설득해 밀어붙인다. 경쟁 국면에 강하다."],
+ "D/C/S":["원칙형","기준을 세우고 그 기준으로 판단한다. 예외를 잘 만들지 않는다."],
+ "I/D/S":["리더십형","사람을 모으고 방향을 주고 끝까지 챙긴다. 앞에 서는 게 어색하지 않다."],
+ "I/D/C":["협상형","분위기를 만들고 조건을 따진다. 테이블에서 가장 강하다."],
+ "I/S/D":["중재형","갈등 한복판에서 말을 붙인다. 필요하면 결정도 내린다."],
+ "I/S/C":["코치형","상대의 속도에 맞춰 끌어올린다. 사람을 키우는 데 시간을 쓴다."],
+ "I/C/D":["설득형","자료로 무장한 뒤 말로 이긴다. 준비된 설득을 한다."],
+ "I/C/S":["조언형","묻는 사람에게 정리된 답을 준다. 앞에 나서지 않고 붙어 있는다."],
+ "S/D/I":["현장형","현장에서 직접 몸을 쓰며 결정한다. 책상보다 자리에서 강하다."],
+ "S/D/C":["운영형","돌아가는 상태를 유지하고 문제를 즉시 잡는다. 흔들림에 강하다."],
+ "S/I/D":["팀장형","팀을 먼저 보고 그다음에 일을 본다. 사람으로 성과를 만든다."],
+ "S/I/C":["상담형","오래 듣고 정확하게 답한다. 신뢰가 자산이 되는 유형."],
+ "S/C/D":["개선형","돌아가는 것을 더 낫게 바꾼다. 큰 판 대신 매일을 고친다."],
+ "S/C/I":["지원형","앞에 선 사람이 흔들리지 않게 뒤를 받친다. 실무가 정확하다."],
+ "C/D/I":["기획전략형","구조를 짜고 방향을 정하고 팔기까지 한다. 기획 전 구간을 커버한다."],
+ "C/D/S":["감사형","기준으로 재고 결론을 낸다. 타협하지 않는 검증자."],
+ "C/I/D":["프레젠터형","분석을 무기로 앞에 선다. 숫자를 이야기로 바꾼다."],
+ "C/I/S":["교육형","알고 있는 것을 남이 쓰게 만든다. 가르치는 데 시간을 아끼지 않는다."],
+ "C/S/D":["품질형","기준선 아래로 내려가는 것을 못 견딘다. 마지막 관문 역할."],
+ "C/S/I":["연구형","깊게 파고 오래 붙어 있는다. 조용히 전문성이 쌓인다."],
+ "BAL":["균형형","한쪽으로 기울지 않는다. 상황에 따라 네 방향을 바꿔 쓰는 드문 유형."]
+};
+
+/* ══ 상태 ══ */
+let N=14, cur=0, ans=[];
+
+function start(n){
+  N=n; cur=0; ans=Array.from({length:n},()=>({hi:null,lo:null}));
+  intro.style.display="none"; result.style.display="none"; quiz.style.display="block";
+  window.scrollTo(0,0); render();
+}
+function render(){
+  const idx=cur, it=ITEMS[idx], ord=ORDER[idx], a=ans[idx];
+  qcount.textContent=(idx+1)+" / "+N;
+  const pct=Math.round(idx/N*100); qpct.textContent=pct+"%"; qbar.style.width=pct+"%";
+  btnPrev.style.visibility = idx===0 ? "hidden":"visible";
+  opts.innerHTML = ord.map(f=>`
+    <div class="opt">
+      <span class="w">${it[f]}</span>
+      <span class="pick">
+        <button data-k="hi" data-f="${f}" class="${a.hi===f?"on":""}" onclick="pick(${f},'hi')">나 같다</button>
+        <button data-k="lo" data-f="${f}" class="${a.lo===f?"on":""}" onclick="pick(${f},'lo')">아니다</button>
+      </span>
+    </div>`).join("");
+}
+function pick(f,k){
+  const a=ans[cur];
+  const other = k==="hi" ? "lo":"hi";
+  if(a[other]===f) a[other]=null;          // 같은 항목에 둘 다 못 준다
+  a[k] = (a[k]===f) ? null : f;
+  render();
+  if(a.hi!==null && a.lo!==null){
+    setTimeout(()=>{ if(cur<N-1){cur++;render();window.scrollTo(0,0);} else finish(); },220);
+  }
+}
+function goPrev(){ if(cur>0){cur--;render();window.scrollTo(0,0);} }
+
+/* ══ 채점 ══ */
+function seg(v,kind){
+  if(kind==="diff"){ return v>=15?7 : v>=9?6 : v>=4?5 : v>=-3?4 : v>=-8?3 : v>=-14?2 : 1; }
+  return v>=15?7 : v>=12?6 : v>=9?5 : v>=6?4 : v>=4?3 : v>=2?2 : 1;
+}
+function score(){
+  const hi={D:0,I:0,S:0,C:0}, lo={D:0,I:0,S:0,C:0};
+  ans.forEach(a=>{ if(a.hi!==null)hi[F[a.hi]]++; if(a.lo!==null)lo[F[a.lo]]++; });
+  const k = 28/N;                                   // 14문항은 ×2로 28점 척도에 정규화
+  const g1={},g2={},g3={},sg={};
+  F.forEach(f=>{ g1[f]=Math.round(hi[f]*k); g2[f]=Math.round(lo[f]*k); g3[f]=g1[f]-g2[f]; sg[f]=seg(g3[f],"diff"); });
+  const rank=[...F].sort((a,b)=> g3[b]-g3[a] || F.indexOf(a)-F.indexOf(b));
+  let main = rank.filter(f=>sg[f]>=5);
+  let flat=false;
+  if(main.length===0){                                // 뚜렷한 상승 요인이 없다
+    if(g3[rank[0]]-g3[rank[3]] <= 6){ flat=true; }     // 네 요인이 서로 붙어 있으면 균형형
+    main=[rank[0]];
+  }
+  if(main.length>3) main=main.slice(0,3);
+  return {hi,lo,g1,g2,g3,sg,rank,flat,code: flat?"BAL":main.join("/")};
+}
+
+/* ══ 그래프 ══ */
+function chart(title,vals,kind){
+  const W=200,H=250,PL=26,PR=14,PT=22,PB=20, iw=W-PL-PR, ih=H-PT-PB;
+  const lo = kind==="diff"?-28:0, hi=28;
+  const y=v=>PT+ih-(v-lo)/(hi-lo)*ih;
+  const x=i=>PL+iw*(i+.5)/4;
+  const bands=[1,2,3,4,5,6,7], bnd = kind==="diff"?[-28,-15,-9,-4,4,9,15,29]:[0,2,4,6,9,12,15,29];
+  let g="";
+  bands.forEach((b,i)=>{ const y0=y(Math.min(bnd[i+1],28)), y1=y(bnd[i]);
+    g+=`<rect x="${PL}" y="${y0}" width="${iw}" height="${Math.max(0,y1-y0)}" fill="${b===4?'#F2F0EC':'#FBFAF8'}"/>`;
+    g+=`<line x1="${PL}" y1="${y1}" x2="${PL+iw}" y2="${y1}" stroke="#EAEAEA" stroke-width="1"/>`;
+    if(y1-y0>=13) g+=`<text x="${PL-7}" y="${(y0+y1)/2+3.5}" font-size="9" fill="#B8B6B0" text-anchor="end" font-weight="700">${b}</text>`; });
+  let pts=F.map((f,i)=>`${x(i)},${y(vals[f])}`).join(" ");
+  g+=`<polyline points="${pts}" fill="none" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>`;
+  F.forEach((f,i)=>{ g+=`<circle cx="${x(i)}" cy="${y(vals[f])}" r="4.5" fill="${FCOL[f]}"/>`;
+    g+=`<text x="${x(i)}" y="${H-6}" font-size="10.5" fill="${FCOL[f]}" text-anchor="middle" font-weight="800">${f}</text>`; });
+  return `<div><div class="gcap">${title}</div>
+    <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${g}</svg></div>`;
+}
+
+/* ══ 결과 ══ */
+let R=null;
+function finish(){
+  R=score();
+  const [nm,ln]=TYPES[R.code]||TYPES[R.rank[0]];
+  quiz.style.display="none"; result.style.display="block"; window.scrollTo(0,0);
+  const CODE = R.flat ? F : R.code.split("/");
+  rcode.textContent = R.flat ? "네 요인 균형" : CODE.map(f=>f+" "+FNAME[f]).join("  ·  ");
+  rdots.innerHTML = CODE.map(f=>`<i style="background:${FCOL[f]}"></i>`).join("");
+  rname.textContent=nm; rline.textContent=ln;
+
+  graphs.innerHTML = chart("그래프 <b>Ⅰ</b> · 최고치 — 남에게 보이는 나",R.g1,"raw")
+                   + chart("그래프 <b>Ⅱ</b> · 최소치 — 눌러 두는 나",R.g2,"raw")
+                   + chart("그래프 <b>Ⅲ</b> · 차이 — 실제 나",R.g3,"diff");
+  gnote.innerHTML = "그래프 Ⅲ = 최고치 − 최소치. 유형 판정은 Ⅲ을 기준으로 한다. "
+    + (N===14 ? "<b>14문항 결과는 28점 척도로 환산한 값</b>이라 정밀 진단과 소수 차이가 날 수 있다." : "28문항 원점수 그대로다.");
+
+  tbody.innerHTML = F.map(f=>`<tr>
+    <td><span class="fk"><i style="background:${FCOL[f]}"></i>${FLONG[f]}</span></td>
+    <td class="num mono">${R.g1[f]}</td><td class="num mono">${R.g2[f]}</td>
+    <td class="num mono">${R.g3[f]>0?"+":""}${R.g3[f]}</td>
+    <td class="num"><span class="seg" style="background:${FBG[f]};color:${FCOL[f]}">${R.sg[f]}</span></td></tr>`).join("");
+
+  const P = R.flat ? R.rank.slice(0,2) : R.code.split("/");
+  const S = P.length===1 ? [...LIB[P[0]].s]
+          : [...LIB[P[0]].s.slice(0,2), LIB[P[1]].s[0], ...(P[2]?[LIB[P[2]].s[1]]:[])];
+  const Wk = P.length===1 ? [...LIB[P[0]].w]
+          : [...LIB[P[0]].w.slice(0,2), LIB[P[1]].w[1]];
+  strong.innerHTML=S.map(t=>`<li>${t}</li>`).join("");
+  weak.innerHTML=Wk.map(t=>`<li>${t}</li>`).join("");
+  rjob.textContent=JOB[P[0]] + (P[1] ? "  —  여기에 "+FNAME[P[1]]+" 성향이 붙어 "+(P[1]==="C"?"검증까지 스스로 한다.":P[1]==="I"?"사람을 붙이는 일까지 같이 한다.":P[1]==="S"?"오래 붙어 있는 일에도 견딘다.":"결정 속도가 한 단계 빨라진다.") : ".");
+  const fp=FIT[P[0]];
+  rfit.textContent=FLONG[fp]+"이 높은 유형. "+FITWHY[P[0]]+" 역할이라 부딪히는 대신 서로의 빈 곳을 메운다.";
+
+  upsell.style.display = N===14 ? "inline-block":"none";
+  disc.innerHTML="이 진단은 DISC 4요인 이론(W. M. Marston, 1928)의 <b>구조</b>를 참고해 문항·채점기준·유형 서술을 자체 제작한 파일럿입니다. 특정 상용 검사도구의 문항이나 리포트를 사용하지 않으며 어떤 기업·기관의 공인 검사도 아닙니다. 채용·인사 판정 등 개인에게 불이익이 갈 수 있는 결정의 근거로 쓰지 마세요.<br>규준 변환 기준은 응답 표본 확보 전의 <b>잠정값</b>입니다. 표본 500건 이상 수집 후 백분위 기준으로 교체 예정.";
+}
+
+/* ══ 결과 카드 PNG ══ */
+function saveCard(){
+  const c=shot, x=c.getContext("2d"), W=1080,H=1350;
+  x.fillStyle="#F7F6F3"; x.fillRect(0,0,W,H);
+  const [nm,ln]=TYPES[R.code]||TYPES[R.rank[0]];
+  x.fillStyle="#787774"; x.font="700 26px Pretendard,sans-serif";
+  x.fillText("행 동 유 형   진 단", 90, 150);
+  x.fillStyle="#111"; x.font="800 116px Pretendard,sans-serif"; x.fillText(nm, 86, 290);
+  x.font="700 34px Pretendard,sans-serif";
+  x.fillText(R.flat ? "네 요인 균형" : R.code.split("/").map(f=>f+" "+FNAME[f]).join("   ·   "), 90, 360);
+  x.fillStyle="#2F3437"; x.font="400 33px Pretendard,sans-serif";
+  let line="",y=460; ln.split(" ").forEach(w=>{ if(x.measureText(line+w).width>880){x.fillText(line,90,y);y+=52;line="";} line+=w+" ";});
+  x.fillText(line,90,y);
+  // 막대
+  const bx=90, bw=900, top=y+120;
+  F.forEach((f,i)=>{ const yy=top+i*118, v=R.g3[f], w=Math.max(6, Math.abs(v)/28*(bw/2));
+    x.fillStyle="#E7E5E1"; x.fillRect(bx,yy+40,bw,3);
+    x.fillStyle=FCOL[f];
+    if(v>=0) x.fillRect(bx+bw/2,yy+26,w,30); else x.fillRect(bx+bw/2-w,yy+26,w,30);
+    x.font="800 30px Pretendard,sans-serif"; x.fillText(f,bx,yy+50);
+    x.fillStyle="#787774"; x.font="600 25px Pretendard,sans-serif";
+    x.fillText(FNAME[f]+"  "+(v>0?"+":"")+v, bx+46, yy+50); });
+  x.fillStyle="#B8B6B0"; x.font="700 24px Pretendard,sans-serif";
+  x.fillText("SigmaAd  ·  파일럿 데모", 90, H-80);
+  const a=document.createElement("a"); a.download="행동유형_"+nm+".png"; a.href=c.toDataURL("image/png"); a.click();
+}
+</script>
+</body>
+</html>
