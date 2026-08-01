@@ -3,12 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>행동유형 진단 — 파일럿 데모</title>
+<title>행동유형 진단 — 3분, 무료, 결과 전부 공개</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="3분이면 끝나는 행동유형 진단. 회원가입 없이, 결과 전부 무료로 봅니다.">
+<meta name="description" content="MBTI가 '내 안의 선호'를 묻는다면, 이 검사는 '내가 실제로 어떻게 행동하는지'를 봅니다. 3분 14문항, 회원가입 없이 결과 전부 무료.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="어떻게 일할 때 가장 나다운가">
-<meta property="og:description" content="3분 14문항. 회원가입 없이 결과 전부 공개. — SigmaAd 파일럿">
+<meta property="og:description" content="3분 14문항. 회원가입 없이 결과 전부 공개. 41개 행동유형 진단.">
+<meta property="og:image" content="https://andy555-cmyk.github.io/disc/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://andy555-cmyk.github.io/disc/">
+<meta property="og:site_name" content="SigmaAd">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -21,48 +26,66 @@
   --sh:0 0 0 1px rgba(0,0,0,.05),0 1px 1px -.5px rgba(0,0,0,.06),0 3px 3px -1.5px rgba(0,0,0,.06),0 6px 6px -3px rgba(0,0,0,.06),0 12px 12px -6px rgba(0,0,0,.05);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{background:var(--canvas);color:var(--ink);
+html{scroll-behavior:smooth}
+body{background:var(--canvas);color:var(--ink);padding:0 20px 90px;
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;font-feature-settings:"tnum"}
-body{padding:0 20px 80px}
-.wrap{max-width:680px;margin:0 auto}
+.wrap{max-width:700px;margin:0 auto}
 .mono{font-variant-numeric:tabular-nums;font-family:"SFMono-Regular",ui-monospace,Menlo,monospace}
-.eyebrow{font-size:11px;letter-spacing:.2em;color:var(--sub);text-transform:uppercase;font-weight:600}
-h1{font-size:38px;line-height:1.12;letter-spacing:-.035em;font-weight:800;margin:14px 0 0}
-h2{font-size:22px;line-height:1.25;letter-spacing:-.03em;font-weight:700}
+.eyebrow{font-size:11px;letter-spacing:.2em;color:var(--sub);font-weight:700;display:block}
+h1{font-size:40px;line-height:1.12;letter-spacing:-.04em;font-weight:800;margin:16px 0 0}
+h2{font-size:23px;line-height:1.25;letter-spacing:-.03em;font-weight:700}
 h3{font-size:15px;letter-spacing:-.02em;font-weight:700}
-p{line-height:1.65;color:var(--ink2)}
-.sub{color:var(--sub)}
-.hr{height:1px;background:var(--line);border:0}
+p{line-height:1.68;color:var(--ink2)}
+b{font-weight:700;color:var(--ink)}
+.hr{height:1px;background:var(--line);border:0;margin:0}
+.sect{margin-top:52px}
+.sect>.eyebrow{margin-bottom:15px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 24px;margin-top:14px}
 
 /* ── 인트로 ── */
-#intro{padding:72px 0 0}
-#intro .lead{margin-top:20px;font-size:16px;max-width:34em}
-.verbox{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+#intro{padding:74px 0 0}
+.lead{margin-top:22px;font-size:16.5px;max-width:33em}
+.claims{margin-top:34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:20px 0;display:flex;flex-wrap:wrap;gap:0}
+.claim{flex:1 1 33%;min-width:150px;padding:4px 14px 4px 0}
+.claim .n{font-size:20px;font-weight:800;letter-spacing:-.03em}
+.claim .d{font-size:12.5px;color:var(--sub);line-height:1.5;margin-top:4px}
+.verbox{margin-top:34px;display:flex;flex-direction:column;gap:11px}
 .ver{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;
-  cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:18px;transition:.15s;font-family:inherit}
+  cursor:pointer;text-align:left;display:flex;align-items:flex-start;gap:18px;transition:.15s;font-family:inherit;width:100%}
 .ver:hover{border-color:var(--line2);box-shadow:var(--sh);transform:translateY(-1px)}
-.ver .n{font-size:12px;font-weight:700;color:var(--sub);padding-top:3px;min-width:26px}
-.ver .t{font-size:17px;font-weight:700;letter-spacing:-.02em}
+.ver .n{font-size:12px;font-weight:800;color:var(--sub);padding-top:3px;min-width:26px}
+.ver .t{font-size:17.5px;font-weight:700;letter-spacing:-.02em}
 .ver .d{font-size:13.5px;color:var(--sub);margin-top:5px;line-height:1.55}
-.ver .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px;
   background:var(--Cbg);color:var(--C);margin-left:8px;vertical-align:2px;letter-spacing:0}
-.note{margin-top:34px;font-size:12.5px;color:var(--sub);line-height:1.7;
+.note{margin-top:32px;font-size:12.5px;color:var(--sub);line-height:1.75;
   border-left:2px solid var(--line2);padding-left:14px}
+.faq{margin-top:14px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;padding:15px 0;font-size:14.5px;font-weight:700;letter-spacing:-.02em;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--sub);font-weight:600;font-size:17px}
+.faq details[open] summary::after{content:"−"}
+.faq .a{font-size:14px;line-height:1.72;color:var(--ink2);padding:0 0 17px}
+.faq .a a{color:var(--C)}
 
 /* ── 문항 ── */
-#quiz{padding:34px 0 0;display:none}
+#quiz{padding:32px 0 0;display:none}
 .bar{height:2px;background:var(--line);border-radius:2px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--ink);width:0;transition:width .28s cubic-bezier(.4,0,.2,1)}
 .qhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
 .qhead .c{font-size:12px;font-weight:700;color:var(--sub)}
-.qtitle{margin:38px 0 6px;font-size:20px;font-weight:700;letter-spacing:-.03em}
-.qhint{font-size:13.5px;color:var(--sub);margin-bottom:22px}
+.qtitle{margin:36px 0 6px;font-size:20px;font-weight:700;letter-spacing:-.03em}
+.qhint{font-size:13.5px;color:var(--sub);margin-bottom:22px;line-height:1.6}
 .opts{display:flex;flex-direction:column;gap:9px}
-.opt{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:14px 14px 14px 20px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px}
+.opt{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:13px 13px 13px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:10px;transition:.12s}
+.opt.sel{border-color:var(--line2)}
 .opt .w{font-size:16.5px;font-weight:600;letter-spacing:-.02em}
-.pick{display:flex;gap:6px}
+.pick{display:flex;gap:6px;flex:0 0 auto}
 .pick button{font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:-.01em;
   border:1px solid var(--line);background:#fff;color:var(--sub);border-radius:8px;padding:8px 11px;cursor:pointer;transition:.12s}
 .pick button:hover{border-color:#c9c7c1;color:var(--ink2)}
@@ -73,103 +96,184 @@ p{line-height:1.65;color:var(--ink2)}
 .ghost:hover{color:var(--ink)}
 
 /* ── 결과 ── */
-#result{padding:40px 0 0;display:none}
+#result{padding:38px 0 0;display:none}
 .badge{display:inline-flex;align-items:center;gap:9px;background:var(--paper);border:1px solid var(--line);
   border-radius:999px;padding:7px 15px 7px 9px;font-size:12.5px;font-weight:700;color:var(--sub)}
 .dots{display:flex;gap:3px}
 .dots i{width:7px;height:7px;border-radius:50%}
-.rtype{font-size:44px;line-height:1.1;letter-spacing:-.04em;font-weight:800;margin:16px 0 0}
-.rline{font-size:17px;line-height:1.6;color:var(--ink2);margin-top:14px;max-width:32em}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:26px 24px;margin-top:14px}
-.sect{margin-top:44px}
-.sect>.eyebrow{display:block;margin-bottom:14px}
+.rtype{font-size:46px;line-height:1.08;letter-spacing:-.045em;font-weight:800;margin:16px 0 0}
+.rline{font-size:18px;line-height:1.55;color:var(--ink2);margin-top:14px;max-width:30em;font-weight:600}
+.rbody p{font-size:15.5px;margin-top:16px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-@media(max-width:620px){.g3{grid-template-columns:1fr}}
-.gcap{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:2px}
+@media(max-width:640px){.g3{grid-template-columns:1fr}}
+.gcap{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:1px}
 .gcap b{color:var(--ink)}
-.gnote{font-size:11.5px;color:var(--sub);line-height:1.5;margin-top:8px}
+.gsub{font-size:11px;color:var(--sub);margin-bottom:4px}
+.gnote{font-size:12px;color:var(--sub);line-height:1.65;margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{text-align:left;padding:11px 6px;border-bottom:1px solid var(--line)}
-th{font-size:11px;letter-spacing:.12em;color:var(--sub);font-weight:700;text-transform:uppercase}
+th{font-size:10.5px;letter-spacing:.1em;color:var(--sub);font-weight:700}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
 .fk{display:inline-flex;align-items:center;gap:8px;font-weight:700}
-.fk i{width:9px;height:9px;border-radius:2px;display:inline-block}
-.seg{display:inline-block;min-width:20px;text-align:center;font-weight:800;font-size:13px;
-  padding:2px 7px;border-radius:5px}
+.fk i{width:9px;height:9px;border-radius:2px;display:inline-block;flex:0 0 9px}
+.seg{display:inline-block;min-width:20px;text-align:center;font-weight:800;font-size:13px;padding:2px 7px;border-radius:5px}
 ul.pts{list-style:none;display:flex;flex-direction:column;gap:11px}
-ul.pts li{display:flex;gap:11px;font-size:15px;line-height:1.55;color:var(--ink2)}
+ul.pts li{display:flex;gap:11px;font-size:14.5px;line-height:1.6;color:var(--ink2)}
 ul.pts li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--line2);flex:0 0 5px;margin-top:9px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:620px){.two{grid-template-columns:1fr}}
-.btnrow{margin-top:44px;display:flex;flex-wrap:wrap;gap:9px}
+@media(max-width:640px){.two{grid-template-columns:1fr}}
+.kv{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.kv:last-child{border-bottom:0}
+.kv dt{flex:0 0 92px;font-size:12.5px;font-weight:700;color:var(--sub);padding-top:2px}
+.kv dd{font-size:14.5px;line-height:1.62;color:var(--ink2)}
+.fx{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:640px){.fx{grid-template-columns:1fr}}
+.fxi{border:1px solid var(--line);border-radius:10px;padding:15px 16px;background:var(--paper)}
+.fxi .h{font-weight:800;font-size:14px;letter-spacing:-.02em;display:flex;align-items:center;gap:7px}
+.fxi .h i{width:9px;height:9px;border-radius:2px}
+.fxi .d{font-size:13px;color:var(--sub);line-height:1.6;margin-top:6px}
+.btnrow{margin-top:46px;display:flex;flex-wrap:wrap;gap:9px}
 .btn{font-family:inherit;font-size:14.5px;font-weight:700;letter-spacing:-.02em;border-radius:10px;
   padding:14px 20px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:#fff;transition:.15s}
 .btn:hover{opacity:.86}
 .btn.sec{background:#fff;color:var(--ink);border-color:var(--line2)}
 .btn.sec:hover{border-color:var(--ink);opacity:1}
-.adslot{margin-top:44px;border:1px dashed var(--line2);border-radius:10px;padding:26px;text-align:center;
+.adslot{margin-top:46px;border:1px dashed var(--line2);border-radius:10px;padding:26px;text-align:center;
   font-size:11.5px;letter-spacing:.14em;color:#b8b6b0;font-weight:700}
-.disc{margin-top:40px;font-size:11.5px;color:var(--sub);line-height:1.75;
-  border-top:1px solid var(--line);padding-top:18px}
+.disc{margin-top:14px;font-size:12px;color:var(--sub);line-height:1.8}
+.disc a{color:var(--sub)}
+.srcs{font-size:11.5px;color:var(--sub);line-height:1.9;margin-top:10px}
+.srcs a{color:var(--C);text-decoration:none}
+.srcs a:hover{text-decoration:underline}
 canvas#shot{display:none}
+.pr{display:none}
+
+/* ── 인쇄 / PDF ── */
+@media print{
+  @page{size:A4;margin:12mm 12mm 13mm}
+  html,body{background:#fff;padding:0;font-size:9.8pt}
+  .wrap{max-width:none}
+  #intro,#quiz,.btnrow,.adslot,.faq,.noprint{display:none!important}
+  #result{display:block!important;padding:0}
+  .pr{display:block}
+  .prhead{display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1.5px solid #111;padding-bottom:6px;margin-bottom:14px}
+  .prhead .t{font-size:11.5pt;font-weight:800;letter-spacing:-.02em}
+  .prhead .m{font-size:8pt;color:#787774;font-weight:700}
+  .rtype{font-size:27pt;margin-top:4px;line-height:1.05}
+  .rline{font-size:11.5pt;margin-top:7px;max-width:none}
+  .rbody p{font-size:9.8pt;margin-top:7px;line-height:1.6}
+  .sect{margin-top:15px}
+  .sect>.eyebrow{margin-bottom:6px;font-size:8pt;letter-spacing:.16em}
+  .card{box-shadow:none;border:1px solid #DEDCD7;padding:11px 13px;margin-top:7px;break-inside:avoid}
+  .g3{grid-template-columns:1fr 1fr 1fr;gap:6px;break-inside:avoid}
+  .gcap{font-size:8.5pt}.gsub{font-size:7.5pt}
+  .gnote{font-size:7.8pt;line-height:1.55;margin-top:8px;padding-top:8px}
+  table{font-size:9pt}th,td{padding:7px 4px}
+  th{font-size:7.5pt}
+  ul.pts li{font-size:9pt;line-height:1.5;gap:9px}
+  ul.pts{gap:7px}
+  .two,.fx{grid-template-columns:1fr 1fr;gap:8px}
+  .kv{padding:9px 0}.kv dt{flex:0 0 76px;font-size:8.5pt}.kv dd{font-size:9.2pt;line-height:1.55}
+  .fxi{padding:10px 12px;break-inside:avoid}.fxi .h{font-size:9.2pt}.fxi .d{font-size:8.2pt;line-height:1.5}
+  .seg{font-size:8.5pt;padding:1px 6px}
+  .badge{display:none}
+  .disc{font-size:8pt;line-height:1.65}
+  .srcs{font-size:7.3pt;line-height:1.75}
+  .prfoot{margin-top:14px;padding-top:7px;border-top:1px solid #EAEAEA;
+    font-size:7pt;color:#787774;line-height:1.6;break-inside:avoid}
+  a{text-decoration:none;color:inherit}
+  h3{font-size:8pt}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- ══ 인트로 ══ -->
+<!-- ══════ 인트로 ══════ -->
 <section id="intro">
-  <span class="eyebrow">SigmaAd · 행동유형 진단 파일럿</span>
-  <h1>어떻게 일할 때<br>가장 나다운가</h1>
-  <p class="lead">같은 상황에서도 사람마다 먼저 움직이는 방향이 다릅니다. 이 진단은 성격의 좋고 나쁨을 가르지 않고, <b>일할 때 드러나는 행동 방향</b> 네 가지의 비중을 재어 40개 유형 중 하나로 정리합니다.</p>
+  <span class="eyebrow">행동유형 진단 · SigmaAd 파일럿</span>
+  <h1>MBTI는 나를 설명한다.<br>이건 내가 <span style="color:var(--C)">일하는 방식</span>을<br>설명한다.</h1>
+  <p class="lead">같은 상황에서 사람마다 먼저 움직이는 방향이 다릅니다. 이 진단은 성격의 좋고 나쁨을 가르지 않고, <b>일할 때 실제로 드러나는 행동 방향</b> 네 가지의 비중을 재어 41개 유형 중 하나로 정리합니다.</p>
+
+  <div class="claims">
+    <div class="claim"><div class="n">3분</div><div class="d">14문항. 회원가입도 결제도 없습니다.</div></div>
+    <div class="claim"><div class="n">41유형</div><div class="d">단일 4 · 2조합 12 · 3조합 24 · 균형 1</div></div>
+    <div class="claim"><div class="n">전부 공개</div><div class="d">결과를 보려고 돈을 내는 구간이 없습니다.</div></div>
+  </div>
 
   <div class="verbox">
     <button class="ver" onclick="start(14)">
       <span class="n mono">14</span>
       <span>
         <span class="t">빠른 진단</span><span class="tag">약 3분</span>
-        <span class="d">14문항. 유형과 핵심 성향까지 나옵니다. 처음이면 여기서 시작하세요.</span>
+        <span class="d">유형·강도 그래프·해설까지 전부 나옵니다. 처음이면 여기서 시작하세요.</span>
       </span>
     </button>
     <button class="ver" onclick="start(28)">
       <span class="n mono">28</span>
       <span>
         <span class="t">정밀 진단</span><span class="tag">약 7분</span>
-        <span class="d">28문항. 최고치·최소치·차이 그래프 3종을 모두 산출해 대외 행동과 내면 동기의 간극까지 봅니다.</span>
+        <span class="d">문항 수가 두 배라 경계에 걸린 요인이 또렷하게 갈립니다. 결과를 인쇄해 남길 거라면 이쪽.</span>
       </span>
     </button>
   </div>
 
-  <p class="note">문항마다 <b>가장 나 같은 말 1개</b>와 <b>가장 나답지 않은 말 1개</b>를 고릅니다. 옳은 답은 없습니다. 오래 고민할수록 정확도가 떨어지니 첫 느낌으로 고르세요.<br>회원가입 없이 진행되며 답변은 브라우저 안에서만 계산되고 서버로 전송되지 않습니다.</p>
+  <p class="note">문항마다 <b>가장 나 같은 말 1개</b>와 <b>가장 나답지 않은 말 1개</b>를 고릅니다. 정답은 없습니다. 오래 고민할수록 정확도가 떨어지니 첫 느낌으로 고르세요.<br>회원가입이 없고, 답변은 이 브라우저 안에서만 계산되며 <b>서버로 전송되지 않습니다.</b></p>
+
+  <div class="sect">
+    <span class="eyebrow">먼저 알고 시작하세요</span>
+    <div class="faq">
+      <details>
+        <summary>이건 무슨 검사인가요?</summary>
+        <div class="a">1928년 심리학자 윌리엄 몰턴 마스턴이 『Emotions of Normal People』에서 제시한 <b>DISC 4요인 모델</b>의 구조를 따릅니다. 주도(D)·사교(I)·안정(S)·신중(C) 네 방향의 비중을 재는 방식입니다. 이 모델 자체는 특정 회사의 소유가 아니라 공개된 이론이고, 여러 회사가 각자의 문항으로 검사 도구를 만들어 팝니다. <b>이 사이트의 문항·채점 기준·유형 해설은 그 모델 구조만 참고해 전부 새로 만든 것</b>이며, 어떤 상용 검사 도구의 문항이나 리포트도 사용하지 않았습니다.</div>
+      </details>
+      <details>
+        <summary>MBTI랑 뭐가 다른가요?</summary>
+        <div class="a">각 검사의 소유사가 스스로 이렇게 설명합니다. MBTI는 <b>선호(preference)</b> — 에너지를 어디서 얻는지, 정보를 어떻게 받아들이는지 — 네 쌍을 다룹니다. DISC는 <b>행동 경향(behavioral tendencies)</b>을 다룹니다. 쉽게 말해 MBTI는 '내 안에서 무엇이 편한가'를, DISC는 '남들 눈에 내가 어떻게 움직이는가'를 봅니다. 그래서 DISC는 팀 배치·협업 대화에 쓰이는 경우가 많습니다.<br><br>참고로 <b>무료로 도는 MBTI 검사는 정식 MBTI가 아닙니다.</b> MBTI 소유사는 "정식 MBTI는 저작권으로 보호되며 인증받은 사람만 시행할 수 있다"고 공식적으로 밝히고 있고, 국내 정식 검사는 144문항에 3만 원 수준입니다.</div>
+      </details>
+      <details>
+        <summary>얼마나 믿어도 되나요?</summary>
+        <div class="a">솔직하게 적겠습니다. <b>DISC는 학계에서 타당도 논란이 있는 도구입니다.</b> 1주 재검사 신뢰도가 높게 보고된 연구가 있는 반면, 네 요인이 서로 독립적이지 않고 Big Five 특성의 조합으로 더 잘 설명된다는 지적, 예측 타당도가 입증되지 않았다는 지적도 함께 있습니다. 이건 MBTI도 같은 처지입니다.<br><br>그리고 이 사이트는 자체 문항이라 <b>표준화된 규준 표본이 아직 없습니다.</b> 지금의 강도 구간(1~7)은 이론적으로 설정한 잠정값이고, 응답이 충분히 쌓이면 실제 분포 기준으로 교체할 예정입니다.<br><br>그래서 이렇게 쓰시면 됩니다 — <b>나를 확정하는 도구가 아니라, 팀 안에서 서로 다른 방식을 이야기하기 시작하는 도구.</b> 채용·인사 평가처럼 누군가에게 불이익이 갈 수 있는 결정의 근거로는 쓰지 마세요.</div>
+      </details>
+      <details>
+        <summary>내 답변은 어디로 가나요?</summary>
+        <div class="a">아무 데도 가지 않습니다. 문항 선택과 채점은 전부 이 페이지의 자바스크립트가 브라우저 안에서 처리하고, 결과를 서버로 보내는 코드가 없습니다. 이름·이메일·나이 같은 것도 묻지 않습니다. 페이지를 닫으면 결과도 같이 사라집니다.</div>
+      </details>
+    </div>
+  </div>
 </section>
 
-<!-- ══ 문항 ══ -->
+<!-- ══════ 문항 ══════ -->
 <section id="quiz">
   <div class="qhead">
     <span class="c mono" id="qcount">1 / 14</span>
     <span class="c" id="qpct">0%</span>
   </div>
   <div class="bar"><i id="qbar"></i></div>
-
   <h2 class="qtitle">아래 넷 중에서</h2>
-  <p class="qhint">가장 나 같은 것에 <b>나 같다</b>, 가장 거리가 먼 것에 <b>아니다</b>를 누르세요.</p>
-
+  <p class="qhint">가장 나 같은 것에 <b>나 같다</b>, 가장 거리가 먼 것에 <b>아니다</b>를 누르세요. 둘 다 고르면 자동으로 넘어갑니다.</p>
   <div class="opts" id="opts"></div>
-
   <div class="qfoot">
     <button class="ghost" id="btnPrev" onclick="goPrev()">← 이전 문항</button>
     <button class="ghost" onclick="location.reload()">처음으로</button>
   </div>
 </section>
 
-<!-- ══ 결과 ══ -->
+<!-- ══════ 결과 ══════ -->
 <section id="result">
-  <span class="badge"><span class="dots" id="rdots"></span><span id="rcode">D / I</span></span>
-  <h1 class="rtype" id="rname">개척형</h1>
+  <div class="pr prhead">
+    <span class="t">행동유형 진단 리포트</span>
+    <span class="m" id="prmeta"></span>
+  </div>
+
+  <span class="badge noprint"><span class="dots" id="rdots"></span><span id="rcode"></span></span>
+  <h1 class="rtype" id="rname"></h1>
   <p class="rline" id="rline"></p>
+  <div class="rbody" id="rbody"></div>
 
   <div class="sect">
-    <span class="eyebrow">성향 프로파일</span>
+    <span class="eyebrow">강도 프로파일</span>
     <div class="card" style="padding:20px 18px">
       <div class="g3" id="graphs"></div>
       <p class="gnote" id="gnote"></p>
@@ -177,11 +281,12 @@ canvas#shot{display:none}
   </div>
 
   <div class="sect">
-    <span class="eyebrow">요인별 강도</span>
+    <span class="eyebrow">요인별 수치</span>
     <table>
-      <thead><tr><th>요인</th><th class="num">최고치</th><th class="num">최소치</th><th class="num">차이</th><th class="num">구분</th></tr></thead>
+      <thead><tr><th>요인</th><th class="num">최고치</th><th class="num">최소치</th><th class="num">차이</th><th class="num">강도</th></tr></thead>
       <tbody id="tbody"></tbody>
     </table>
+    <p class="gnote" style="border:0;padding-top:10px">강도는 1~7이며 <b>4가 중립대</b>입니다. 5 이상이 뚜렷하게 쓰는 방향, 3 이하는 평소 잘 꺼내지 않는 방향입니다.</p>
   </div>
 
   <div class="sect two">
@@ -196,36 +301,60 @@ canvas#shot{display:none}
   </div>
 
   <div class="sect">
-    <span class="eyebrow">일과 사람</span>
-    <div class="card">
-      <h3>잘 맞는 자리</h3>
-      <p style="margin-top:8px;font-size:15px" id="rjob"></p>
-      <hr class="hr" style="margin:20px 0">
-      <h3>같이 두면 잘 굴러가는 유형</h3>
-      <p style="margin-top:8px;font-size:15px" id="rfit"></p>
+    <span class="eyebrow">압박 · 성장 · 자리</span>
+    <div class="card" style="padding:6px 24px">
+      <dl>
+        <div class="kv"><dt>압박받을 때</dt><dd id="rst"></dd></div>
+        <div class="kv"><dt>성장 포인트</dt><dd id="rg"></dd></div>
+        <div class="kv"><dt>잘 맞는 자리</dt><dd id="rjob"></dd></div>
+        <div class="kv"><dt>궁합 유형</dt><dd id="rfit"></dd></div>
+      </dl>
     </div>
   </div>
 
-  <div class="adslot">AD SLOT · 728 × 90</div>
+  <div class="sect">
+    <span class="eyebrow">네 가지 방향이란</span>
+    <div class="fx" id="fxbox"></div>
+  </div>
 
-  <div class="btnrow">
-    <button class="btn" onclick="saveCard()">결과 카드 저장</button>
-    <button class="btn sec" id="upsell" onclick="start(28)">정밀 28문항으로 다시 보기</button>
+  <div class="adslot noprint">AD SLOT · 728 × 90</div>
+
+  <div class="btnrow noprint">
+    <button class="btn" onclick="window.print()">결과 PDF로 저장 · 인쇄</button>
+    <button class="btn sec" onclick="saveCard()">공유 카드 이미지</button>
+    <button class="btn sec" id="upsell" onclick="start(28)">정밀 28문항으로 다시</button>
     <button class="btn sec" onclick="location.reload()">처음부터</button>
   </div>
 
-  <p class="disc" id="disc"></p>
+  <div class="sect">
+    <span class="eyebrow">근거와 한계</span>
+    <div class="card">
+      <p class="disc" id="disc"></p>
+      <hr class="hr" style="margin:16px 0">
+      <h3 style="font-size:12px;letter-spacing:.1em;color:var(--sub)">출처</h3>
+      <p class="srcs">
+        · W. M. Marston, <i>Emotions of Normal People</i> (1928) — <a href="https://archive.org/details/emotionsofnormal032195mbp" target="_blank" rel="noopener">archive.org</a><br>
+        · DISC 모델 개요·이용 규모 — <a href="https://www.discprofile.com/what-is-disc" target="_blank" rel="noopener">discprofile.com</a><br>
+        · 정식 MBTI의 저작권·인증 정책 — <a href="https://www.themyersbriggs.com/en-US/Campaigns/All-About-the-MBTI-Assessment" target="_blank" rel="noopener">themyersbriggs.com</a><br>
+        · DISC 신뢰도·타당도 논쟁 정리 — <a href="https://en.wikipedia.org/wiki/DISC_assessment" target="_blank" rel="noopener">Wikipedia: DISC assessment</a><br>
+        · MBTI 심리측정 비판 — Pittenger, D. J. (1993), <i>Review of Educational Research</i> 63(4)
+      </p>
+    </div>
+  </div>
+
+  <div class="pr prfoot" id="prfoot"></div>
 </section>
 
 <canvas id="shot" width="1080" height="1350"></canvas>
 </div>
 
 <script>
-/* ══════════════════════════════════════════════════════════════
-   문항 — 자체 개발본 v0.1
+/* ══════════════════════════════════════════════════════════════════════
+   문항 — 자체 개발본 v1.0
    각 문항은 D·I·S·C 형용사 1개씩으로 구성한다.
-   → 최고치 합 = 최소치 합 = 문항 수 가 자동으로 보장된다.
-   ══════════════════════════════════════════════════════════════ */
+   → 최고치 합 = 최소치 합 = 문항 수 가 자동 보장되고 검산이 가능하다.
+   요인 배정은 표준 DISC 형용사 분류와 대조 검증했다(중복 형용사 12개 전수 일치).
+   ══════════════════════════════════════════════════════════════════════ */
 const ITEMS=[
  ["단호한","활발한","차분한","꼼꼼한"],
  ["도전적인","낙천적인","인내심 있는","논리적인"],
@@ -261,76 +390,965 @@ const FNAME={D:"주도",I:"사교",S:"안정",C:"신중"};
 const FLONG={D:"주도 Dominance",I:"사교 Influence",S:"안정 Steadiness",C:"신중 Conscientiousness"};
 const FCOL={D:"#9F2F2D",I:"#956400",S:"#346538",C:"#1F6C9F"};
 const FBG={D:"#FDEBEC",I:"#FBF3DB",S:"#EDF3EC",C:"#E1F3FE"};
+const FDESC={
+ D:"문제와 속도. 결정을 빨리 내리고 결과로 판단합니다. 높을수록 주도하고 부딪히는 쪽, 낮을수록 신중하고 합의를 기다리는 쪽입니다.",
+ I:"사람과 표현. 관계로 일을 풉니다. 높을수록 말하고 설득하고 분위기를 만드는 쪽, 낮을수록 조용하고 사실 위주로 가는 쪽입니다.",
+ S:"속도와 지속. 흔들리지 않는 것을 중시합니다. 높을수록 꾸준하고 협조적인 쪽, 낮을수록 변화를 반기고 급하게 움직이는 쪽입니다.",
+ C:"기준과 정확도. 근거가 있어야 움직입니다. 높을수록 확인하고 따지는 쪽, 낮을수록 큰 그림 위주로 빠르게 가는 쪽입니다."};
 
-/* 문항별 표시 순서 — 고정 셔플(D가 항상 위에 오지 않게) */
 const ORDER=[[0,1,2,3],[2,0,3,1],[1,3,0,2],[3,2,1,0],[0,3,1,2],[2,1,0,3],[1,0,3,2],[3,1,2,0],
              [0,2,3,1],[1,2,0,3],[2,3,1,0],[3,0,2,1],[0,1,3,2],[2,0,1,3],[1,3,2,0],[3,2,0,1],
              [0,3,2,1],[1,0,2,3],[2,1,3,0],[3,1,0,2],[0,2,1,3],[1,2,3,0],[2,3,0,1],[3,0,1,2],
              [0,1,2,3],[2,0,3,1],[1,3,0,2],[3,2,1,0]];
 
-/* 요인별 서술 사전 */
-const LIB={
- D:{s:["막힌 상황에서 먼저 결정을 내려 판을 움직인다","성과 목표가 분명할수록 속도가 붙는다","반대 의견 앞에서도 자기 안을 끝까지 밀어붙인다"],
-    w:["결론을 서두르다 근거 확인을 건너뛴다","말이 세게 나가 상대가 지적으로 받아들인다","혼자 정하고 통보하는 형태가 되기 쉽다"]},
- I:{s:["처음 만난 사람과도 금방 대화의 물꼬를 튼다","분위기가 가라앉은 자리를 되살린다","말과 표정으로 사람을 움직여 협조를 얻어낸다"],
-    w:["말이 앞서 약속한 범위가 커진다","마무리와 기록이 뒤로 밀린다","반응이 없는 상대 앞에서 동력이 급히 떨어진다"]},
- S:{s:["한번 맡은 일을 오래 같은 품질로 끌고 간다","팀 안의 감정 마찰을 조용히 흡수한다","상대가 말을 다 마칠 때까지 듣는다"],
-    w:["부당한 요구에도 거절을 미룬다","방향이 자주 바뀌면 눈에 띄게 지친다","불만을 말하지 않고 안에 쌓아둔다"]},
- C:{s:["숫자와 근거를 확인한 뒤에 움직인다","남들이 지나친 예외와 허점을 먼저 찾아낸다","기준을 문서로 만들어 반복 가능한 형태로 남긴다"],
-    w:["기준에 못 미치면 착수 자체를 미룬다","지적이 사람에 대한 평가로 전달된다","완결도를 지키느라 마감이 늦어진다"]}
-};
-const JOB={D:"결정 권한이 있고 성과가 숫자로 찍히는 자리",I:"사람을 계속 만나고 설득이 성과가 되는 자리",
-           S:"관계와 품질을 오래 유지해야 하는 자리",C:"정확도와 기준이 결과를 좌우하는 자리"};
-const FIT={D:"S",I:"C",S:"D",C:"I"};
-const FITWHY={D:"속도만 남지 않게 뒤를 받쳐 주는",I:"벌여 놓은 것을 검증해 마무리해 주는",S:"멈춰 있을 때 먼저 결정을 내려 주는",C:"닫힌 판을 열고 사람을 붙여 주는"};
-
-/* 40유형 — 이름과 한 줄 정의 */
 const TYPES={
- "D":["돌파형","막힌 일 앞에서 가장 먼저 손을 대는 사람. 결정이 빠르고 책임을 피하지 않는다."],
- "I":["확산형","사람을 통해 일이 풀린다고 믿는 사람. 분위기를 만들고 그 힘으로 움직인다."],
- "S":["안정형","같은 자리에서 같은 품질을 지켜내는 사람. 흔들리는 판을 조용히 붙잡는다."],
- "C":["정밀형","근거가 서야 움직이는 사람. 남들이 넘어간 곳을 다시 들여다본다."],
- "D/I":["개척형","없던 판을 열고 사람까지 끌어모은다. 시작 국면에서 가장 세다."],
- "D/S":["관철형","한번 정한 방향을 끝까지 가져간다. 시끄럽지 않게 밀고 나간다."],
- "D/C":["전략형","이길 수 있는 판인지 먼저 계산하고 들어간다. 근거 있는 승부를 건다."],
- "I/D":["선동형","말로 판을 만들고 그대로 밀어붙인다. 사람을 움직여 결과를 낸다."],
- "I/S":["화합형","사람 사이의 온도를 맞춘다. 어느 자리에 두어도 팀이 부드러워진다."],
- "I/C":["기획형","아이디어를 말로 풀고 형태까지 잡는다. 발상과 정리를 혼자 오간다."],
- "S/D":["실행형","말보다 먼저 손이 나간다. 맡은 범위를 조용히 끝내 놓는다."],
- "S/I":["조율형","갈라진 의견 사이에 서서 접점을 만든다. 편을 만들지 않는다."],
- "S/C":["정착형","한번 만든 기준을 지켜 자리를 잡게 한다. 오래 가는 것을 만든다."],
- "C/D":["설계형","구조를 먼저 그리고 그대로 밀어붙인다. 틀이 서야 움직인다."],
- "C/I":["컨설팅형","분석한 것을 상대가 알아듣게 옮긴다. 근거와 설명을 같이 가진다."],
- "C/S":["관리형","정해진 기준이 흐트러지지 않게 지킨다. 조용히 품질을 붙잡는다."],
- "D/I/S":["통솔형","앞장서되 사람을 버리지 않는다. 팀 전체를 끌고 간다."],
- "D/I/C":["사업형","기회를 보고 사람을 붙이고 숫자로 검증한다. 판을 사업으로 만든다."],
- "D/S/I":["조직형","방향을 정하고 사람을 배치한다. 굴러가는 구조를 만든다."],
- "D/S/C":["완수형","시작한 것을 끝내는 데 특화돼 있다. 중간에 놓지 않는다."],
- "D/C/I":["승부형","이길 근거를 만들고 사람을 설득해 밀어붙인다. 경쟁 국면에 강하다."],
- "D/C/S":["원칙형","기준을 세우고 그 기준으로 판단한다. 예외를 잘 만들지 않는다."],
- "I/D/S":["리더십형","사람을 모으고 방향을 주고 끝까지 챙긴다. 앞에 서는 게 어색하지 않다."],
- "I/D/C":["협상형","분위기를 만들고 조건을 따진다. 테이블에서 가장 강하다."],
- "I/S/D":["중재형","갈등 한복판에서 말을 붙인다. 필요하면 결정도 내린다."],
- "I/S/C":["코치형","상대의 속도에 맞춰 끌어올린다. 사람을 키우는 데 시간을 쓴다."],
- "I/C/D":["설득형","자료로 무장한 뒤 말로 이긴다. 준비된 설득을 한다."],
- "I/C/S":["조언형","묻는 사람에게 정리된 답을 준다. 앞에 나서지 않고 붙어 있는다."],
- "S/D/I":["현장형","현장에서 직접 몸을 쓰며 결정한다. 책상보다 자리에서 강하다."],
- "S/D/C":["운영형","돌아가는 상태를 유지하고 문제를 즉시 잡는다. 흔들림에 강하다."],
- "S/I/D":["팀장형","팀을 먼저 보고 그다음에 일을 본다. 사람으로 성과를 만든다."],
- "S/I/C":["상담형","오래 듣고 정확하게 답한다. 신뢰가 자산이 되는 유형."],
- "S/C/D":["개선형","돌아가는 것을 더 낫게 바꾼다. 큰 판 대신 매일을 고친다."],
- "S/C/I":["지원형","앞에 선 사람이 흔들리지 않게 뒤를 받친다. 실무가 정확하다."],
- "C/D/I":["기획전략형","구조를 짜고 방향을 정하고 팔기까지 한다. 기획 전 구간을 커버한다."],
- "C/D/S":["감사형","기준으로 재고 결론을 낸다. 타협하지 않는 검증자."],
- "C/I/D":["프레젠터형","분석을 무기로 앞에 선다. 숫자를 이야기로 바꾼다."],
- "C/I/S":["교육형","알고 있는 것을 남이 쓰게 만든다. 가르치는 데 시간을 아끼지 않는다."],
- "C/S/D":["품질형","기준선 아래로 내려가는 것을 못 견딘다. 마지막 관문 역할."],
- "C/S/I":["연구형","깊게 파고 오래 붙어 있는다. 조용히 전문성이 쌓인다."],
- "BAL":["균형형","한쪽으로 기울지 않는다. 상황에 따라 네 방향을 바꿔 쓰는 드문 유형."]
+ "D": {
+  "t": "돌파형",
+  "l": "막힌 곳에 제일 먼저 손을 대는 사람.",
+  "b1": "회의가 길어지면 답답해집니다. 정보가 70%만 모여도 결정을 내리고, 나머지는 가면서 채웁니다. 문제가 생겼을 때 누구 책임인지 따지기 전에 일단 뚫고 나가는 쪽을 택합니다.",
+  "b2": "밀어붙인다는 말을 자주 듣지만 본인은 그냥 지연이 손해라고 봅니다. 화가 나서 세게 말하는 게 아니라 결론만 말하는 습관인데, 듣는 쪽은 감정으로 받습니다.",
+  "s": [
+   "결정이 멈춘 자리에서 판을 다시 굴린다",
+   "목표가 숫자로 잡히면 속도가 눈에 띄게 붙는다",
+   "반대가 많아도 자기 안을 끝까지 들고 간다"
+  ],
+  "w": [
+   "근거 확인 단계를 건너뛰고 뒤에서 비용이 터진다",
+   "혼자 정하고 통보하는 형태가 되기 쉽다",
+   "속도가 안 나는 사람을 능력 부족으로 읽는다"
+  ],
+  "st": "압박이 커지면 말이 짧아지고 상의 없이 혼자 처리해 버립니다.",
+  "g": "결정 자체보다 결정을 공유하는 데 시간을 조금 더 쓰면 같은 속도로 더 멀리 갑니다.",
+  "j": "권한이 명확하고 성과가 숫자로 찍히는 자리. 신규 사업, 영업, 위기 대응.",
+  "f": [
+   "S/C",
+   "정착형 — 벌여 놓은 것을 자리잡게 만드는 사람. 이 조합이 붙어야 성과가 남습니다."
+  ]
+ },
+ "D/I": {
+  "t": "개척형",
+  "l": "없던 판을 열고 사람까지 끌어모읍니다.",
+  "b1": "새로운 것이 눈에 들어오면 먼저 움직이고, 움직이면서 사람을 붙입니다. 설명이 설득이 되고 설득이 실행이 되는 속도가 빠릅니다. 시작 국면에서 가장 강합니다.",
+  "b2": "가볍다는 오해를 받습니다. 관심이 자주 옮겨 가는 것처럼 보이지만 본인 안에서는 하나의 큰 방향이 있고 경로만 바꾸는 중입니다.",
+  "s": [
+   "아무도 안 하던 일을 먼저 꺼내 판을 만든다",
+   "사람을 모아 초기 동력을 만든다",
+   "거절당해도 다음 대상으로 바로 넘어간다"
+  ],
+  "w": [
+   "시작한 것이 끝나기 전에 다음 것을 벌인다",
+   "말로 약속한 범위가 실제 리소스보다 커진다",
+   "기록과 마무리가 뒤로 밀린다"
+  ],
+  "st": "일이 안 풀리면 판을 갈아엎고 새로 시작하려 합니다.",
+  "g": "새로 벌이기 전에 이미 벌인 것 하나를 닫는 규칙을 스스로 만들면 성과가 쌓입니다.",
+  "j": "신규 사업 개발, 초기 영업, 파트너십. 0을 1로 만드는 구간.",
+  "f": [
+   "C/S",
+   "관리형 — 열어 놓은 판을 굴러가게 유지하는 사람."
+  ]
+ },
+ "D/S": {
+  "t": "관철형",
+  "l": "한번 정한 방향을 소리 없이 끝까지 가져갑니다.",
+  "b1": "요란하게 시작하지 않지만 중간에 놓지도 않습니다. 방향이 정해지면 매일 같은 강도로 밀고, 저항이 있어도 정면으로 부딪히기보다 계속 밀어 결국 통과시킵니다.",
+  "b2": "조용해서 순한 사람으로 읽히다가, 물러서지 않는 지점에서 놀라게 만듭니다. 유연하지 않다는 말을 듣지만 본인은 이미 정한 것을 흔들지 않는 것뿐입니다.",
+  "s": [
+   "긴 호흡의 일을 같은 품질로 끌고 간다",
+   "말보다 결과로 증명한다",
+   "반복되는 마찰에 쉽게 지치지 않는다"
+  ],
+  "w": [
+   "방향이 틀렸을 때도 관성으로 계속 간다",
+   "불만을 말하지 않고 안에 쌓는다",
+   "새로운 방식으로 갈아타는 데 시간이 걸린다"
+  ],
+  "st": "압박이 오면 말수가 줄고 혼자 감당하려 합니다.",
+  "g": "중간 점검 시점을 미리 정해 두면 방향 오류를 오래 끌고 가지 않게 됩니다.",
+  "j": "장기 프로젝트 실행, 운영 총괄, 현장 관리.",
+  "f": [
+   "I/C",
+   "기획형 — 새 각도와 정리된 근거를 함께 던져 주는 사람."
+  ]
+ },
+ "D/C": {
+  "t": "전략형",
+  "l": "이길 수 있는 판인지 먼저 계산하고 들어갑니다.",
+  "b1": "감으로 뛰어들지 않습니다. 숫자와 조건을 먼저 보고, 승산이 보이면 그때부터는 아주 빠르게 움직입니다. 근거 없는 낙관도 근거 없는 신중함도 싫어합니다.",
+  "b2": "차갑다는 말을 듣습니다. 사람을 안 챙기는 게 아니라 판단 국면에서 감정을 잠깐 치워 두는 것인데, 그 순간이 상대에게는 무시로 느껴집니다.",
+  "s": [
+   "구조와 숫자를 먼저 보고 승산을 판단한다",
+   "결정한 뒤에는 흔들림 없이 실행한다",
+   "상대의 논리적 허점을 빠르게 잡아낸다"
+  ],
+  "w": [
+   "설명 없이 결론만 던져 팀이 따라오지 못한다",
+   "기준에 못 미치는 안은 사람까지 낮게 본다",
+   "분석이 길어져 타이밍을 놓칠 때가 있다"
+  ],
+  "st": "압박이 오면 사람을 빼고 데이터만 붙잡습니다.",
+  "g": "결론과 함께 판단 과정을 한 줄이라도 공유하면 저항이 절반으로 줄어듭니다.",
+  "j": "사업 기획, 투자 판단, 경쟁 입찰, 구조조정.",
+  "f": [
+   "I/S",
+   "화합형 — 결정이 사람에게 닿는 온도를 맞춰 주는 사람."
+  ]
+ },
+ "D/I/S": {
+  "t": "통솔형",
+  "l": "앞장서되 사람을 버리고 가지 않습니다.",
+  "b1": "방향을 정하고, 그 방향에 사람을 붙이고, 뒤처지는 사람을 챙깁니다. 세 가지를 동시에 하기 때문에 팀 전체를 끌고 가는 자리에 자연스럽게 놓입니다.",
+  "b2": "좋은 사람이라 만만하게 보다가 결정 국면에서 단호함을 보고 다시 평가하게 됩니다. 본인은 챙기는 것과 봐주는 것을 구분합니다.",
+  "s": [
+   "방향과 사람을 동시에 관리한다",
+   "팀의 사기를 성과로 바꾼다",
+   "갈등을 덮지 않고 정면에서 정리한다"
+  ],
+  "w": [
+   "다 안고 가려다 본인이 과부하에 걸린다",
+   "성과가 안 나는 사람을 오래 붙잡는다",
+   "위임보다 직접 하는 쪽을 택한다"
+  ],
+  "st": "압박이 오면 혼자 다 하려 하고 번아웃으로 갑니다.",
+  "g": "챙기지 않을 사람을 정하는 것도 리더의 일입니다. 여기서 한 단계 올라갑니다.",
+  "j": "팀 리드, 현장 총괄, 조직 재건.",
+  "f": [
+   "C/S",
+   "관리형 — 사람 대신 시스템으로 굴러가게 만들어 주는 사람."
+  ]
+ },
+ "D/I/C": {
+  "t": "사업형",
+  "l": "기회를 보고 사람을 붙이고 숫자로 검증합니다.",
+  "b1": "판을 사업으로 바꾸는 사람입니다. 아이디어에서 멈추지 않고 누구를 만나야 하는지, 얼마가 남는지까지 한 흐름으로 갑니다. 창업자에게 자주 보이는 조합입니다.",
+  "b2": "말이 앞선다는 오해를 받지만 뒤에 계산이 있습니다. 다만 그 계산을 남에게 안 보여줘서 즉흥적으로 보입니다.",
+  "s": [
+   "기회를 사업 구조로 번역한다",
+   "설득과 검증을 혼자 오간다",
+   "숫자가 안 맞으면 미련 없이 접는다"
+  ],
+  "w": [
+   "동시에 여러 건을 벌여 실행이 얇아진다",
+   "팀의 처리 속도를 자기 기준으로 본다",
+   "운영 단계에 들어가면 흥미가 떨어진다"
+  ],
+  "st": "압박이 오면 새 기회를 찾아 시선을 돌립니다.",
+  "g": "벌이는 사람과 굴리는 사람을 분리하는 순간 규모가 달라집니다.",
+  "j": "창업, 신사업, 사업 개발, 투자 유치.",
+  "f": [
+   "S/C",
+   "정착형 — 만들어 놓은 것을 반복 가능한 형태로 굳혀 주는 사람."
+  ]
+ },
+ "D/S/I": {
+  "t": "조직형",
+  "l": "방향을 정하고 사람을 자리에 배치합니다.",
+  "b1": "일을 직접 하기보다 굴러가는 구조를 만듭니다. 누가 어디에 있어야 하는지 감이 빠르고, 한번 짜 놓은 배치를 오래 유지합니다.",
+  "b2": "느리다는 오해를 받을 때가 있습니다. 실제로는 사람이 자리에 익숙해지는 시간을 계산에 넣고 있는 것입니다.",
+  "s": [
+   "사람의 강약을 보고 자리를 정한다",
+   "한번 만든 조직을 오래 유지한다",
+   "방향과 실행 사이를 이어 준다"
+  ],
+  "w": [
+   "구조가 굳어져 변화 대응이 늦다",
+   "맞지 않는 사람의 교체를 미룬다",
+   "새 방식을 검증 없이 배제한다"
+  ],
+  "st": "압박이 오면 기존 구조를 더 단단히 조입니다.",
+  "g": "정기적으로 배치를 다시 보는 일정을 강제로 넣어 두면 경직을 막습니다.",
+  "j": "조직 운영, 인력 배치, 사업부 관리.",
+  "f": [
+   "I/C",
+   "기획형 — 굳은 구조에 새 각도를 넣어 주는 사람."
+  ]
+ },
+ "D/S/C": {
+  "t": "완수형",
+  "l": "시작한 것을 끝내는 데 특화돼 있습니다.",
+  "b1": "화려한 시작보다 확실한 마무리를 맡습니다. 남이 벌여 놓고 손 뗀 일을 넘겨받아 결국 끝내 놓는 자리에 자주 있습니다.",
+  "b2": "재미없는 사람으로 보이지만, 조직에서 가장 신뢰받는 자리에 있는 경우가 많습니다. 끝낸 이력이 쌓여 있기 때문입니다.",
+  "s": [
+   "미완의 일을 넘겨받아 완결시킨다",
+   "기준선 아래로 내려가지 않는다",
+   "장애물이 나와도 우회로를 찾아 계속 간다"
+  ],
+  "w": [
+   "끝내는 데 집착해 방향 오류를 못 본다",
+   "도움 요청을 늦게 한다",
+   "속도보다 완결을 택해 마감이 밀린다"
+  ],
+  "st": "압박이 오면 잠을 줄여서라도 혼자 끝내려 합니다.",
+  "g": "'이건 끝내지 않는다'는 결정도 완수의 일부입니다.",
+  "j": "프로젝트 마감, 사업 정상화, 인수인계 총괄.",
+  "f": [
+   "I/D",
+   "선동형 — 멈춘 판에 사람과 에너지를 다시 붙여 주는 사람."
+  ]
+ },
+ "D/C/I": {
+  "t": "승부형",
+  "l": "이길 근거를 만들고 사람을 설득해 밀어붙입니다.",
+  "b1": "경쟁 국면에서 가장 살아납니다. 상대의 약한 고리를 먼저 보고, 그것을 근거로 만들어 테이블에서 사용합니다. 지는 것을 못 견딥니다.",
+  "b2": "공격적으로 보이지만 준비량이 많습니다. 즉흥적으로 이기는 게 아니라 이미 계산을 끝내고 들어옵니다.",
+  "s": [
+   "경쟁 상황에서 준비량으로 이긴다",
+   "근거와 화술을 동시에 쓴다",
+   "불리한 판을 뒤집는 각을 찾는다"
+  ],
+  "w": [
+   "이기는 것이 목적이 되어 관계를 태운다",
+   "진 판을 오래 곱씹는다",
+   "협력해야 할 상대까지 경쟁자로 본다"
+  ],
+  "st": "압박이 오면 더 세게 밀어붙여 관계를 손상시킵니다.",
+  "g": "이겨야 할 판과 같이 가야 할 판을 구분하는 것만으로 성과가 크게 달라집니다.",
+  "j": "입찰, 협상, 경쟁 PT, 영업 총괄.",
+  "f": [
+   "S/I",
+   "조율형 — 태운 관계를 다시 이어 주는 사람."
+  ]
+ },
+ "D/C/S": {
+  "t": "원칙형",
+  "l": "기준을 세우고 그 기준으로 판단합니다.",
+  "b1": "예외를 잘 만들지 않습니다. 한번 정한 원칙을 본인에게도 똑같이 적용하기 때문에, 시간이 지나면 주변이 그 기준을 신뢰하게 됩니다.",
+  "b2": "융통성 없다는 말을 듣습니다. 본인은 예외를 한 번 허용하면 기준 자체가 무너진다는 것을 경험으로 알고 있습니다.",
+  "s": [
+   "기준이 흔들리지 않아 신뢰가 쌓인다",
+   "자기 자신에게도 같은 잣대를 쓴다",
+   "부당한 압력에 물러서지 않는다"
+  ],
+  "w": [
+   "상황이 바뀌어도 기준을 갱신하지 않는다",
+   "기준 미달을 사람에 대한 평가로 전달한다",
+   "협상해야 할 자리에서 협상하지 않는다"
+  ],
+  "st": "압박이 오면 원칙을 더 강하게 붙잡고 고립됩니다.",
+  "g": "기준을 지키는 것과 기준을 다시 검토하는 것은 다른 일입니다. 둘 다 해야 합니다.",
+  "j": "감사, 준법, 품질 총괄, 공공 사업 관리.",
+  "f": [
+   "I/S",
+   "화합형 — 원칙과 사람 사이의 완충을 만들어 주는 사람."
+  ]
+ },
+ "I": {
+  "t": "확산형",
+  "l": "사람을 통해 일이 풀린다고 믿습니다.",
+  "b1": "먼저 말을 겁니다. 낯선 자리에서도 금방 대화가 생기고, 그 대화에서 기회가 나옵니다. 혼자 오래 있는 것보다 사람 사이에 있을 때 성과가 납니다.",
+  "b2": "가볍다는 오해를 받지만, 사람을 기억하고 계속 연결하는 일은 상당한 에너지를 씁니다. 그게 이 사람의 노동입니다.",
+  "s": [
+   "처음 만난 사람과도 금방 대화의 물꼬를 튼다",
+   "가라앉은 자리를 되살린다",
+   "거절을 개인적으로 받지 않는다"
+  ],
+  "w": [
+   "말이 앞서 약속 범위가 커진다",
+   "기록과 마무리가 뒤로 밀린다",
+   "반응 없는 상대 앞에서 동력이 급히 떨어진다"
+  ],
+  "st": "압박이 오면 사람을 더 만나서 풀려 하고 정작 할 일이 밀립니다.",
+  "g": "말한 것을 그날 안에 적어 두는 습관 하나로 신뢰가 크게 올라갑니다.",
+  "j": "영업, 홍보, 커뮤니티, 대외 협력.",
+  "f": [
+   "C/S",
+   "관리형 — 벌여 놓은 대화를 실제 결과로 정리해 주는 사람."
+  ]
+ },
+ "I/D": {
+  "t": "선동형",
+  "l": "말로 판을 만들고 그대로 밀어붙입니다.",
+  "b1": "분위기를 만드는 데서 끝나지 않습니다. 만든 분위기를 바로 실행으로 전환시킵니다. 사람들이 이 사람 말에 움직인 경험을 가지고 있습니다.",
+  "b2": "쇼맨십으로 보이지만 실제로 결과를 내 왔기 때문에 따르는 사람이 생깁니다. 다만 본인도 그 기대를 계속 감당해야 합니다.",
+  "s": [
+   "사람을 움직여 실제 결과를 만든다",
+   "앞에 서는 것을 부담스러워하지 않는다",
+   "분위기가 죽은 조직을 되살린다"
+  ],
+  "w": [
+   "기대를 키워 놓고 실무가 못 따라간다",
+   "반대 의견을 기세로 눌러 버린다",
+   "혼자 있는 시간에 급격히 흔들린다"
+  ],
+  "st": "압박이 오면 더 크게 말하고 더 크게 약속합니다.",
+  "g": "말하기 전에 실행 가능한 범위를 한 번 확인하면 신뢰가 오래갑니다.",
+  "j": "영업 총괄, 캠페인, 브랜드 대외 활동, 팀 리드.",
+  "f": [
+   "C/S",
+   "관리형 — 벌인 약속을 실제로 지킬 수 있게 만들어 주는 사람."
+  ]
+ },
+ "I/S": {
+  "t": "화합형",
+  "l": "사람 사이의 온도를 맞춥니다.",
+  "b1": "어느 팀에 넣어도 분위기가 부드러워집니다. 말을 많이 해서가 아니라 상대가 편하게 말하게 만들기 때문입니다. 조직에서 잘 안 보이지만 없으면 바로 티가 납니다.",
+  "b2": "성과가 안 보인다는 평가를 받기 쉽습니다. 실제로는 이 사람 덕분에 안 터진 갈등이 여러 건 있습니다.",
+  "s": [
+   "처음 온 사람을 빠르게 적응시킨다",
+   "불편한 말을 상하지 않게 전달한다",
+   "오래 이어지는 관계를 만든다"
+  ],
+  "w": [
+   "거절을 못 해 일이 몰린다",
+   "불만을 말하지 않고 참는다",
+   "성과를 자기 것으로 주장하지 않는다"
+  ],
+  "st": "압박이 오면 웃으면서 참다가 어느 순간 조용히 이탈합니다.",
+  "g": "'그건 제가 못 합니다'를 한 번 말하는 연습이 이 유형에게 가장 큰 성장입니다.",
+  "j": "고객 응대, 팀 코디네이션, 파트너 관리, 교육.",
+  "f": [
+   "D/C",
+   "전략형 — 대신 선을 그어 주고 결정을 내려 주는 사람."
+  ]
+ },
+ "I/C": {
+  "t": "기획형",
+  "l": "아이디어를 말로 풀고 형태까지 잡습니다.",
+  "b1": "발상과 정리를 혼자 오갑니다. 떠오른 것을 그냥 흘리지 않고 구조로 만들어 남에게 보여줄 수 있는 상태로 만듭니다. 기획 직군에 많은 조합입니다.",
+  "b2": "말이 많아 가벼워 보이지만 결과물을 보면 정리가 되어 있어 평가가 뒤집히는 경우가 많습니다.",
+  "s": [
+   "발상을 남이 이해할 형태로 바꾼다",
+   "자료와 화술을 둘 다 쓴다",
+   "혼자서 초안까지 끌고 간다"
+  ],
+  "w": [
+   "기획 단계가 길어져 실행이 늦다",
+   "완성도가 안 나오면 아예 안 보여준다",
+   "실행 인력의 부담을 과소평가한다"
+  ],
+  "st": "압박이 오면 자료를 더 만들면서 결정을 미룹니다.",
+  "g": "70% 완성도에서 한 번 보여주는 것이 100%를 혼자 만드는 것보다 빠릅니다.",
+  "j": "기획, 마케팅 전략, 콘텐츠 디렉션, 제안서.",
+  "f": [
+   "D/S",
+   "관철형 — 기획을 끝까지 실행으로 밀고 가 주는 사람."
+  ]
+ },
+ "I/D/S": {
+  "t": "리더십형",
+  "l": "사람을 모으고 방향을 주고 끝까지 챙깁니다.",
+  "b1": "앞에 서는 것이 어색하지 않고, 서고 나서도 사람을 놓지 않습니다. 조직이 커질 때 자연스럽게 중심에 놓이는 유형입니다.",
+  "b2": "인기로 리더가 됐다고 보는 시선이 있지만, 실제로는 챙긴 이력이 쌓여서 된 것입니다.",
+  "s": [
+   "사람을 모으고 방향까지 준다",
+   "팀의 상태를 빨리 알아챈다",
+   "공을 나눌 줄 안다"
+  ],
+  "w": [
+   "모두를 만족시키려다 결정이 늦다",
+   "성과 부진자를 오래 안고 간다",
+   "본인 상태를 뒤로 미룬다"
+  ],
+  "st": "압박이 오면 팀을 지키려다 혼자 무너집니다.",
+  "g": "리더가 자기 상태를 말하는 것도 팀 관리입니다.",
+  "j": "팀 리드, 조직 문화, 대외 협력 총괄.",
+  "f": [
+   "C/D",
+   "설계형 — 감이 아니라 구조로 판단해 주는 사람."
+  ]
+ },
+ "I/D/C": {
+  "t": "협상형",
+  "l": "분위기를 만들고 조건을 따집니다.",
+  "b1": "테이블에서 가장 강합니다. 먼저 편한 자리를 만들어 놓고, 그 위에서 정확하게 조건을 다툽니다. 상대가 기분 나쁘지 않게 지게 만드는 사람입니다.",
+  "b2": "친화적으로 보여 방심하게 만드는데, 계약서를 보면 다 챙겨져 있습니다.",
+  "s": [
+   "관계를 유지하면서 조건을 얻어낸다",
+   "상대의 진짜 관심사를 빨리 읽는다",
+   "숫자와 화술을 같이 쓴다"
+  ],
+  "w": [
+   "이기는 데 몰입해 장기 관계를 소모한다",
+   "내부 실행 가능성보다 조건을 먼저 합의한다",
+   "진 협상을 오래 곱씹는다"
+  ],
+  "st": "압박이 오면 말을 늘려서 시간을 벌려 합니다.",
+  "g": "합의 전에 내부 실행팀에 한 번 확인하는 절차를 넣으면 사고가 없어집니다.",
+  "j": "영업, 구매, 계약, 파트너십, 수주.",
+  "f": [
+   "S/C",
+   "정착형 — 합의한 것을 실제로 이행 가능하게 만들어 주는 사람."
+  ]
+ },
+ "I/S/D": {
+  "t": "중재형",
+  "l": "갈등 한복판에 들어가 말을 붙입니다.",
+  "b1": "싸움이 난 자리를 피하지 않습니다. 양쪽 말을 다 듣고, 필요하면 본인이 결론을 냅니다. 듣기만 하는 사람과 결정하는 사람 사이에 있습니다.",
+  "b2": "좋은 게 좋은 사람으로 보다가, 선을 넘으면 분명히 자르는 것을 보고 놀랍니다.",
+  "s": [
+   "대립하는 양쪽 모두에게 신뢰를 얻는다",
+   "감정과 사실을 분리해 정리한다",
+   "필요하면 직접 결론을 낸다"
+  ],
+  "w": [
+   "중재만 하다 본인 성과가 안 남는다",
+   "양쪽을 챙기다 소진된다",
+   "자기 입장을 늦게 밝힌다"
+  ],
+  "st": "압박이 오면 모두를 달래려다 아무도 만족시키지 못합니다.",
+  "g": "중재자에게도 자기 입장이 있어야 합니다. 그걸 먼저 말해도 신뢰는 안 깨집니다.",
+  "j": "노사·부서 간 조율, 고객 클레임, 협력사 관리.",
+  "f": [
+   "D/C",
+   "전략형 — 감정을 걷어내고 기준으로 정리해 주는 사람."
+  ]
+ },
+ "I/S/C": {
+  "t": "코치형",
+  "l": "상대의 속도에 맞춰 끌어올립니다.",
+  "b1": "사람을 키우는 데 시간을 씁니다. 답을 주기보다 상대가 스스로 찾게 만들고, 그 과정을 오래 기다립니다. 급한 조직에서는 답답해 보이지만 사람은 확실히 남습니다.",
+  "b2": "성과가 늦게 보입니다. 이 사람이 키운 사람들이 나중에 성과를 내면서 뒤늦게 평가받습니다.",
+  "s": [
+   "상대의 수준에 맞춰 설명한다",
+   "기다릴 줄 안다",
+   "사람의 변화를 실제로 만든다"
+  ],
+  "w": [
+   "단기 성과 압박에 약하다",
+   "성장이 없는 사람도 오래 붙잡는다",
+   "본인 커리어를 뒤로 미룬다"
+  ],
+  "st": "압박이 오면 사람을 감싸다가 본인이 책임을 뒤집어씁니다.",
+  "g": "키울 사람과 내보낼 사람을 구분하는 것이 코치의 마지막 능력입니다.",
+  "j": "교육, 온보딩, HR, 컨설팅, 팀 육성.",
+  "f": [
+   "D/I",
+   "개척형 — 새 기회를 계속 물어다 주는 사람."
+  ]
+ },
+ "I/C/D": {
+  "t": "설득형",
+  "l": "자료로 무장한 뒤 말로 이깁니다.",
+  "b1": "준비된 설득을 합니다. 감으로 밀지 않고, 근거를 먼저 만든 다음 그것을 상대가 알아듣는 언어로 바꿔서 던집니다. 반박을 미리 예상해 답을 준비해 둡니다.",
+  "b2": "말이 좋아서 이긴 것으로 보이지만, 뒤에 준비량이 있습니다. 그래서 두 번, 세 번 만나도 계속 이깁니다.",
+  "s": [
+   "근거와 전달을 둘 다 갖춘다",
+   "예상 반박을 미리 준비한다",
+   "어려운 내용을 쉬운 말로 바꾼다"
+  ],
+  "w": [
+   "준비가 안 되면 시작 자체를 안 한다",
+   "반대 의견을 이겨야 할 대상으로 본다",
+   "설득에 성공한 뒤 실행을 안 챙긴다"
+  ],
+  "st": "압박이 오면 자료를 더 만들며 대면을 미룹니다.",
+  "g": "설득의 목적은 이기는 게 아니라 같이 움직이는 것입니다. 이 전환이 핵심입니다.",
+  "j": "제안 발표, 투자 유치, 대외 커뮤니케이션, 컨설팅.",
+  "f": [
+   "S/D",
+   "실행형 — 설득 다음의 실무를 조용히 끝내 주는 사람."
+  ]
+ },
+ "I/C/S": {
+  "t": "조언형",
+  "l": "묻는 사람에게 정리된 답을 줍니다.",
+  "b1": "앞에 나서지 않지만 옆에 오래 붙어 있습니다. 판단이 필요할 때 사람들이 조용히 찾아와 묻는 자리에 있습니다. 답이 정확해서 그렇습니다.",
+  "b2": "존재감이 약해 보입니다. 조직도에서는 잘 안 보이는데 의사결정 과정에는 대부분 관여되어 있습니다.",
+  "s": [
+   "정리된 판단을 조용히 제공한다",
+   "비밀을 지켜 신뢰를 얻는다",
+   "상대의 입장에서 답을 만든다"
+  ],
+  "w": [
+   "묻지 않으면 먼저 말하지 않는다",
+   "공식 권한 없이 책임만 진다",
+   "본인 성과로 기록되지 않는다"
+  ],
+  "st": "압박이 오면 뒤로 물러나 관여를 줄입니다.",
+  "g": "묻기 전에 먼저 말하는 횟수를 늘리면 영향력이 권한이 됩니다.",
+  "j": "참모, 기획 지원, 자문, 내부 컨설팅.",
+  "f": [
+   "D/I",
+   "개척형 — 판을 벌여 놓고 조언을 실제로 쓰게 만드는 사람."
+  ]
+ },
+ "S": {
+  "t": "안정형",
+  "l": "같은 자리에서 같은 품질을 지켜냅니다.",
+  "b1": "요란하지 않게 매일 같은 일을 같은 수준으로 합니다. 급하게 바뀌는 것을 싫어하는 게 아니라, 바뀌면 품질이 흔들린다는 것을 알기 때문입니다. 조직에서 가장 오래 남는 유형입니다.",
+  "b2": "야망이 없다는 오해를 받습니다. 본인은 눈에 띄는 것보다 맡은 것이 무너지지 않는 쪽을 택한 것입니다.",
+  "s": [
+   "맡은 일을 오래 같은 품질로 끌고 간다",
+   "팀 안의 마찰을 조용히 흡수한다",
+   "상대가 말을 마칠 때까지 듣는다"
+  ],
+  "w": [
+   "부당한 요구에도 거절을 미룬다",
+   "방향이 자주 바뀌면 눈에 띄게 지친다",
+   "불만을 말하지 않고 안에 쌓아 둔다"
+  ],
+  "st": "압박이 오면 겉으로는 괜찮다고 하면서 안에서 무너집니다.",
+  "g": "참는 것과 동의하는 것은 다릅니다. 그 차이를 말로 표현하면 관계가 오히려 좋아집니다.",
+  "j": "운영, 고객 관리, 품질 유지, 총무·지원.",
+  "f": [
+   "D/I",
+   "개척형 — 안 움직이는 판을 먼저 흔들어 주는 사람."
+  ]
+ },
+ "S/D": {
+  "t": "실행형",
+  "l": "말보다 손이 먼저 나갑니다.",
+  "b1": "회의에서 길게 말하지 않고 나가서 해 옵니다. 맡은 범위를 조용히 끝내 놓는 것으로 존재를 증명합니다. 현장에서 가장 신뢰받는 유형입니다.",
+  "b2": "생각이 없다는 오해를 받습니다. 실제로는 이미 판단을 끝내고 실행 중인 것인데 그 과정을 말로 안 합니다.",
+  "s": [
+   "맡은 범위를 확실히 끝낸다",
+   "현장에서 즉시 판단하고 움직인다",
+   "불평 없이 궂은 일을 처리한다"
+  ],
+  "w": [
+   "과정을 공유하지 않아 오해를 산다",
+   "일이 몰려도 도움을 청하지 않는다",
+   "방향이 틀려도 일단 끝내려 한다"
+  ],
+  "st": "압박이 오면 말없이 더 많이 일하다 소진됩니다.",
+  "g": "진행 상황을 짧게 알리는 습관 하나로 평가가 완전히 달라집니다.",
+  "j": "현장 실행, 생산·물류, 프로젝트 실무.",
+  "f": [
+   "I/C",
+   "기획형 — 무엇을 왜 하는지 정리해 주는 사람."
+  ]
+ },
+ "S/I": {
+  "t": "조율형",
+  "l": "갈라진 의견 사이에서 접점을 만듭니다.",
+  "b1": "편을 만들지 않습니다. 양쪽 말을 다 듣고 공통점부터 꺼내 놓기 때문에 대화가 다시 이어집니다. 정치를 안 하는 사람으로 신뢰를 얻습니다.",
+  "b2": "우유부단해 보입니다. 실제로는 결론을 안 내는 게 아니라 양쪽이 받아들일 결론을 찾는 중입니다.",
+  "s": [
+   "대립 상황에서 대화를 재개시킨다",
+   "어느 쪽에도 치우치지 않는다",
+   "분위기를 읽고 타이밍을 잡는다"
+  ],
+  "w": [
+   "결론을 내야 할 때 미룬다",
+   "자기 의견을 마지막까지 숨긴다",
+   "양쪽을 맞추다 본인이 소모된다"
+  ],
+  "st": "압박이 오면 결정을 미루고 상황이 정리되기를 기다립니다.",
+  "g": "조율의 마지막 단계는 결론입니다. 접점을 찾았으면 확정해야 합니다.",
+  "j": "부서 간 조율, 협력사 관리, 프로젝트 코디네이션.",
+  "f": [
+   "D/C",
+   "전략형 — 미뤄진 결정을 대신 끊어 주는 사람."
+  ]
+ },
+ "S/C": {
+  "t": "정착형",
+  "l": "한번 만든 기준을 지켜 자리잡게 합니다.",
+  "b1": "새로 만드는 것보다 만들어진 것을 오래 가게 하는 데 강합니다. 절차를 문서로 남기고, 그 절차가 지켜지는지 계속 봅니다. 시간이 지나면 이 사람이 만든 방식이 조직의 표준이 됩니다.",
+  "b2": "변화를 싫어한다고 오해받습니다. 본인은 검증되지 않은 변화를 싫어하는 것입니다.",
+  "s": [
+   "만들어진 것을 반복 가능한 형태로 굳힌다",
+   "절차를 문서로 남긴다",
+   "품질이 흔들리는 지점을 먼저 알아챈다"
+  ],
+  "w": [
+   "새 방식의 도입 속도가 느리다",
+   "예외 상황에 대응이 경직된다",
+   "개선 제안을 위협으로 받아들일 때가 있다"
+  ],
+  "st": "압박이 오면 기존 절차를 더 꽉 잡습니다.",
+  "g": "절차를 지키는 사람이 절차를 바꾸자고 하면 아무도 반대하지 않습니다. 그 권한을 쓰세요.",
+  "j": "운영 표준화, 품질 관리, 매뉴얼·SOP, 백오피스.",
+  "f": [
+   "D/I",
+   "개척형 — 굳은 자리에 새 판을 던져 주는 사람."
+  ]
+ },
+ "S/D/I": {
+  "t": "현장형",
+  "l": "책상보다 현장에서 강합니다.",
+  "b1": "직접 가서 보고 그 자리에서 결정합니다. 보고서로 오는 정보를 신뢰하지 않고 눈으로 확인하려 합니다. 현장 사람들과 관계가 좋아 정보가 빨리 들어옵니다.",
+  "b2": "체계가 없다는 평을 듣지만, 현장 변수는 체계로 안 잡히는 것이 많다는 걸 경험으로 압니다.",
+  "s": [
+   "현장 상황을 즉시 판단한다",
+   "실무자들에게 신뢰를 얻는다",
+   "문제를 보고 전에 먼저 잡는다"
+  ],
+  "w": [
+   "기록과 보고가 약하다",
+   "본인이 없으면 안 돌아가는 구조를 만든다",
+   "전체 그림보다 눈앞 문제에 매인다"
+  ],
+  "st": "압박이 오면 현장에 더 오래 붙어 있고 관리 업무가 밀립니다.",
+  "g": "본인이 없어도 돌아가게 만드는 것이 다음 단계입니다.",
+  "j": "현장 관리, 시공·생산, 매장 운영, AS.",
+  "f": [
+   "C/D",
+   "설계형 — 현장 경험을 구조로 바꿔 주는 사람."
+  ]
+ },
+ "S/D/C": {
+  "t": "운영형",
+  "l": "돌아가는 상태를 유지하고 문제를 즉시 잡습니다.",
+  "b1": "평소에는 조용하다가 이상 신호가 뜨면 바로 움직입니다. 무엇이 정상인지 알고 있어서 벗어나는 순간을 남보다 빨리 감지합니다.",
+  "b2": "성과가 안 보이는 자리처럼 여겨집니다. 사고가 안 나는 것이 이 사람의 성과인데 그건 숫자로 안 잡힙니다.",
+  "s": [
+   "정상 상태를 정의하고 이탈을 감지한다",
+   "흔들림에도 서비스 수준을 유지한다",
+   "반복 문제의 근본 원인을 찾아 없앤다"
+  ],
+  "w": [
+   "안정 유지에 몰려 개선 투자를 미룬다",
+   "위험 신호를 과대평가해 보수적으로 간다",
+   "성과를 드러내지 않아 저평가된다"
+  ],
+  "st": "압박이 오면 변화를 막는 쪽으로 방어합니다.",
+  "g": "'막은 사고'를 기록해 두면 저평가가 사라집니다.",
+  "j": "서비스 운영, 인프라, 고객 지원, 안전 관리.",
+  "f": [
+   "D/I",
+   "개척형 — 유지 국면에 성장 압력을 넣어 주는 사람."
+  ]
+ },
+ "S/I/D": {
+  "t": "팀장형",
+  "l": "팀을 먼저 보고 그다음에 일을 봅니다.",
+  "b1": "사람이 괜찮아야 일이 된다고 믿습니다. 팀원 상태를 알고 있고, 무리한 요구가 오면 앞에서 막아 줍니다. 팀원들이 오래 남는 조직을 만듭니다.",
+  "b2": "무르다는 평가를 받지만, 팀 이탈률과 재직 기간을 보면 반박이 됩니다.",
+  "s": [
+   "팀원 상태를 정확히 파악한다",
+   "외부 압력을 대신 막아 준다",
+   "사람으로 성과를 만든다"
+  ],
+  "w": [
+   "성과 부진을 오래 덮어 준다",
+   "상부와의 마찰을 피하려 한다",
+   "본인이 완충재가 되어 소진된다"
+  ],
+  "st": "압박이 오면 팀을 지키려다 본인이 다 뒤집어씁니다.",
+  "g": "막아 주는 것과 성과를 요구하는 것은 같이 가야 합니다.",
+  "j": "팀 리드, 현장 관리자, 지점장.",
+  "f": [
+   "C/D",
+   "설계형 — 감정 아닌 기준으로 성과를 관리해 주는 사람."
+  ]
+ },
+ "S/I/C": {
+  "t": "상담형",
+  "l": "오래 듣고 정확하게 답합니다.",
+  "b1": "말을 끊지 않습니다. 상대가 다 말할 때까지 기다렸다가 정리된 답을 줍니다. 그 답이 맞아서 사람들이 계속 찾아옵니다. 신뢰가 자산이 되는 유형입니다.",
+  "b2": "적극적이지 않아 보이지만, 이 사람에게 붙은 고객·동료의 유지율이 대체로 가장 높습니다.",
+  "s": [
+   "끝까지 듣고 나서 답한다",
+   "상대가 말 안 한 것까지 읽는다",
+   "한번 맺은 관계가 오래간다"
+  ],
+  "w": [
+   "먼저 제안하지 않는다",
+   "자기 시간을 지키지 못한다",
+   "감정 노동이 쌓여도 표현하지 않는다"
+  ],
+  "st": "압박이 오면 더 많이 들어주다가 스스로 고갈됩니다.",
+  "g": "듣는 시간에 한계를 정해 두는 것이 오래 일하는 조건입니다.",
+  "j": "고객 상담, 영업 관리, HR, 교육, 케어 서비스.",
+  "f": [
+   "D/I",
+   "개척형 — 관계를 새 기회로 바꿔 주는 사람."
+  ]
+ },
+ "S/C/D": {
+  "t": "개선형",
+  "l": "돌아가는 것을 조금씩 더 낫게 만듭니다.",
+  "b1": "큰 판을 뒤엎지 않습니다. 매일 쓰는 것에서 거슬리는 지점을 찾아 하나씩 고칩니다. 1년 뒤에 보면 전혀 다른 수준이 되어 있습니다.",
+  "b2": "혁신적이지 않다는 평을 듣지만, 실제로 조직의 생산성을 올린 것은 대부분 이런 누적입니다.",
+  "s": [
+   "매일 쓰는 것에서 개선점을 찾는다",
+   "작게 바꿔 확실히 정착시킨다",
+   "되돌릴 수 있게 바꾼다"
+  ],
+  "w": [
+   "근본적 전환이 필요할 때도 개선으로 접근한다",
+   "개선 효과를 측정·보고하지 않는다",
+   "기존 방식에 대한 애착이 판단을 흐린다"
+  ],
+  "st": "압박이 오면 더 작은 개선으로 도망칩니다.",
+  "g": "가끔은 개선이 아니라 폐기가 답입니다. 그 판단을 같이 하세요.",
+  "j": "업무 프로세스 개선, 생산성, 운영 최적화, 품질.",
+  "f": [
+   "D/I",
+   "개척형 — 판 자체를 바꿔야 할 때를 짚어 주는 사람."
+  ]
+ },
+ "S/C/I": {
+  "t": "지원형",
+  "l": "앞에 선 사람이 흔들리지 않게 뒤를 받칩니다.",
+  "b1": "본인이 앞에 나서는 것에 관심이 없습니다. 대신 앞에 선 사람이 필요한 것을 미리 준비해 둡니다. 실무 정확도가 높아 없으면 바로 티가 납니다.",
+  "b2": "보조 역할로 보이지만, 이 사람이 빠진 조직은 눈에 띄게 느려집니다.",
+  "s": [
+   "필요한 것을 미리 준비해 둔다",
+   "실무 정확도가 높다",
+   "앞에 선 사람의 부담을 줄인다"
+  ],
+  "w": [
+   "공을 주장하지 않아 저평가된다",
+   "요청이 몰려도 다 받는다",
+   "본인 커리어 설계를 미룬다"
+  ],
+  "st": "압박이 오면 더 많이 받아 안고 조용히 지칩니다.",
+  "g": "받쳐 준 것을 기록으로 남기세요. 그게 이 유형의 커리어가 됩니다.",
+  "j": "경영 지원, PM 어시스트, 운영 실무, 총무.",
+  "f": [
+   "D/C",
+   "전략형 — 본인 몫을 대신 요구해 주는 사람."
+  ]
+ },
+ "C": {
+  "t": "정밀형",
+  "l": "근거가 서야 움직입니다.",
+  "b1": "확인하지 않은 것을 사실로 말하지 않습니다. 남들이 넘어간 곳을 한 번 더 열어 보고, 거기서 문제를 찾아냅니다. 이 사람이 확인한 것은 대체로 맞습니다.",
+  "b2": "느리다는 오해를 받습니다. 실제로는 나중에 터질 것을 지금 막고 있는 것이라 전체 시간은 오히려 줄어듭니다.",
+  "s": [
+   "근거를 확인한 뒤 움직인다",
+   "남들이 지나친 허점을 먼저 찾는다",
+   "기준을 문서로 남겨 반복 가능하게 만든다"
+  ],
+  "w": [
+   "기준에 못 미치면 착수 자체를 미룬다",
+   "지적이 사람에 대한 평가로 전달된다",
+   "완결도를 지키느라 마감이 늦어진다"
+  ],
+  "st": "압박이 오면 더 확인하려 하고 결정이 멈춥니다.",
+  "g": "'지금 아는 것으로 내리는 최선의 결정'도 정확한 판단입니다.",
+  "j": "회계·재무, 데이터 분석, 법무, 품질 검증, 연구.",
+  "f": [
+   "I/D",
+   "선동형 — 멈춘 지점에서 사람을 움직여 주는 사람."
+  ]
+ },
+ "C/D": {
+  "t": "설계형",
+  "l": "구조를 먼저 그리고 그대로 밀어붙입니다.",
+  "b1": "틀이 서야 움직입니다. 전체 그림을 먼저 그리고, 그 구조가 맞다고 판단되면 실행 속도가 빨라집니다. 큰 시스템을 만드는 자리에 맞습니다.",
+  "b2": "고집스럽게 보입니다. 본인은 구조를 중간에 바꾸면 전체가 망가진다는 것을 알기 때문에 버티는 것입니다.",
+  "s": [
+   "전체 구조를 먼저 잡는다",
+   "구조가 서면 실행이 빠르다",
+   "장기 확장성을 미리 계산한다"
+  ],
+  "w": [
+   "설계가 길어져 착수가 늦다",
+   "현장 변수를 구조에 안 넣는다",
+   "사람보다 시스템을 먼저 본다"
+  ],
+  "st": "압박이 오면 설계를 다시 그리며 착수를 미룹니다.",
+  "g": "설계는 실행 중에도 고칠 수 있습니다. 완벽한 초안은 없습니다.",
+  "j": "시스템 기획, 아키텍처, 사업 구조 설계, 조직 설계.",
+  "f": [
+   "I/S",
+   "화합형 — 구조가 사람에게 닿는 지점을 봐 주는 사람."
+  ]
+ },
+ "C/I": {
+  "t": "컨설팅형",
+  "l": "분석한 것을 상대가 알아듣게 옮깁니다.",
+  "b1": "근거와 설명을 둘 다 가지고 있습니다. 어려운 내용을 상대의 수준에 맞춰 다시 말할 수 있어서, 전문성이 실제 영향력으로 바뀝니다.",
+  "b2": "말이 매끄러워 깊이가 없어 보일 때가 있지만, 파고들면 근거가 다 있습니다.",
+  "s": [
+   "분석을 상대의 언어로 번역한다",
+   "질문을 받아 넘기지 않는다",
+   "전문성과 전달력을 동시에 갖춘다"
+  ],
+  "w": [
+   "설명에 시간을 많이 써 실행이 늦다",
+   "이해 못 하는 상대에게 답답함을 드러낸다",
+   "결론보다 과정을 길게 말한다"
+  ],
+  "st": "압박이 오면 더 자세히 설명하려다 핵심을 흐립니다.",
+  "g": "결론을 먼저 말하고 근거를 뒤에 붙이는 순서로만 바꿔도 설득력이 올라갑니다.",
+  "j": "컨설팅, 기술 영업, 교육, 애널리스트.",
+  "f": [
+   "D/S",
+   "관철형 — 제안을 실제 실행까지 끌고 가 주는 사람."
+  ]
+ },
+ "C/S": {
+  "t": "관리형",
+  "l": "정해진 기준이 흐트러지지 않게 지킵니다.",
+  "b1": "조용히 품질을 붙잡습니다. 눈에 띄는 일을 하지 않지만 이 사람이 보는 영역에서는 사고가 안 납니다. 오래 맡길수록 신뢰가 쌓이는 유형입니다.",
+  "b2": "소극적으로 보이지만, 관리 영역의 사고율을 비교하면 평가가 뒤집힙니다.",
+  "s": [
+   "기준을 일관되게 적용한다",
+   "누락과 오류를 먼저 잡는다",
+   "장기간 같은 품질을 유지한다"
+  ],
+  "w": [
+   "변화 요구에 방어적으로 반응한다",
+   "문제를 지적할 때 표현이 딱딱하다",
+   "권한 밖 문제는 보고도 넘어간다"
+  ],
+  "st": "압박이 오면 규정을 방패로 삼고 소통을 줄입니다.",
+  "g": "지키는 이유를 설명하면 규정이 협조를 얻습니다.",
+  "j": "품질 관리, 회계·정산, 계약 관리, 리스크.",
+  "f": [
+   "D/I",
+   "개척형 — 관리 영역 밖의 기회를 물어다 주는 사람."
+  ]
+ },
+ "C/D/I": {
+  "t": "기획전략형",
+  "l": "구조를 짜고 방향을 정하고 팔기까지 합니다.",
+  "b1": "기획 전 구간을 혼자 커버합니다. 분석에서 시작해 전략을 세우고, 그것을 설득하는 자리까지 갑니다. 드문 조합이라 조직에서 빠르게 눈에 띕니다.",
+  "b2": "다 잘한다고 보이지만 본인은 각 단계마다 다른 근육을 쓰느라 소모가 큽니다.",
+  "s": [
+   "분석·전략·설득을 한 흐름으로 처리한다",
+   "숫자로 방향을 증명한다",
+   "반대 논리를 미리 무력화한다"
+  ],
+  "w": [
+   "혼자 다 하려다 팀이 성장하지 않는다",
+   "실행 난이도를 과소평가한다",
+   "완성 전에 공유하지 않는다"
+  ],
+  "st": "압박이 오면 범위를 더 넓게 잡고 혼자 감당합니다.",
+  "g": "중간 산출물을 공유하는 것만으로 팀의 실행력이 올라갑니다.",
+  "j": "전략 기획, 사업 기획, 컨설팅, 신사업.",
+  "f": [
+   "S/I",
+   "조율형 — 전략이 조직에 스며들게 만들어 주는 사람."
+  ]
+ },
+ "C/D/S": {
+  "t": "감사형",
+  "l": "기준으로 재고 결론을 냅니다.",
+  "b1": "타협하지 않습니다. 확인할 것을 다 확인하고, 결과가 불편해도 그대로 말합니다. 이 사람의 결론은 뒤집히지 않기 때문에 조직이 신뢰합니다.",
+  "b2": "적대적으로 보이지만 사람을 보는 게 아니라 기준을 보는 것입니다. 그 구분이 잘 전달되지 않습니다.",
+  "s": [
+   "불편한 결론도 그대로 낸다",
+   "확인 범위를 빠뜨리지 않는다",
+   "압력에 결론을 바꾸지 않는다"
+  ],
+  "w": [
+   "결론 전달 방식이 관계를 손상시킨다",
+   "개선안 없이 문제만 지적한다",
+   "협업 국면에서도 검증 모드로 간다"
+  ],
+  "st": "압박이 오면 더 엄격해지고 고립됩니다.",
+  "g": "지적 하나에 대안 하나를 붙이면 저항이 협조로 바뀝니다.",
+  "j": "내부 감사, 준법, 실사, 리스크 관리, 검수.",
+  "f": [
+   "I/S",
+   "화합형 — 결론이 사람에게 닿는 방식을 다듬어 주는 사람."
+  ]
+ },
+ "C/I/D": {
+  "t": "프레젠터형",
+  "l": "분석을 무기로 앞에 섭니다.",
+  "b1": "숫자를 이야기로 바꿉니다. 자료를 만든 사람이 직접 발표해서 질문이 들어와도 흔들리지 않습니다. 무대에서 가장 신뢰를 얻는 조합입니다.",
+  "b2": "쇼로 보이지만 뒷장에 근거가 다 있습니다. 그래서 심사·질의 국면에서 강합니다.",
+  "s": [
+   "복잡한 자료를 한 장으로 압축한다",
+   "질의응답에서 무너지지 않는다",
+   "앞에 서는 것을 부담스러워하지 않는다"
+  ],
+  "w": [
+   "발표 완성도에 시간을 과하게 쓴다",
+   "자료 없이는 말하지 않으려 한다",
+   "발표 이후 실행 관리를 놓친다"
+  ],
+  "st": "압박이 오면 자료를 더 만들며 밤을 새웁니다.",
+  "g": "발표는 시작입니다. 끝난 뒤 일정을 먼저 잡으세요.",
+  "j": "경쟁 PT, IR, 제안 발표, 대외 보고.",
+  "f": [
+   "S/C",
+   "정착형 — 발표 다음의 실행을 굴려 주는 사람."
+  ]
+ },
+ "C/I/S": {
+  "t": "교육형",
+  "l": "알고 있는 것을 남이 쓰게 만듭니다.",
+  "b1": "가르치는 데 시간을 아끼지 않습니다. 정확하게 알고 있고, 상대가 이해할 때까지 다른 방식으로 다시 설명합니다. 조직의 지식이 이 사람을 통해 퍼집니다.",
+  "b2": "느긋해 보이지만 준비량이 많습니다. 같은 내용을 세 가지 방식으로 설명할 수 있게 만들어 옵니다.",
+  "s": [
+   "같은 내용을 여러 방식으로 설명한다",
+   "상대가 이해할 때까지 기다린다",
+   "지식을 조직에 남긴다"
+  ],
+  "w": [
+   "가르치느라 본인 실무가 밀린다",
+   "이해가 느린 사람에게 시간을 과투자한다",
+   "성과가 본인 이름으로 남지 않는다"
+  ],
+  "st": "압박이 오면 더 자세히 가르치려 하고 정작 본인 일이 밀립니다.",
+  "g": "가르친 것을 문서로 남기면 시간이 절반으로 줄고 영향력은 두 배가 됩니다.",
+  "j": "사내 교육, 온보딩, 매뉴얼, 기술 지원, 강의.",
+  "f": [
+   "D/I",
+   "개척형 — 쌓인 지식을 밖에서 돈으로 바꿔 주는 사람."
+  ]
+ },
+ "C/S/D": {
+  "t": "품질형",
+  "l": "기준선 아래로 내려가는 것을 못 견딥니다.",
+  "b1": "마지막 관문 역할을 합니다. 통과시킬지 말지를 정하고, 아니면 아니라고 합니다. 이 사람을 통과한 것은 밖에서 문제가 안 납니다.",
+  "b2": "발목 잡는 사람으로 보이지만, 이 사람이 없는 조직은 밖에서 사고가 납니다.",
+  "s": [
+   "기준 미달을 통과시키지 않는다",
+   "결함을 재현 가능한 형태로 정리한다",
+   "같은 문제가 두 번 나오지 않게 만든다"
+  ],
+  "w": [
+   "일정 압박과 정면으로 충돌한다",
+   "완벽을 요구해 팀이 지친다",
+   "개선 속도보다 검출에 집중한다"
+  ],
+  "st": "압박이 오면 기준을 더 올리고 갈등을 키웁니다.",
+  "g": "무엇을 통과시킬지 정하는 것도 품질 관리입니다. 등급을 나누세요.",
+  "j": "품질 보증, 검수, 최종 승인, 안전 관리.",
+  "f": [
+   "I/D",
+   "선동형 — 막힌 지점을 사람으로 풀어 주는 사람."
+  ]
+ },
+ "C/S/I": {
+  "t": "연구형",
+  "l": "깊게 파고 오래 붙어 있습니다.",
+  "b1": "하나를 오래 봅니다. 남들이 지루해하는 구간에서 계속 파고들어 결국 다른 사람이 못 가진 것을 손에 넣습니다. 전문성이 조용히 쌓이는 유형입니다.",
+  "b2": "존재감이 약해 보입니다. 그러다 특정 주제에서 이 사람 말고는 답할 사람이 없다는 게 드러납니다.",
+  "s": [
+   "한 주제를 오래 파고든다",
+   "자료를 체계적으로 축적한다",
+   "성급한 결론을 내지 않는다"
+  ],
+  "w": [
+   "성과를 밖으로 알리지 않는다",
+   "완성 전에는 공유하지 않는다",
+   "마감보다 완결도를 택한다"
+  ],
+  "st": "압박이 오면 더 깊이 들어가며 외부와 단절됩니다.",
+  "g": "중간 결과를 정기적으로 공개하면 연구가 자원을 얻습니다.",
+  "j": "R&D, 데이터 분석, 리서치, 기술 전문직.",
+  "f": [
+   "D/I",
+   "개척형 — 연구 결과를 시장으로 끌어내 주는 사람."
+  ]
+ },
+ "BAL": {
+  "t": "균형형",
+  "l": "한쪽으로 기울지 않습니다.",
+  "b1": "네 방향의 강도가 서로 비슷합니다. 상황에 따라 필요한 쪽을 꺼내 쓰기 때문에 어느 자리에 놓아도 크게 어긋나지 않습니다. 전체 응답자 중 드물게 나오는 결과입니다.",
+  "b2": "특징이 없다는 말을 듣습니다. 실제로는 상황 적응력이 높은 것이고, 조직에서 여러 역할을 이어 주는 자리에 잘 맞습니다.",
+  "s": [
+   "상황에 따라 접근 방식을 바꾼다",
+   "서로 다른 유형 사이를 통역한다",
+   "극단적 판단을 하지 않는다"
+  ],
+  "w": [
+   "본인의 강점이 무엇인지 설명하기 어렵다",
+   "어느 영역에서도 최고가 되기 힘들다",
+   "선택을 요구받는 자리에서 흔들린다"
+  ],
+  "st": "압박이 오면 어느 쪽을 택할지 정하지 못하고 시간을 씁니다.",
+  "g": "적응력은 강점입니다. 다만 '무엇을 가장 잘하는가'에 대한 답은 스스로 정해 두어야 합니다.",
+  "j": "제너럴리스트 포지션, 조직 간 연결, PM, 사업 관리.",
+  "f": [
+   "",
+   "특정 유형과의 궁합보다, 팀에 부족한 방향을 그때그때 메우는 역할이 맞습니다."
+  ]
+ }
 };
 
 /* ══ 상태 ══ */
-let N=14, cur=0, ans=[];
+let N=14, cur=0, ans=[], R=null;
 
 function start(n){
   N=n; cur=0; ans=Array.from({length:n},()=>({hi:null,lo:null}));
@@ -338,47 +1356,41 @@ function start(n){
   window.scrollTo(0,0); render();
 }
 function render(){
-  const idx=cur, it=ITEMS[idx], ord=ORDER[idx], a=ans[idx];
-  qcount.textContent=(idx+1)+" / "+N;
-  const pct=Math.round(idx/N*100); qpct.textContent=pct+"%"; qbar.style.width=pct+"%";
-  btnPrev.style.visibility = idx===0 ? "hidden":"visible";
+  const it=ITEMS[cur], ord=ORDER[cur], a=ans[cur];
+  qcount.textContent=(cur+1)+" / "+N;
+  const pct=Math.round(cur/N*100); qpct.textContent=pct+"%"; qbar.style.width=pct+"%";
+  btnPrev.style.visibility = cur===0 ? "hidden":"visible";
   opts.innerHTML = ord.map(f=>`
-    <div class="opt">
+    <div class="opt${(a.hi===f||a.lo===f)?" sel":""}">
       <span class="w">${it[f]}</span>
       <span class="pick">
-        <button data-k="hi" data-f="${f}" class="${a.hi===f?"on":""}" onclick="pick(${f},'hi')">나 같다</button>
-        <button data-k="lo" data-f="${f}" class="${a.lo===f?"on":""}" onclick="pick(${f},'lo')">아니다</button>
+        <button data-k="hi" class="${a.hi===f?"on":""}" onclick="pick(${f},'hi')">나 같다</button>
+        <button data-k="lo" class="${a.lo===f?"on":""}" onclick="pick(${f},'lo')">아니다</button>
       </span>
     </div>`).join("");
 }
 function pick(f,k){
-  const a=ans[cur];
-  const other = k==="hi" ? "lo":"hi";
-  if(a[other]===f) a[other]=null;          // 같은 항목에 둘 다 못 준다
+  const a=ans[cur], other = k==="hi" ? "lo":"hi";
+  if(a[other]===f) a[other]=null;
   a[k] = (a[k]===f) ? null : f;
   render();
-  if(a.hi!==null && a.lo!==null){
-    setTimeout(()=>{ if(cur<N-1){cur++;render();window.scrollTo(0,0);} else finish(); },220);
-  }
+  if(a.hi!==null && a.lo!==null)
+    setTimeout(()=>{ if(cur<N-1){cur++;render();window.scrollTo(0,0);} else finish(); },230);
 }
 function goPrev(){ if(cur>0){cur--;render();window.scrollTo(0,0);} }
 
 /* ══ 채점 ══ */
-function seg(v,kind){
-  if(kind==="diff"){ return v>=15?7 : v>=9?6 : v>=4?5 : v>=-3?4 : v>=-8?3 : v>=-14?2 : 1; }
-  return v>=15?7 : v>=12?6 : v>=9?5 : v>=6?4 : v>=4?3 : v>=2?2 : 1;
-}
+function seg(v){ return v>=15?7 : v>=9?6 : v>=4?5 : v>=-3?4 : v>=-8?3 : v>=-14?2 : 1; }
+function segRaw(v){ return v>=15?7 : v>=12?6 : v>=9?5 : v>=6?4 : v>=4?3 : v>=2?2 : 1; }
 function score(){
   const hi={D:0,I:0,S:0,C:0}, lo={D:0,I:0,S:0,C:0};
   ans.forEach(a=>{ if(a.hi!==null)hi[F[a.hi]]++; if(a.lo!==null)lo[F[a.lo]]++; });
-  const k = 28/N;                                   // 14문항은 ×2로 28점 척도에 정규화
-  const g1={},g2={},g3={},sg={};
-  F.forEach(f=>{ g1[f]=Math.round(hi[f]*k); g2[f]=Math.round(lo[f]*k); g3[f]=g1[f]-g2[f]; sg[f]=seg(g3[f],"diff"); });
+  const k=28/N, g1={},g2={},g3={},sg={};
+  F.forEach(f=>{ g1[f]=Math.round(hi[f]*k); g2[f]=Math.round(lo[f]*k); g3[f]=g1[f]-g2[f]; sg[f]=seg(g3[f]); });
   const rank=[...F].sort((a,b)=> g3[b]-g3[a] || F.indexOf(a)-F.indexOf(b));
-  let main = rank.filter(f=>sg[f]>=5);
-  let flat=false;
-  if(main.length===0){                                // 뚜렷한 상승 요인이 없다
-    if(g3[rank[0]]-g3[rank[3]] <= 6){ flat=true; }     // 네 요인이 서로 붙어 있으면 균형형
+  let main = rank.filter(f=>sg[f]>=5), flat=false;
+  if(main.length===0){
+    if(g3[rank[0]]-g3[rank[3]] <= 6) flat=true;
     main=[rank[0]];
   }
   if(main.length>3) main=main.slice(0,3);
@@ -386,41 +1398,49 @@ function score(){
 }
 
 /* ══ 그래프 ══ */
-function chart(title,vals,kind){
-  const W=200,H=250,PL=26,PR=14,PT=22,PB=20, iw=W-PL-PR, ih=H-PT-PB;
-  const lo = kind==="diff"?-28:0, hi=28;
-  const y=v=>PT+ih-(v-lo)/(hi-lo)*ih;
-  const x=i=>PL+iw*(i+.5)/4;
-  const bands=[1,2,3,4,5,6,7], bnd = kind==="diff"?[-28,-15,-9,-4,4,9,15,29]:[0,2,4,6,9,12,15,29];
+function chart(title,sub,vals,kind){
+  const W=200,H=250,PL=26,PR=14,PT=20,PB=22, iw=W-PL-PR, ih=H-PT-PB;
+  const lo = kind==="diff"?-28:0;
+  const y=v=>PT+ih-(v-lo)/(28-lo)*ih, x=i=>PL+iw*(i+.5)/4;
+  const bnd = kind==="diff"?[-28,-15,-9,-4,4,9,15,29]:[0,2,4,6,9,12,15,29];
   let g="";
-  bands.forEach((b,i)=>{ const y0=y(Math.min(bnd[i+1],28)), y1=y(bnd[i]);
-    g+=`<rect x="${PL}" y="${y0}" width="${iw}" height="${Math.max(0,y1-y0)}" fill="${b===4?'#F2F0EC':'#FBFAF8'}"/>`;
+  [1,2,3,4,5,6,7].forEach((b,i)=>{
+    const y0=y(Math.min(bnd[i+1],28)), y1=y(bnd[i]);
+    g+=`<rect x="${PL}" y="${y0}" width="${iw}" height="${Math.max(0,y1-y0)}" fill="${b===4?'#F1EFEB':'#FCFBF9'}"/>`;
     g+=`<line x1="${PL}" y1="${y1}" x2="${PL+iw}" y2="${y1}" stroke="#EAEAEA" stroke-width="1"/>`;
-    if(y1-y0>=13) g+=`<text x="${PL-7}" y="${(y0+y1)/2+3.5}" font-size="9" fill="#B8B6B0" text-anchor="end" font-weight="700">${b}</text>`; });
-  let pts=F.map((f,i)=>`${x(i)},${y(vals[f])}`).join(" ");
-  g+=`<polyline points="${pts}" fill="none" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>`;
-  F.forEach((f,i)=>{ g+=`<circle cx="${x(i)}" cy="${y(vals[f])}" r="4.5" fill="${FCOL[f]}"/>`;
-    g+=`<text x="${x(i)}" y="${H-6}" font-size="10.5" fill="${FCOL[f]}" text-anchor="middle" font-weight="800">${f}</text>`; });
-  return `<div><div class="gcap">${title}</div>
+    if(y1-y0>=13) g+=`<text x="${PL-7}" y="${(y0+y1)/2+3.5}" font-size="9" fill="#B8B6B0" text-anchor="end" font-weight="700">${b}</text>`;
+  });
+  g+=`<polyline points="${F.map((f,i)=>`${x(i)},${y(vals[f])}`).join(" ")}" fill="none" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>`;
+  F.forEach((f,i)=>{
+    g+=`<circle cx="${x(i)}" cy="${y(vals[f])}" r="4.5" fill="${FCOL[f]}"/>`;
+    g+=`<text x="${x(i)}" y="${H-6}" font-size="10.5" fill="${FCOL[f]}" text-anchor="middle" font-weight="800">${f}</text>`;
+  });
+  return `<div><div class="gcap">${title}</div><div class="gsub">${sub}</div>
     <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${g}</svg></div>`;
 }
 
 /* ══ 결과 ══ */
-let R=null;
 function finish(){
   R=score();
-  const [nm,ln]=TYPES[R.code]||TYPES[R.rank[0]];
+  const T=TYPES[R.code];
   quiz.style.display="none"; result.style.display="block"; window.scrollTo(0,0);
-  const CODE = R.flat ? F : R.code.split("/");
-  rcode.textContent = R.flat ? "네 요인 균형" : CODE.map(f=>f+" "+FNAME[f]).join("  ·  ");
-  rdots.innerHTML = CODE.map(f=>`<i style="background:${FCOL[f]}"></i>`).join("");
-  rname.textContent=nm; rline.textContent=ln;
 
-  graphs.innerHTML = chart("그래프 <b>Ⅰ</b> · 최고치 — 남에게 보이는 나",R.g1,"raw")
-                   + chart("그래프 <b>Ⅱ</b> · 최소치 — 눌러 두는 나",R.g2,"raw")
-                   + chart("그래프 <b>Ⅲ</b> · 차이 — 실제 나",R.g3,"diff");
-  gnote.innerHTML = "그래프 Ⅲ = 최고치 − 최소치. 유형 판정은 Ⅲ을 기준으로 한다. "
-    + (N===14 ? "<b>14문항 결과는 28점 척도로 환산한 값</b>이라 정밀 진단과 소수 차이가 날 수 있다." : "28문항 원점수 그대로다.");
+  const CODE = R.flat ? F : R.code.split("/");
+  rcode.textContent = R.flat ? "네 방향 균형" : CODE.map(f=>f+" "+FNAME[f]).join("  ·  ");
+  rdots.innerHTML = CODE.map(f=>`<i style="background:${FCOL[f]}"></i>`).join("");
+  rname.textContent=T.t;
+  rline.textContent=T.l;
+  rbody.innerHTML=`<p>${T.b1}</p><p>${T.b2}</p>`;
+
+  graphs.innerHTML =
+      chart("그래프 <b>Ⅰ</b> · 최고치","남에게 보이는 나",R.g1,"raw")
+    + chart("그래프 <b>Ⅱ</b> · 최소치","눌러 두는 나",R.g2,"raw")
+    + chart("그래프 <b>Ⅲ</b> · 차이","실제 쓰는 나",R.g3,"diff");
+  gnote.innerHTML = "<b>Ⅰ은</b> 스스로 '나 같다'고 고른 횟수, <b>Ⅱ는</b> '나답지 않다'고 고른 횟수입니다. "
+    + "<b>Ⅲ은 Ⅰ에서 Ⅱ를 뺀 값</b>이고, 유형 판정은 Ⅲ을 씁니다. "
+    + "Ⅰ과 Ⅲ의 모양이 많이 다르다면, 겉으로 드러내는 방식과 실제로 편한 방식 사이에 간극이 있다는 뜻입니다.<br>"
+    + (N===14 ? "이번 결과는 14문항을 <b>28점 척도로 환산</b>한 값이라 정밀 진단과 1~2점 차이가 날 수 있습니다."
+              : "이번 결과는 28문항 <b>원점수 그대로</b>입니다.");
 
   tbody.innerHTML = F.map(f=>`<tr>
     <td><span class="fk"><i style="background:${FCOL[f]}"></i>${FLONG[f]}</span></td>
@@ -428,46 +1448,68 @@ function finish(){
     <td class="num mono">${R.g3[f]>0?"+":""}${R.g3[f]}</td>
     <td class="num"><span class="seg" style="background:${FBG[f]};color:${FCOL[f]}">${R.sg[f]}</span></td></tr>`).join("");
 
-  const P = R.flat ? R.rank.slice(0,2) : R.code.split("/");
-  const S = P.length===1 ? [...LIB[P[0]].s]
-          : [...LIB[P[0]].s.slice(0,2), LIB[P[1]].s[0], ...(P[2]?[LIB[P[2]].s[1]]:[])];
-  const Wk = P.length===1 ? [...LIB[P[0]].w]
-          : [...LIB[P[0]].w.slice(0,2), LIB[P[1]].w[1]];
-  strong.innerHTML=S.map(t=>`<li>${t}</li>`).join("");
-  weak.innerHTML=Wk.map(t=>`<li>${t}</li>`).join("");
-  rjob.textContent=JOB[P[0]] + (P[1] ? "  —  여기에 "+FNAME[P[1]]+" 성향이 붙어 "+(P[1]==="C"?"검증까지 스스로 한다.":P[1]==="I"?"사람을 붙이는 일까지 같이 한다.":P[1]==="S"?"오래 붙어 있는 일에도 견딘다.":"결정 속도가 한 단계 빨라진다.") : ".");
-  const fp=FIT[P[0]];
-  rfit.textContent=FLONG[fp]+"이 높은 유형. "+FITWHY[P[0]]+" 역할이라 부딪히는 대신 서로의 빈 곳을 메운다.";
+  strong.innerHTML=T.s.map(t=>`<li>${t}</li>`).join("");
+  weak.innerHTML=T.w.map(t=>`<li>${t}</li>`).join("");
+  rst.textContent=T.st; rg.textContent=T.g; rjob.textContent=T.j;
+  rfit.innerHTML = T.f[0] ? `<b>${TYPES[T.f[0]].t}</b> — ${T.f[1].replace(/^[^—]*—\s*/,"")}` : T.f[1];
+
+  fxbox.innerHTML = F.map(f=>`<div class="fxi">
+      <div class="h"><i style="background:${FCOL[f]}"></i>${FLONG[f]}
+        <span style="margin-left:auto;font-size:12px;color:${FCOL[f]}">강도 ${R.sg[f]}</span></div>
+      <div class="d">${FDESC[f]}</div></div>`).join("");
 
   upsell.style.display = N===14 ? "inline-block":"none";
-  disc.innerHTML="이 진단은 DISC 4요인 이론(W. M. Marston, 1928)의 <b>구조</b>를 참고해 문항·채점기준·유형 서술을 자체 제작한 파일럿입니다. 특정 상용 검사도구의 문항이나 리포트를 사용하지 않으며 어떤 기업·기관의 공인 검사도 아닙니다. 채용·인사 판정 등 개인에게 불이익이 갈 수 있는 결정의 근거로 쓰지 마세요.<br>규준 변환 기준은 응답 표본 확보 전의 <b>잠정값</b>입니다. 표본 500건 이상 수집 후 백분위 기준으로 교체 예정.";
+
+  const d=new Date();
+  const stamp=`${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,"0")}.${String(d.getDate()).padStart(2,"0")}`;
+  prmeta.textContent = `${R.flat?"균형":R.code}  ·  ${N}문항  ·  ${stamp}`;
+
+  disc.innerHTML = "이 진단은 <b>DISC 4요인 모델(W. M. Marston, 1928)의 구조</b>를 참고해 문항·채점 기준·유형 해설을 전부 자체 제작한 것입니다. "
+    + "어떤 상용 검사 도구의 문항이나 리포트도 사용하지 않았고, 어느 기업·기관의 공인 검사도 아닙니다.<br>"
+    + "<b>강도 구간(1~7)은 규준 표본 확보 전의 잠정값</b>입니다. 응답이 충분히 쌓이면 실제 분포 기준으로 교체합니다. "
+    + "DISC 계열 도구는 학계에서 예측 타당도에 대한 비판이 있으며, 이는 MBTI를 포함한 유형론 검사 전반에 해당합니다.<br>"
+    + "<b>채용·승진·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마세요.</b> "
+    + "서로 다른 일하는 방식을 이야기하기 시작하는 도구로 쓰는 것이 이 검사가 실제로 잘하는 일입니다.";
+
+  prfoot.innerHTML = `행동유형 진단 리포트 · ${T.t} (${R.flat?"균형":R.code}) · ${N}문항 · ${stamp}<br>`
+    + `DISC 4요인 모델(Marston, 1928) 구조 기반 자체 제작 검사. 공인 검사가 아니며 강도 구간은 잠정값입니다. `
+    + `채용·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마십시오. · SigmaAd`;
 }
 
-/* ══ 결과 카드 PNG ══ */
+/* ══ 공유 카드 PNG ══ */
 function saveCard(){
-  const c=shot, x=c.getContext("2d"), W=1080,H=1350;
+  const c=shot, x=c.getContext("2d"), W=1080,H=1350, T=TYPES[R.code];
   x.fillStyle="#F7F6F3"; x.fillRect(0,0,W,H);
-  const [nm,ln]=TYPES[R.code]||TYPES[R.rank[0]];
-  x.fillStyle="#787774"; x.font="700 26px Pretendard,sans-serif";
-  x.fillText("행 동 유 형   진 단", 90, 150);
-  x.fillStyle="#111"; x.font="800 116px Pretendard,sans-serif"; x.fillText(nm, 86, 290);
-  x.font="700 34px Pretendard,sans-serif";
-  x.fillText(R.flat ? "네 요인 균형" : R.code.split("/").map(f=>f+" "+FNAME[f]).join("   ·   "), 90, 360);
-  x.fillStyle="#2F3437"; x.font="400 33px Pretendard,sans-serif";
-  let line="",y=460; ln.split(" ").forEach(w=>{ if(x.measureText(line+w).width>880){x.fillText(line,90,y);y+=52;line="";} line+=w+" ";});
-  x.fillText(line,90,y);
-  // 막대
-  const bx=90, bw=900, top=y+120;
-  F.forEach((f,i)=>{ const yy=top+i*118, v=R.g3[f], w=Math.max(6, Math.abs(v)/28*(bw/2));
-    x.fillStyle="#E7E5E1"; x.fillRect(bx,yy+40,bw,3);
+  x.fillStyle="#E7E5E1"; x.fillRect(88,150,904,2);
+  x.fillStyle="#787774"; x.font="700 25px Pretendard,sans-serif";
+  x.fillText("행 동 유 형   진 단", 88, 128);
+  x.fillStyle="#111"; x.font="800 112px Pretendard,sans-serif"; x.fillText(T.t, 84, 300);
+  x.font="700 32px Pretendard,sans-serif"; x.fillStyle="#787774";
+  x.fillText(R.flat?"네 방향 균형":R.code.split("/").map(f=>f+" "+FNAME[f]).join("   ·   "), 88, 366);
+
+  x.fillStyle="#2F3437"; x.font="400 34px Pretendard,sans-serif";
+  let line="", y=460;
+  T.l.split(" ").forEach(w=>{ if(x.measureText(line+w).width>880){x.fillText(line,88,y);y+=54;line="";} line+=w+" "; });
+  x.fillText(line,88,y);
+
+  const bx=88, bw=904, top=y+110;
+  F.forEach((f,i)=>{
+    const yy=top+i*124, v=R.g3[f], w=Math.max(8, Math.abs(v)/28*(bw/2));
+    x.fillStyle="#E7E5E1"; x.fillRect(bx,yy+40,bw,2);
+    x.fillStyle="#DEDCD7"; x.fillRect(bx+bw/2-1,yy+18,2,46);
     x.fillStyle=FCOL[f];
-    if(v>=0) x.fillRect(bx+bw/2,yy+26,w,30); else x.fillRect(bx+bw/2-w,yy+26,w,30);
+    if(v>=0) x.fillRect(bx+bw/2,yy+26,w,28); else x.fillRect(bx+bw/2-w,yy+26,w,28);
     x.font="800 30px Pretendard,sans-serif"; x.fillText(f,bx,yy+50);
     x.fillStyle="#787774"; x.font="600 25px Pretendard,sans-serif";
-    x.fillText(FNAME[f]+"  "+(v>0?"+":"")+v, bx+46, yy+50); });
-  x.fillStyle="#B8B6B0"; x.font="700 24px Pretendard,sans-serif";
-  x.fillText("SigmaAd  ·  파일럿 데모", 90, H-80);
-  const a=document.createElement("a"); a.download="행동유형_"+nm+".png"; a.href=c.toDataURL("image/png"); a.click();
+    x.fillText(FNAME[f]+"  "+(v>0?"+":"")+v, bx+42, yy+50);
+  });
+  x.fillStyle="#B8B6B0"; x.font="700 23px Pretendard,sans-serif";
+  x.fillText("3분 · 무료 · 결과 전부 공개", 88, H-112);
+  x.fillStyle="#787774"; x.font="800 25px Pretendard,sans-serif";
+  x.fillText("SigmaAd  행동유형 진단", 88, H-70);
+
+  const a=document.createElement("a");
+  a.download="행동유형_"+T.t+".png"; a.href=c.toDataURL("image/png"); a.click();
 }
 </script>
 </body>
