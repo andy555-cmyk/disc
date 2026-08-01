@@ -13,7 +13,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://andy555-cmyk.github.io/disc/">
-<meta property="og:site_name" content="SigmaAd">
+<meta property="og:site_name" content="HayDay">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -148,6 +148,31 @@ ul.pts li::before{content:"";width:5px;height:5px;border-radius:50%;background:v
 canvas#shot{display:none}
 .pr{display:none}
 
+/* ── 정렬 리듬: 헤더는 가운데, 읽는 본문은 왼쪽 ── */
+#intro{text-align:center}
+#intro .lead{margin-left:auto;margin-right:auto;max-width:30em}
+.claims{justify-content:center}
+.claim{text-align:center;padding:4px 10px}
+.claim .d{max-width:21em;margin-left:auto;margin-right:auto}
+#intro .note{text-align:center;border-left:0;padding:18px 0 0;max-width:38em;
+  margin:30px auto 0;border-top:1px solid var(--line)}
+#intro .faq{text-align:left}
+.verbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}
+.ver{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;
+  padding:28px 22px 26px}
+.ver .n{font-size:11px;letter-spacing:.16em;color:var(--sub);font-weight:800;min-width:0}
+.ver .t{font-size:19px;font-weight:800;letter-spacing:-.03em;margin-top:9px}
+.ver .t .tag{font-style:normal;margin-left:6px}
+.ver .d{font-size:13px;margin-top:9px;line-height:1.62}
+.sect>.eyebrow{text-align:center}
+.qtitle,.qhint{text-align:center}
+.qhint{max-width:30em;margin-left:auto;margin-right:auto}
+.rhead{text-align:center}
+.rhead .rline{margin-left:auto;margin-right:auto}
+.btnrow{justify-content:center}
+.gcap,.gsub{text-align:center}
+.fxi .d{text-align:left}
+
 /* ── 이미지 ── */
 .hero{margin:34px 0 0}
 .hero>img{width:100%;height:auto;display:block;border-radius:14px;border:1px solid var(--line);
@@ -174,7 +199,11 @@ canvas#shot{display:none}
   .claim .d{margin-top:0;font-size:12.5px}
   .hero{margin-top:26px;border-radius:12px}
   .rband{aspect-ratio:16/9;margin-bottom:18px}
-  .ver{padding:19px 18px;gap:13px}
+  .verbox{grid-template-columns:1fr;gap:10px;margin-top:28px}
+  .ver{padding:22px 18px}
+  .ver .t{font-size:17.5px}
+  .ver .d{font-size:12.5px}
+  .ver .d br{display:none}
   .ver .t{font-size:16.5px}
   .ver .d{font-size:13px}
   .sect{margin-top:40px}
@@ -202,6 +231,9 @@ canvas#shot{display:none}
   html,body{background:#fff;padding:0;font-size:9.8pt}
   .wrap{max-width:none}
   #intro,#quiz,.btnrow,.adslot,.faq,.noprint,.hero,.rband{display:none!important}
+  .rhead{text-align:left}
+  .rhead .rline{margin-left:0}
+  .sect>.eyebrow{text-align:left}
   #result{display:block!important;padding:0}
   .pr{display:block}
   .prhead{display:flex;justify-content:space-between;align-items:baseline;
@@ -240,7 +272,7 @@ canvas#shot{display:none}
 
 <!-- ══════ 인트로 ══════ -->
 <section id="intro">
-  <span class="eyebrow">행동유형 진단 · SigmaAd 파일럿</span>
+  <span class="eyebrow">행동유형 진단 · HayDay 파일럿</span>
   <h1>MBTI는 나를 설명한다.<br>DISC 검사는 내가 <span style="color:var(--C)">일하는 방식</span>을<br class="brdesk">설명한다.</h1>
   <figure class="hero">
     <img src="hero.jpg" alt="네 가지 색의 종이 띠" loading="eager" width="1600" height="900">
@@ -257,18 +289,14 @@ canvas#shot{display:none}
 
   <div class="verbox">
     <button class="ver" onclick="start(14)">
-      <span class="n mono">14</span>
-      <span>
-        <span class="t">빠른 진단</span><span class="tag">약 3분</span>
-        <span class="d">유형·강도 그래프·해설까지 전부 나옵니다. 처음이면 여기서 시작하세요.</span>
-      </span>
+      <span class="n mono">14 문항</span>
+      <span class="t">빠른 진단 <em class="tag">약 3분</em></span>
+      <span class="d">유형과 강도 그래프, 해설까지 전부 나옵니다.<br>처음이면 여기서 시작하세요.</span>
     </button>
     <button class="ver" onclick="start(28)">
-      <span class="n mono">28</span>
-      <span>
-        <span class="t">정밀 진단</span><span class="tag">약 7분</span>
-        <span class="d">문항 수가 두 배라 경계에 걸린 요인이 또렷하게 갈립니다. 결과를 인쇄해 남길 거라면 이쪽.</span>
-      </span>
+      <span class="n mono">28 문항</span>
+      <span class="t">정밀 진단 <em class="tag">약 7분</em></span>
+      <span class="d">경계에 걸린 요인까지 또렷하게 갈립니다.<br>인쇄해서 남길 거라면 이쪽.</span>
     </button>
   </div>
 
@@ -322,9 +350,11 @@ canvas#shot{display:none}
 
   <figure class="rband noprint"><img id="rbandimg" src="" alt="" width="1600" height="686"><span class="rbandtag" id="rbandtag"></span></figure>
 
-  <span class="badge noprint"><span class="dots" id="rdots"></span><span id="rcode"></span></span>
-  <h1 class="rtype" id="rname"></h1>
-  <p class="rline" id="rline"></p>
+  <div class="rhead">
+    <span class="badge noprint"><span class="dots" id="rdots"></span><span id="rcode"></span></span>
+    <h1 class="rtype" id="rname"></h1>
+    <p class="rline" id="rline"></p>
+  </div>
   <div class="rbody" id="rbody"></div>
 
   <div class="sect">
@@ -1533,44 +1563,95 @@ function finish(){
 
   prfoot.innerHTML = `행동유형 진단 리포트 · ${T.t} (${R.flat?"균형":R.code}) · ${N}문항 · ${stamp}<br>`
     + `DISC 4요인 모델(Marston, 1928) 구조 기반 자체 제작 검사. 공인 검사가 아니며 강도 구간은 잠정값입니다. `
-    + `채용·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마십시오. · SigmaAd`;
+    + `채용·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마십시오. · HayDay`;
 }
 
-/* ══ 공유 카드 PNG ══ */
+/* ══ 공유 카드 PNG — 유형 이미지 + 중앙 정렬 ══ */
+function drawWrapped(x,cx,y,maxW,lh,txt,font,fill,align){
+  x.font=font; x.fillStyle=fill; x.textAlign=align||"center";
+  const words=txt.split(" "); let line="", n=0;
+  for(const w of words){
+    const t=line?line+" "+w:w;
+    if(x.measureText(t).width>maxW && line){ x.fillText(line,cx,y+n*lh); n++; line=w; }
+    else line=t;
+  }
+  if(line) x.fillText(line,cx,y+n*lh);
+  return n+1;
+}
 function saveCard(){
-  const c=shot, x=c.getContext("2d"), W=1080,H=1350, T=TYPES[R.code];
-  x.fillStyle="#F7F6F3"; x.fillRect(0,0,W,H);
-  x.fillStyle="#E7E5E1"; x.fillRect(88,150,904,2);
-  x.fillStyle="#787774"; x.font="700 25px Pretendard,sans-serif";
-  x.fillText("행 동 유 형   진 단", 88, 128);
-  x.fillStyle="#111"; x.font="800 112px Pretendard,sans-serif"; x.fillText(T.t, 84, 300);
-  x.font="700 32px Pretendard,sans-serif"; x.fillStyle="#787774";
-  x.fillText(R.flat?"네 방향 균형":R.code.split("/").map(f=>f+" "+FNAME[f]).join("   ·   "), 88, 366);
+  const c=shot, x=c.getContext("2d"), W=1080, H=1350;
+  const T=TYPES[R.code], lead = R.flat ? "ALL" : R.code.split("/")[0];
+  const PAPER="#F7F6F3", INK="#111111", SUB="#787774", LINE="#DEDCD7";
 
-  x.fillStyle="#2F3437"; x.font="400 34px Pretendard,sans-serif";
-  let line="", y=460;
-  T.l.split(" ").forEach(w=>{ if(x.measureText(line+w).width>880){x.fillText(line,88,y);y+=54;line="";} line+=w+" "; });
-  x.fillText(line,88,y);
+  const img=new Image();
+  img.onload=()=>{ render(img); };
+  img.onerror=()=>{ render(null); };
+  img.src="f_"+lead+".jpg";
 
-  const bx=88, bw=904, top=y+110;
-  F.forEach((f,i)=>{
-    const yy=top+i*124, v=R.g3[f], w=Math.max(8, Math.abs(v)/28*(bw/2));
-    x.fillStyle="#E7E5E1"; x.fillRect(bx,yy+40,bw,2);
-    x.fillStyle="#DEDCD7"; x.fillRect(bx+bw/2-1,yy+18,2,46);
-    x.fillStyle=FCOL[f];
-    if(v>=0) x.fillRect(bx+bw/2,yy+26,w,28); else x.fillRect(bx+bw/2-w,yy+26,w,28);
-    x.font="800 30px Pretendard,sans-serif"; x.fillText(f,bx,yy+50);
-    x.fillStyle="#787774"; x.font="600 25px Pretendard,sans-serif";
-    x.fillText(FNAME[f]+"  "+(v>0?"+":"")+v, bx+42, yy+50);
-  });
-  x.fillStyle="#B8B6B0"; x.font="700 23px Pretendard,sans-serif";
-  x.fillText("3분 · 무료 · 결과 전부 공개", 88, H-112);
-  x.fillStyle="#787774"; x.font="800 25px Pretendard,sans-serif";
-  x.fillText("SigmaAd  행동유형 진단", 88, H-70);
+  function render(im){
+    x.fillStyle=PAPER; x.fillRect(0,0,W,H);
 
-  const a=document.createElement("a");
-  a.download="행동유형_"+T.t+".png"; a.href=c.toDataURL("image/png"); a.click();
+    /* 1 · 상단 이미지 */
+    const IH=540;
+    if(im){
+      const sw=im.width, sh=im.height, t=W/IH;
+      let sx=0, sy=0, cw=sw, ch=sh;
+      if(sw/sh>t){ cw=Math.round(sh*t); sx=Math.round((sw-cw)/2); }
+      else       { ch=Math.round(sw/t); sy=Math.round((sh-ch)/2); }
+      x.drawImage(im, sx,sy,cw,ch, 0,0,W,IH);
+      const gr=x.createLinearGradient(0,IH-150,0,IH);
+      gr.addColorStop(0,"rgba(247,246,243,0)"); gr.addColorStop(1,PAPER);
+      x.fillStyle=gr; x.fillRect(0,IH-150,W,150);
+    } else { x.fillStyle="#EFEDE8"; x.fillRect(0,0,W,IH); }
+
+    /* 2 · 타이틀 블록 */
+    x.textAlign="center";
+    x.font="800 24px Pretendard,sans-serif"; x.fillStyle=SUB;
+    x.fillText("행 동 유 형   진 단", W/2, 600);
+    x.strokeStyle=LINE; x.lineWidth=2;
+    x.beginPath(); x.moveTo(W/2-52,624); x.lineTo(W/2+52,624); x.stroke();
+
+    x.font="800 118px Pretendard,sans-serif"; x.fillStyle=INK;
+    x.fillText(T.t, W/2, 738);
+
+    x.font="700 29px Pretendard,sans-serif"; x.fillStyle=SUB;
+    x.fillText(R.flat ? "네 방향 균형" : R.code.split("/").map(f=>f+" "+FNAME[f]).join("   ·   "), W/2, 790);
+
+    drawWrapped(x, W/2, 858, 840, 48, T.l, "400 33px Pretendard,sans-serif", "#2F3437");
+
+    /* 3 · 세로 막대 — 중앙 축 대칭 */
+    const BW=78, GAP=44, TOTAL=4*BW+3*GAP, X0=(W-TOTAL)/2;
+    const MID=1045, MAXH=112;
+    x.strokeStyle="#E7E5E1"; x.lineWidth=2;
+    x.beginPath(); x.moveTo(120,MID); x.lineTo(W-120,MID); x.stroke();
+
+    F.forEach((f,i)=>{
+      const v=R.g3[f], bx=X0+i*(BW+GAP);
+      const h=Math.max(6, Math.round(Math.abs(v)/28*MAXH));
+      x.fillStyle=FCOL[f];
+      if(v>=0) x.fillRect(bx, MID-h, BW, h); else x.fillRect(bx, MID, BW, h);
+      const cx=bx+BW/2;
+      x.textAlign="center";
+      x.font="800 34px Pretendard,sans-serif"; x.fillStyle=FCOL[f];
+      x.fillText(f, cx, 1205);
+      x.font="600 24px Pretendard,sans-serif"; x.fillStyle=SUB;
+      x.fillText(FNAME[f]+"  "+(v>0?"+":"")+v, cx, 1243);
+    });
+
+    /* 4 · 꼬리말 */
+    x.strokeStyle=LINE; x.lineWidth=2;
+    x.beginPath(); x.moveTo(W/2-52,1282); x.lineTo(W/2+52,1282); x.stroke();
+    x.textAlign="center";
+    x.font="800 26px Pretendard,sans-serif"; x.fillStyle=INK;
+    x.fillText("HayDay  행동유형 진단   ·   3분 · 무료 · 결과 전부 공개", W/2, 1324);
+
+    try{
+      const a=document.createElement("a");
+      a.download="행동유형_"+T.t+".png"; a.href=c.toDataURL("image/png"); a.click();
+    }catch(e){ alert("이미지 저장은 배포된 주소에서만 됩니다."); }
+  }
 }
+
 </script>
 </body>
 </html>
