@@ -16,6 +16,7 @@
 <meta property="og:site_name" content="HayDay">
 <meta property="og:locale" content="ko_KR">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNyIgZmlsbD0iI0Y3RjZGMyIvPjxyZWN0IHg9IjYiICB5PSI5IiAgd2lkdGg9IjQiIGhlaWdodD0iMTYiIHJ4PSIxIiBmaWxsPSIjOUYyRjJEIi8+PHJlY3QgeD0iMTIiIHk9IjEzIiB3aWR0aD0iNCIgaGVpZ2h0PSIxMiIgcng9IjEiIGZpbGw9IiM5NTY0MDAiLz48cmVjdCB4PSIxOCIgeT0iNyIgIHdpZHRoPSI0IiBoZWlnaHQ9IjE4IiByeD0iMSIgZmlsbD0iIzM0NjUzOCIvPjxyZWN0IHg9IjI0IiB5PSIxMiIgd2lkdGg9IjQiIGhlaWdodD0iMTMiIHJ4PSIxIiBmaWxsPSIjMUY2QzlGIi8+PC9zdmc+">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 :root{
@@ -118,8 +119,8 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 .fk i{width:9px;height:9px;border-radius:2px;display:inline-block;flex:0 0 9px}
 .seg{display:inline-block;min-width:20px;text-align:center;font-weight:800;font-size:13px;padding:2px 7px;border-radius:5px}
 ul.pts{list-style:none;display:flex;flex-direction:column;gap:11px}
-ul.pts li{display:flex;gap:11px;font-size:14.5px;line-height:1.6;color:var(--ink2)}
-ul.pts li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--line2);flex:0 0 5px;margin-top:9px}
+ul.pts li{position:relative;display:block;padding-left:17px;font-size:14.5px;line-height:1.62;color:var(--ink2)}
+ul.pts li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--line2)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.two{grid-template-columns:1fr}}
 .kv{display:flex;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:flex-start}
@@ -172,6 +173,80 @@ canvas#shot{display:none}
 .btnrow{justify-content:center}
 .gcap,.gsub{text-align:center}
 .fxi .d{text-align:left}
+
+/* ── 인앱 브라우저 대응 ── */
+#inapp{display:none;position:sticky;top:0;z-index:60;margin:0 -20px 0;
+  background:#111;color:#fff;padding:10px 16px;font-size:13px;font-weight:600;
+  letter-spacing:-.025em;align-items:center;gap:9px;justify-content:center;
+  text-align:center;white-space:nowrap}
+#inapp.on{display:flex}
+#inapp button{font-family:inherit;font-size:12.5px;font-weight:800;letter-spacing:-.02em;
+  background:#fff;color:#111;border:0;border-radius:7px;padding:7px 12px;cursor:pointer;flex:0 0 auto}
+.modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(17,17,17,.55);
+  align-items:center;justify-content:center;padding:22px;overflow:auto}
+.modal.on{display:flex}
+.mbox{background:var(--paper);border-radius:16px;padding:26px 24px;max-width:420px;width:100%;
+  box-shadow:0 24px 60px rgba(0,0,0,.22);text-align:center}
+.mbox h3{font-size:18px;letter-spacing:-.03em;margin-bottom:10px}
+.mbox p{font-size:14px;line-height:1.7;color:var(--ink2)}
+.mbox .steps{text-align:left;background:var(--canvas);border-radius:10px;padding:15px 16px;
+  margin-top:15px;font-size:13.5px;line-height:1.85;color:var(--ink2)}
+.mbox .steps b{color:var(--ink)}
+.mbox .mbtn{margin-top:18px;display:flex;gap:8px;flex-direction:column}
+.mbox .mbtn button{font-family:inherit;font-size:14.5px;font-weight:700;letter-spacing:-.02em;
+  border-radius:10px;padding:13px;cursor:pointer;border:1px solid var(--ink);background:var(--ink);color:#fff}
+.mbox .mbtn button.sec{background:#fff;color:var(--ink);border-color:var(--line2)}
+.mbox img{width:100%;border-radius:10px;border:1px solid var(--line);margin-top:14px;display:block}
+
+/* ── 궁합 ── */
+#match{display:none;padding:38px 0 0}
+.mhead{text-align:center}
+.mtitle{font-size:40px;line-height:1.12;letter-spacing:-.04em;font-weight:800;margin:14px 0 0}
+.mhead .rline{margin-left:auto;margin-right:auto}
+.pair{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  padding-bottom:18px;border-bottom:1px solid var(--line)}
+.pcard{text-align:center;min-width:120px}
+.pcard .who{font-size:11px;letter-spacing:.16em;color:var(--sub);font-weight:800}
+.pcard .nm{font-size:22px;font-weight:800;letter-spacing:-.03em;margin-top:5px}
+.pcard .cd{font-size:12px;color:var(--sub);font-weight:700;margin-top:3px}
+.pair .vs{font-size:12px;font-weight:800;color:var(--sub);letter-spacing:.1em;padding:0 4px}
+.cmp{margin-top:18px;display:flex;flex-direction:column;gap:13px}
+.cmprow{display:grid;grid-template-columns:76px 1fr 1fr;gap:9px;align-items:center}
+.cmprow .lb{font-size:12.5px;font-weight:800;display:flex;align-items:center;gap:6px}
+.cmprow .lb i{width:8px;height:8px;border-radius:2px;flex:0 0 8px}
+.mtr{height:24px;background:var(--canvas);border-radius:5px;position:relative;overflow:hidden}
+.mtr .fillbar{position:absolute;top:0;bottom:0;left:0;opacity:.85}
+.mtr .v{position:absolute;right:7px;top:50%;transform:translateY(-50%);
+  font-size:11.5px;font-weight:800;color:var(--ink)}
+.cmphdr{display:grid;grid-template-columns:76px 1fr 1fr;gap:9px;font-size:10.5px;
+  letter-spacing:.1em;color:var(--sub);font-weight:700;margin-bottom:-4px}
+.mblk .card{margin-top:12px}
+.mnone{font-size:14.5px;color:var(--sub);line-height:1.6}
+
+/* 코드 입력 */
+.codebox{margin-top:16px}
+.codeme{display:flex;align-items:center;gap:10px;justify-content:center;
+  background:var(--canvas);border-radius:10px;padding:13px 16px;flex-wrap:wrap}
+.codeme .cl{font-size:11px;letter-spacing:.14em;color:var(--sub);font-weight:800}
+.codeme .cv{font-size:20px;font-weight:800;letter-spacing:.04em}
+.codein{display:flex;gap:8px;margin-top:10px}
+.codein input{flex:1 1 auto;min-width:0;font-family:inherit;font-size:15.5px;font-weight:700;
+  letter-spacing:.02em;border:1px solid var(--line2);border-radius:10px;padding:13px 14px;
+  background:var(--paper);color:var(--ink);text-transform:uppercase}
+.codein input::placeholder{font-weight:500;color:#b8b6b0;text-transform:none;letter-spacing:0}
+.codein input:focus{outline:0;border-color:var(--ink)}
+.codein .btn{flex:0 0 auto;padding:13px 18px}
+.cerr{font-size:12.5px;color:var(--D);margin-top:9px;min-height:1px;text-align:center}
+@media(max-width:480px){
+  .mtitle{font-size:28px;line-height:1.3}
+  .cmprow,.cmphdr{grid-template-columns:62px 1fr 1fr;gap:7px}
+  .cmprow .lb{font-size:11.5px}
+  .codein{flex-direction:column}
+  .codein .btn{width:100%}
+  .pcard{min-width:104px}
+  .pcard .nm{font-size:19px}
+}
+@media print{ #match .btnrow{display:none!important} }
 
 /* ── 이미지 ── */
 .hero{margin:34px 0 0}
@@ -251,7 +326,8 @@ canvas#shot{display:none}
   .gnote{font-size:7.8pt;line-height:1.55;margin-top:8px;padding-top:8px}
   table{font-size:9pt}th,td{padding:7px 4px}
   th{font-size:7.5pt}
-  ul.pts li{font-size:9pt;line-height:1.5;gap:9px}
+  ul.pts li{font-size:9pt;line-height:1.5;padding-left:14px}
+  ul.pts li::before{top:6px;width:4px;height:4px}
   ul.pts{gap:7px}
   .two,.fx{grid-template-columns:1fr 1fr;gap:8px}
   .kv{padding:9px 0}.kv dt{flex:0 0 76px;font-size:8.5pt}.kv dd{font-size:9.2pt;line-height:1.55}
@@ -268,6 +344,10 @@ canvas#shot{display:none}
 </style>
 </head>
 <body>
+<div id="inapp">
+  <span id="inappmsg">카카오톡 안에서는 저장·인쇄가 막힙니다</span>
+  <button onclick="openExternal()">브라우저로 열기</button>
+</div>
 <div class="wrap">
 
 <!-- ══════ 인트로 ══════ -->
@@ -405,10 +485,32 @@ canvas#shot{display:none}
   <div class="adslot noprint">AD SLOT · 728 × 90</div>
 
   <div class="btnrow noprint">
-    <button class="btn" onclick="window.print()">결과 PDF로 저장 · 인쇄</button>
+    <button class="btn" onclick="doPrint()">결과 PDF로 저장 · 인쇄</button>
     <button class="btn sec" onclick="saveCard()">공유 카드 이미지</button>
     <button class="btn sec" id="upsell" onclick="start(28)">정밀 28문항으로 다시</button>
     <button class="btn sec" onclick="location.reload()">처음부터</button>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">동료와 맞춰 보기</span>
+    <div class="card">
+      <p style="font-size:15px">같이 일하는 사람의 코드를 넣으면 <b>어디서 빨리 통하고 어디서 부딪히는지</b> 나옵니다.
+      상대에게 검사 링크를 보내고 결과에 뜨는 코드를 받으세요.</p>
+
+      <div class="codebox">
+        <div class="codeme">
+          <span class="cl">내 코드</span>
+          <b class="cv mono" id="mycode"></b>
+          <button class="ghost" onclick="copyCode()" id="copybtn">복사</button>
+        </div>
+        <div class="codein">
+          <input id="peer" type="text" inputmode="latin" autocomplete="off" spellcheck="false"
+                 placeholder="상대 코드 (예: DI-6622)" oninput="peerHint()">
+          <button class="btn" onclick="runMatch()">궁합 보기</button>
+        </div>
+        <p class="cerr" id="cerr"></p>
+      </div>
+    </div>
   </div>
 
   <div class="sect">
@@ -430,7 +532,61 @@ canvas#shot{display:none}
   <div class="pr prfoot" id="prfoot"></div>
 </section>
 
+
+<!-- ══════ 궁합 ══════ -->
+<section id="match">
+  <div class="mhead">
+    <span class="eyebrow">함께 일하는 사이</span>
+    <h1 class="mtitle" id="mrel"></h1>
+    <p class="rline" id="mrelline"></p>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">두 사람</span>
+    <div class="card">
+      <div class="pair" id="mpair"></div>
+      <div class="cmp" id="mcmp"></div>
+      <p class="gnote" id="mcmpnote"></p>
+    </div>
+  </div>
+
+  <div class="sect" id="msame"></div>
+  <div class="sect" id="mcomp"></div>
+  <div class="sect" id="mgap"></div>
+  <div class="sect" id="mclash"></div>
+
+  <div class="sect">
+    <span class="eyebrow">일 나누기</span>
+    <div class="card"><ul class="pts" id="msplit"></ul></div>
+  </div>
+
+  <div class="btnrow noprint">
+    <button class="btn" onclick="doPrint()">궁합 PDF로 저장 · 인쇄</button>
+    <button class="btn sec" onclick="anotherPeer()">다른 사람과 비교</button>
+    <button class="btn sec" onclick="backToResult()">내 결과로 돌아가기</button>
+    <button class="btn sec" onclick="location.reload()">처음부터</button>
+  </div>
+
+  <div class="sect">
+    <div class="card">
+      <p class="disc">궁합은 <b>두 사람의 강도 등급을 비교해 산출</b>합니다. 좋고 나쁨을 가르는 점수가 아니라
+      <b>어디서 빨리 통하고 어디서 부딪히는지</b>를 보여주는 도구입니다.
+      사람을 배치하거나 평가하는 근거로 쓰지 마세요.</p>
+    </div>
+  </div>
+</section>
+
 <canvas id="shot" width="1080" height="1350"></canvas>
+
+<!-- 인앱 안내 모달 -->
+<div class="modal" id="mdl" onclick="if(event.target===this)closeModal()">
+  <div class="mbox">
+    <h3 id="mtitle"></h3>
+    <p id="mdesc"></p>
+    <div id="mextra"></div>
+    <div class="mbtn" id="mbtns"></div>
+  </div>
+</div>
 </div>
 
 <script>
@@ -1432,8 +1588,90 @@ const TYPES={
  }
 };
 
+
+/* ══════════════════════════════════════════════════════════
+   인앱 브라우저 대응
+   카카오톡·인스타·페북 인앱 웹뷰는 window.print() 와
+   a[download] 를 둘 다 무시한다. 감지해서 우회로를 준다.
+   ══════════════════════════════════════════════════════════ */
+const UA = navigator.userAgent || "";
+const ENV = {
+  kakao : /KAKAOTALK/i.test(UA),
+  inapp : /KAKAOTALK|Instagram|FBAN|FBAV|FB_IAB|NAVER\(inapp|DaumApps|Line\/|band|everytimeApp|kakaostory|Snapchat|Twitter/i.test(UA),
+  ios   : /iPhone|iPad|iPod/i.test(UA),
+  and   : /Android/i.test(UA)
+};
+function initEnv(){
+  if(!ENV.inapp) return;
+  const el=document.getElementById("inapp");
+  document.getElementById("inappmsg").textContent =
+    ENV.kakao ? "카톡에서는 저장이 막혀요" : "앱 안에서는 저장이 막혀요";
+  el.classList.add("on");
+}
+function openExternal(){
+  const url = location.href;
+  if(ENV.kakao && ENV.and){ location.href = "kakaotalk://web/openExternal?url=" + encodeURIComponent(url); return; }
+  if(ENV.kakao && ENV.ios){ modal("사파리로 열어 주세요",
+      "카카오톡 브라우저는 파일 저장을 지원하지 않습니다. 아래 순서로 열면 PDF와 이미지 저장이 됩니다.",
+      "<div class='steps'><b>1</b>  화면 오른쪽 아래 <b>⋯</b> (더보기) 누르기<br><b>2</b>  <b>다른 브라우저로 열기</b> 선택<br><b>3</b>  Safari 또는 Chrome 선택</div>",
+      [["주소 복사하기", copyURL],["닫기", closeModal, true]]); return; }
+  modal("브라우저로 열어 주세요",
+    "지금 보고 계신 앱 안의 화면에서는 파일 저장이 막혀 있습니다. 주소를 복사해 브라우저에 붙여넣어 주세요.",
+    "", [["주소 복사하기", copyURL],["닫기", closeModal, true]]);
+}
+function copyURL(){
+  const u=location.href;
+  const done=()=>{ document.getElementById("mdesc").textContent="주소를 복사했습니다. 브라우저 주소창에 붙여넣어 주세요."; };
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(u).then(done).catch(fallback); }
+  else fallback();
+  function fallback(){
+    const t=document.createElement("textarea"); t.value=u; t.style.position="fixed"; t.style.opacity="0";
+    document.body.appendChild(t); t.select();
+    try{ document.execCommand("copy"); done(); }catch(e){
+      document.getElementById("mdesc").textContent = u;
+    }
+    document.body.removeChild(t);
+  }
+}
+
+/* ══ 모달 ══ */
+function modal(title, desc, extra, buttons){
+  document.getElementById("mtitle").textContent=title;
+  document.getElementById("mdesc").textContent=desc;
+  document.getElementById("mextra").innerHTML=extra||"";
+  const box=document.getElementById("mbtns"); box.innerHTML="";
+  (buttons||[["닫기", closeModal, true]]).forEach(([label,fn,sec])=>{
+    const b=document.createElement("button");
+    b.textContent=label; if(sec)b.className="sec"; b.onclick=fn; box.appendChild(b);
+  });
+  document.getElementById("mdl").classList.add("on");
+}
+function closeModal(){ document.getElementById("mdl").classList.remove("on"); }
+
+/* ══ PDF 저장 · 인쇄 ══ */
+function doPrint(){
+  if(ENV.inapp){
+    if(ENV.kakao && ENV.and)
+      modal("PDF는 브라우저에서 저장됩니다",
+        "카카오톡 안에서는 인쇄·PDF 저장이 동작하지 않습니다. 브라우저로 열면 바로 저장됩니다.",
+        "", [["브라우저로 열기", openExternal],["닫기", closeModal, true]]);
+    else if(ENV.kakao && ENV.ios)
+      modal("PDF는 사파리에서 저장됩니다",
+        "카카오톡 브라우저는 인쇄를 지원하지 않습니다. 아래 순서로 열면 PDF 저장이 됩니다.",
+        "<div class='steps'><b>1</b>  화면 오른쪽 아래 <b>⋯</b> (더보기) 누르기<br><b>2</b>  <b>다른 브라우저로 열기</b> 선택<br><b>3</b>  Safari에서 공유 → <b>프린트</b> → 두 손가락으로 확대 → PDF 저장</div>",
+        [["주소 복사하기", copyURL],["닫기", closeModal, true]]);
+    else
+      modal("브라우저에서 저장해 주세요",
+        "앱 안의 화면에서는 인쇄·PDF 저장이 막혀 있습니다. 주소를 복사해 브라우저에서 열어 주세요.",
+        "", [["주소 복사하기", copyURL],["닫기", closeModal, true]]);
+    return;
+  }
+  window.print();
+}
+
 /* ══ 상태 ══ */
 let N=14, cur=0, ans=[], R=null;
+initEnv();
 
 function start(n){
   N=n; cur=0; ans=Array.from({length:n},()=>({hi:null,lo:null}));
@@ -1561,9 +1799,205 @@ function finish(){
     + "<b>채용·승진·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마세요.</b> "
     + "서로 다른 일하는 방식을 이야기하기 시작하는 도구로 쓰는 것이 이 검사가 실제로 잘하는 일입니다.";
 
+  document.getElementById("mycode").textContent = myCode();
+  try{
+    const q=new URLSearchParams(location.search).get("m");
+    if(q){ document.getElementById("peer").value=q.toUpperCase(); }
+  }catch(e){}
+
   prfoot.innerHTML = `행동유형 진단 리포트 · ${T.t} (${R.flat?"균형":R.code}) · ${N}문항 · ${stamp}<br>`
     + `DISC 4요인 모델(Marston, 1928) 구조 기반 자체 제작 검사. 공인 검사가 아니며 강도 구간은 잠정값입니다. `
     + `채용·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마십시오. · HayDay`;
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   궁합 — 두 사람의 강도 등급을 비교한다
+   코드 형식: 유형코드 + 강도4자리   예) DI-6622 · BAL-4444 · C-4417
+   ══════════════════════════════════════════════════════════ */
+const FDOM  = {D:"결정과 속도", I:"사람과 설득", S:"지속과 안정", C:"근거와 정확도"};
+const FROLE = {D:"결정을 내리고 밀어붙이는 일", I:"사람을 붙이고 설득하는 일",
+               S:"오래 유지하고 챙기는 일",     C:"확인하고 기준을 세우는 일"};
+const FBOTH = {
+  D:"둘 다 빠르게 결정합니다. 방향만 맞으면 속도가 두 배가 됩니다.",
+  I:"둘 다 사람으로 풉니다. 밖에서 기회를 물어오는 힘이 강합니다.",
+  S:"둘 다 오래 갑니다. 한번 맡은 일이 무너지지 않습니다.",
+  C:"둘 다 근거를 봅니다. 이 팀이 넘긴 건 뒤에서 사고가 잘 안 납니다."};
+const FBOTHRISK = {
+  D:"다만 둘 다 주도하려 합니다. <b>최종 결정권을 누가 갖는지</b> 정해 두지 않으면 매번 부딪힙니다.",
+  I:"다만 결론 없이 끝나는 회의가 생깁니다. <b>끝에 정리하는 역할</b>을 정하세요.",
+  S:"다만 불편한 얘기가 계속 미뤄집니다. <b>정기적으로 꺼내는 자리</b>를 만드세요.",
+  C:"다만 둘 다 확인하려 해서 착수가 늦습니다. <b>'이 정도면 간다'는 선</b>을 미리 정하세요."};
+const FGAP = {
+  D:"아무도 먼저 결정을 내리지 않아 <b>일이 멈추는 구간</b>이 생깁니다. 결정 시점을 달력에 못 박으세요.",
+  I:"밖에서 사람을 데려오고 판을 여는 사람이 없습니다. <b>영업·대외 접점</b>은 따로 채워야 합니다.",
+  S:"벌인 것을 끝까지 지키는 사람이 없습니다. <b>운영·유지 담당</b>이 비어 있습니다.",
+  C:"확인 없이 넘어가 <b>뒤에서 사고가 납니다.</b> 검수 단계를 사람이 아니라 절차로 만들어 두세요."};
+const FCLASH = {
+  D:"한쪽은 지금 정하자 하고 다른 쪽은 좀 더 보자고 합니다. <b>결정 시점을 미리 못 박으면</b> 이 마찰은 사라집니다.",
+  I:"한쪽은 만나서 풀자 하고 다른 쪽은 문서로 정리하자 합니다. <b>말로 정할 것과 남길 것</b>을 나누세요.",
+  S:"한쪽은 판을 자주 바꾸고 다른 쪽은 그때마다 소모됩니다. <b>바꾸기 전에 한 번 알려 주는 것</b>만으로 크게 줄어듭니다.",
+  C:"한쪽은 근거를 요구하고 다른 쪽은 그걸 발목 잡기로 받습니다. <b>어디까지 확인하고 갈지</b> 기준선을 먼저 합의하세요."};
+
+const REL = {
+  twin : ["닮은 꼴","말이 빨리 통합니다. 대신 두 사람이 똑같은 곳에서 막힙니다."],
+  comp : ["보완 관계","서로 답답할 때가 있지만, 팀으로 묶으면 빈 곳이 거의 없습니다."],
+  mixed: ["부분 보완","통하는 축과 갈리는 축이 같이 있습니다. 역할만 나누면 잘 굴러갑니다."],
+  flat : ["무난한 사이","크게 부딪히지도, 크게 끌어주지도 않습니다. 셋째 사람이 있으면 달라집니다."]
+};
+
+let PEER=null;
+
+function myCode(){
+  if(!R) return "";
+  const c = R.flat ? "BAL" : R.code.replace(/\//g,"");
+  return c + "-" + F.map(f=>R.sg[f]).join("");
+}
+function parseCode(str){
+  const t=(str||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+  const m=t.match(/^(BAL|[DISC]{1,3})([1-7]{4})$/);
+  if(!m) return null;
+  const code = m[1]==="BAL" ? "BAL" : m[1].split("").join("/");
+  if(!TYPES[code]) return null;
+  const sg={}; F.forEach((f,i)=> sg[f]=+m[2][i]);
+  return {code, sg, flat: code==="BAL"};
+}
+function copyCode(){
+  const v=myCode(), btn=document.getElementById("copybtn");
+  const done=()=>{ btn.textContent="복사됨"; setTimeout(()=>btn.textContent="복사",1600); };
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done).catch(fb);
+  else fb();
+  function fb(){ const t=document.createElement("textarea"); t.value=v; t.style.position="fixed"; t.style.opacity="0";
+    document.body.appendChild(t); t.select(); try{document.execCommand("copy"); done();}catch(e){} document.body.removeChild(t); }
+}
+function peerHint(){ document.getElementById("cerr").textContent=""; }
+
+function runMatch(){
+  const raw=document.getElementById("peer").value;
+  const err=document.getElementById("cerr");
+  if(!raw.trim()){ err.textContent="상대 코드를 넣어 주세요."; return; }
+  const p=parseCode(raw);
+  if(!p){ err.textContent="코드를 다시 확인해 주세요. 예: DI-6622 (유형 글자 + 강도 4자리)"; return; }
+  err.textContent=""; PEER=p; renderMatch(p);
+}
+
+function renderMatch(p){
+  const meT = TYPES[R.code], youT = TYPES[p.code];
+  const mine = {}; F.forEach(f=> mine[f]=R.sg[f]);
+  const yours = p.sg;
+
+  const same = F.filter(f=> mine[f]>=5 && yours[f]>=5);
+  const gap  = F.filter(f=> mine[f]<=3 && yours[f]<=3);
+  const comp = F.filter(f=> (mine[f]>=5 && yours[f]<=3) || (mine[f]<=3 && yours[f]>=5));
+  const clash= F.filter(f=> Math.abs(mine[f]-yours[f])>=3);
+
+  let rel = "flat";
+  if(comp.length>=2) rel="comp";
+  else if(same.length>=2 && comp.length===0) rel="twin";
+  else if(comp.length>=1 || same.length>=1) rel="mixed";
+
+  document.getElementById("mrel").textContent=REL[rel][0];
+  document.getElementById("mrelline").textContent=REL[rel][1];
+
+  document.getElementById("mpair").innerHTML =
+    `<div class="pcard"><div class="who">나</div><div class="nm">${meT.t}</div>
+       <div class="cd mono">${myCode()}</div></div>
+     <div class="vs">＋</div>
+     <div class="pcard"><div class="who">상대</div><div class="nm">${youT.t}</div>
+       <div class="cd mono">${p.code.replace(/\//g,"")}-${F.map(f=>yours[f]).join("")}</div></div>`;
+
+  document.getElementById("mcmp").innerHTML =
+    `<div class="cmphdr"><span></span><span>나</span><span>상대</span></div>` +
+    F.map(f=>{
+      const bar=(v)=>`<div class="mtr"><div class="fillbar" style="width:${v/7*100}%;background:${FBG[f]}"></div>
+        <div class="fillbar" style="width:${v/7*100}%;background:${FCOL[f]};opacity:.28"></div>
+        <span class="v">${v}</span></div>`;
+      return `<div class="cmprow"><span class="lb"><i style="background:${FCOL[f]}"></i>${FNAME[f]}</span>
+        ${bar(mine[f])}${bar(yours[f])}</div>`;
+    }).join("");
+  document.getElementById("mcmpnote").innerHTML =
+    "강도 1~7 · <b>4가 중립대</b>입니다. 5 이상은 뚜렷하게 쓰는 방향, 3 이하는 평소 잘 꺼내지 않는 방향입니다.";
+
+  blk("msame","같이 강한 곳", same,
+      f=>`<b>${FDOM[f]}</b> — ${FBOTH[f]} ${FBOTHRISK[f]}`,
+      "둘 다 뚜렷하게 높은 축이 없습니다. 빨리 통하는 지점을 만들려면 공동 목표를 하나 정해 두세요.");
+  blk("mcomp","서로 메우는 곳", comp,
+      f=>{ const meHigh = mine[f]>=5;
+           return `<b>${FDOM[f]}</b> — ${meHigh?"내가 채우고 상대는":"상대가 채우고 나는"} 비어 있습니다. `
+                + `<b>${FROLE[f]}</b>은 ${meHigh?"내가":"상대가"} 맡는 게 맞습니다.`; },
+      "서로 메워 주는 축이 없습니다. 비슷한 방식으로 일한다는 뜻이라, 부딪힘은 적지만 새로운 각도도 적습니다.");
+  blk("mgap","둘 다 비어 있는 곳", gap,
+      f=>`<b>${FDOM[f]}</b> — ${FGAP[f]}`,
+      "네 방향 중 둘 다 비어 있는 축이 없습니다. 두 사람만으로도 한 바퀴가 돌아갑니다.");
+  blk("mclash","부딪히는 지점", clash,
+      f=>`<b>${FDOM[f]}</b> — ${FCLASH[f]}`,
+      "강도 차이가 큰 축이 없습니다. 일하는 속도와 방식이 비슷해 마찰이 적습니다.");
+
+  const split=[];
+  F.forEach(f=>{
+    if(mine[f]-yours[f]>=2)      split.push(`<b>${FROLE[f]}</b> — 내가 맡습니다 (${FNAME[f]} ${mine[f]} : ${yours[f]})`);
+    else if(yours[f]-mine[f]>=2) split.push(`<b>${FROLE[f]}</b> — 상대가 맡습니다 (${FNAME[f]} ${yours[f]} : ${mine[f]})`);
+  });
+  if(!split.length) split.push("네 방향 모두 강도가 비슷합니다. 역할은 성향이 아니라 <b>업무 경험과 관심</b>으로 나누는 편이 낫습니다.");
+  gap.forEach(f=> split.push(`<b>${FDOM[f]}</b>는 둘 다 약합니다. 이 부분은 <b>세 번째 사람이나 절차</b>로 메워야 합니다.`));
+  document.getElementById("msplit").innerHTML = split.map(t=>`<li>${t}</li>`).join("");
+
+  result.style.display="none"; intro.style.display="none"; quiz.style.display="none";
+  document.getElementById("match").style.display="block";
+  window.scrollTo(0,0);
+
+  function blk(id,label,list,fmt,empty){
+    const el=document.getElementById(id); el.className="sect mblk";
+    el.innerHTML = `<span class="eyebrow">${label}</span><div class="card">` +
+      (list.length ? `<ul class="pts">${list.map(f=>`<li>${fmt(f)}</li>`).join("")}</ul>`
+                   : `<p class="mnone">${empty}</p>`) + `</div>`;
+  }
+}
+function anotherPeer(){
+  backToResult();
+  const el=document.getElementById("peer");
+  el.value=""; el.scrollIntoView({block:"center"});
+  setTimeout(()=>el.focus(),300);
+}
+function backToResult(){
+  document.getElementById("match").style.display="none";
+  result.style.display="block"; window.scrollTo(0,0);
+}
+
+/* ══ 카드 전달 — 공유시트 → 다운로드 → 길게눌러저장 순서 ══ */
+function deliverCard(canvas, filename){
+  let dataURL=null;
+  try{ dataURL = canvas.toDataURL("image/png"); }
+  catch(e){ modal("이미지를 만들 수 없습니다","브라우저 보안 설정 때문입니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.","",[["닫기",closeModal,true]]); return; }
+
+  const showLongPress = ()=>{
+    modal("이미지를 길게 눌러 저장하세요",
+      ENV.inapp ? "앱 안에서는 자동 저장이 막혀 있습니다. 아래 이미지를 길게 누르면 사진첩에 저장됩니다."
+                : "아래 이미지를 길게 누르거나 오른쪽 클릭해 저장하세요.",
+      '<img src="'+dataURL+'" alt="결과 카드">',
+      ENV.inapp ? [["브라우저로 열기", openExternal],["닫기", closeModal, true]]
+                : [["닫기", closeModal, true]]);
+  };
+
+  canvas.toBlob(async (blob)=>{
+    if(!blob){ showLongPress(); return; }
+    const file = new File([blob], filename, {type:"image/png"});
+
+    // 1) 공유 시트 — 카톡·인스타로 바로 보내기 가능
+    if(navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){
+      try{ await navigator.share({files:[file], title:"행동유형 진단 결과"}); return; }
+      catch(err){ if(err && err.name==="AbortError") return; }
+    }
+    // 2) 인앱이면 다운로드가 무시되므로 바로 길게눌러저장
+    if(ENV.inapp){ showLongPress(); return; }
+    // 3) 일반 브라우저 — 다운로드
+    try{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement("a");
+      a.href=url; a.download=filename; document.body.appendChild(a); a.click();
+      setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+    }catch(e){ showLongPress(); }
+  }, "image/png");
 }
 
 /* ══ 공유 카드 PNG — 유형 이미지 + 중앙 정렬 ══ */
@@ -1645,10 +2079,7 @@ function saveCard(){
     x.font="800 26px Pretendard,sans-serif"; x.fillStyle=INK;
     x.fillText("HayDay  행동유형 진단   ·   3분 · 무료 · 결과 전부 공개", W/2, 1324);
 
-    try{
-      const a=document.createElement("a");
-      a.download="행동유형_"+T.t+".png"; a.href=c.toDataURL("image/png"); a.click();
-    }catch(e){ alert("이미지 저장은 배포된 주소에서만 됩니다."); }
+    deliverCard(c, "행동유형_"+T.t+".png");
   }
 }
 
