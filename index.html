@@ -300,6 +300,100 @@ canvas#shot{display:none}
   .btn{flex:1 1 46%;padding:13px 12px;font-size:13.5px;text-align:center}
 }
 
+/* ── 상세 분석 (아코디언) ── */
+.btn.wide{display:block;width:100%;margin-top:16px;text-align:center}
+.dopen{text-align:center}
+.dopen p{max-width:34em;margin:0 auto}
+.dbtn.open{background:#fff;color:var(--ink);border-color:var(--line2)}
+#depthwrap,#tdepthwrap{display:none;margin-top:14px}
+.dtl{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-top:9px;overflow:hidden}
+.dtl>summary{list-style:none;cursor:pointer;padding:17px 20px;font-size:15.5px;font-weight:800;
+  letter-spacing:-.025em;display:flex;align-items:center;gap:10px;color:var(--ink)}
+.dtl>summary::-webkit-details-marker{display:none}
+.dtl>summary::after{content:"";margin-left:auto;flex:0 0 9px;width:9px;height:9px;
+  border-right:2px solid var(--sub);border-bottom:2px solid var(--sub);
+  transform:rotate(45deg) translate(-2px,-2px);transition:.18s}
+.dtl[open]>summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.dtl[open]>summary{border-bottom:1px solid var(--line)}
+.dtl>summary:hover{background:var(--canvas)}
+.dbody{padding:18px 20px 22px}
+.dbody p{font-size:14.5px;line-height:1.68;margin-top:11px}
+.dbody p:first-child{margin-top:0}
+.dbody h4{font-size:12.5px;letter-spacing:.08em;color:var(--sub);font-weight:800;margin:20px 0 9px}
+.dbody h5{font-size:12px;letter-spacing:.06em;color:var(--sub);font-weight:800;margin:14px 0 7px}
+.dbody table{margin-top:2px}
+.dbody b{font-weight:800;color:var(--ink)}
+.hi{margin-top:14px;background:var(--canvas);border-left:3px solid var(--line2);border-radius:0 8px 8px 0;
+  padding:13px 15px;font-size:14px;line-height:1.66;color:var(--ink2)}
+.dnote{font-size:12.5px!important;color:var(--sub)!important;line-height:1.68;margin-top:14px!important;
+  border-top:1px solid var(--line);padding-top:12px}
+.fblk{border:1px solid var(--line);border-radius:10px;padding:16px 17px;margin-top:11px;background:var(--paper)}
+.fblk:first-child{margin-top:0}
+.fbh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15px;letter-spacing:-.02em}
+.fbh i{width:9px;height:9px;border-radius:2px;flex:0 0 9px}
+.fbh .bn{font-size:11.5px;color:var(--sub);font-weight:700}
+.fblk p{font-size:14px;margin-top:9px}
+.dim{color:var(--sub);font-weight:600;font-size:13px}
+ol.ord{margin:6px 0 0;padding-left:0;list-style:none;counter-reset:o;display:flex;flex-direction:column;gap:11px}
+ol.ord li{counter-increment:o;position:relative;padding-left:30px;font-size:14.5px;line-height:1.62;color:var(--ink2)}
+ol.ord li::before{content:counter(o);position:absolute;left:0;top:1px;width:20px;height:20px;border-radius:50%;
+  background:var(--canvas);color:var(--sub);font-size:11.5px;font-weight:800;display:flex;
+  align-items:center;justify-content:center}
+.two2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:640px){.two2{grid-template-columns:1fr;gap:6px}}
+.cl2{color:var(--D)!important}
+.relb{margin-left:auto;font-size:11px;letter-spacing:.06em;font-weight:800;color:var(--sub);
+  background:var(--canvas);border-radius:999px;padding:4px 10px}
+
+/* ── 팀 입력 ── */
+.teamcta{text-align:center}
+.teamcta p{max-width:32em;margin:0 auto}
+#teampanel{display:none;margin-top:16px}
+.trow{display:grid;grid-template-columns:1fr 1.35fr 34px;gap:8px;margin-top:8px}
+.trow input{font-family:inherit;font-size:15px;font-weight:700;border:1px solid var(--line2);border-radius:10px;
+  padding:12px 13px;background:var(--paper);color:var(--ink);min-width:0}
+.trow input.tcode{text-transform:uppercase;letter-spacing:.02em}
+.trow input::placeholder{font-weight:500;color:#b8b6b0;text-transform:none;letter-spacing:0}
+.trow input:focus{outline:0;border-color:var(--ink)}
+.trow .trm{font-size:15px;padding:0;line-height:1}
+.tbtns{display:flex;align-items:center;gap:10px;margin-top:14px}
+.tbtns .tadd{flex:0 0 auto}
+.tbtns .btn{margin-left:auto}
+
+/* ── 팀 결과 ── */
+#team{display:none;padding:38px 0 0}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px}
+.tcard{border:1px solid var(--line);border-radius:10px;padding:15px 14px;background:var(--paper);text-align:center}
+.tcard .tn{font-size:16px;font-weight:800;letter-spacing:-.03em}
+.tcard .tt{font-size:12.5px;color:var(--sub);font-weight:700;margin-top:3px}
+.tcard .tc{font-size:11px;color:#b8b6b0;font-weight:700;margin-top:2px}
+.tbars{display:flex;align-items:flex-end;justify-content:center;gap:5px;height:42px;margin:11px 0 8px}
+.tb{width:11px;height:100%;background:var(--canvas);border-radius:3px;display:flex;align-items:flex-end;overflow:hidden}
+.tb i{display:block;width:100%;border-radius:3px}
+.tcard .trole{font-size:12px;color:var(--ink2);line-height:1.5;font-weight:600}
+.tavg{margin-top:20px;border-top:1px solid var(--line);padding-top:18px;display:flex;flex-direction:column;gap:9px}
+.tah{font-size:11px;letter-spacing:.16em;color:var(--sub);font-weight:800}
+.tarow{display:grid;grid-template-columns:78px 1fr 34px;gap:10px;align-items:center}
+.tarow .lb{font-size:12.5px;font-weight:800;display:flex;align-items:center;gap:6px}
+.tarow .lb i{width:8px;height:8px;border-radius:2px;flex:0 0 8px}
+.tabar{height:9px;background:var(--canvas);border-radius:99px;overflow:hidden}
+.tabar i{display:block;height:100%;border-radius:99px;opacity:.85}
+.tav{font-size:12.5px;font-weight:800;text-align:right;color:var(--ink2)}
+.rkb{border:1px solid var(--line);border-left:3px solid var(--D);border-radius:0 10px 10px 0;
+  padding:14px 16px;margin-top:10px;font-size:14.5px;line-height:1.66;color:var(--ink2)}
+.rkb:first-child{margin-top:0}
+.rkb b{color:var(--ink);font-weight:800}
+@media(max-width:480px){
+  .dtl>summary{font-size:14.5px;padding:15px 16px}
+  .dbody{padding:15px 16px 19px}
+  .trow{grid-template-columns:1fr 1fr 30px;gap:6px}
+  .trow input{font-size:14px;padding:11px 10px}
+  .tgrid{grid-template-columns:1fr 1fr;gap:8px}
+  .tcard{padding:13px 10px}
+  .tcard .tn{font-size:15px}
+  .tarow{grid-template-columns:66px 1fr 30px;gap:8px}
+}
+
 /* ── 인쇄 / PDF ── */
 @media print{
   @page{size:A4;margin:12mm 12mm 13mm}
@@ -310,6 +404,9 @@ canvas#shot{display:none}
   .rhead .rline{margin-left:0}
   .sect>.eyebrow{text-align:left}
   #result{display:block!important;padding:0}
+  /* 어느 화면에서 인쇄했는지에 따라 한 리포트만 출력한다 */
+  body[data-pr="match"] #result,body[data-pr="team"] #result{display:none!important}
+  body[data-pr="result"] #match,body[data-pr="team"] #match{display:none!important}
   .pr{display:block}
   .prhead{display:flex;justify-content:space-between;align-items:baseline;
     border-bottom:1.5px solid #111;padding-bottom:6px;margin-bottom:14px}
@@ -340,6 +437,35 @@ canvas#shot{display:none}
     font-size:7pt;color:#787774;line-height:1.6;break-inside:avoid}
   a{text-decoration:none;color:inherit}
   h3{font-size:8pt}
+  /* 상세 분석 · 팀 — 펼친 상태 그대로 인쇄 */
+  #depthwrap,#tdepthwrap{display:block!important;margin-top:8px}
+  .dopen,.dbtn{display:none!important}
+  .dtl{border:1px solid #DEDCD7;margin-top:7px;break-inside:auto}
+  .dtl>summary{padding:8px 10px;font-size:10.5pt;border-bottom:1px solid #EAEAEA}
+  .dtl>summary::after{display:none}
+  .dtl>.dbody{display:block!important;padding:10px 12px 12px}
+  .dbody p{font-size:9pt;margin-top:6px;line-height:1.55}
+  .dbody h4{font-size:8pt;margin:11px 0 5px}
+  .dbody h5{font-size:7.6pt;margin:8px 0 4px}
+  .hi{padding:8px 10px;font-size:8.6pt;line-height:1.55;margin-top:8px;break-inside:avoid}
+  .dnote{font-size:7.8pt!important;margin-top:8px!important;padding-top:7px}
+  .fblk{padding:9px 11px;margin-top:7px;break-inside:avoid}
+  .fbh{font-size:9.4pt}.fblk p{font-size:8.8pt;margin-top:5px}
+  ol.ord li{font-size:9pt;padding-left:24px}
+  ol.ord{gap:7px}
+  .two2{gap:10px}
+  #team{display:none}
+  body[data-pr="team"] #team{display:block!important;padding:0}
+  .mhead{text-align:left}
+  .mtitle{font-size:22pt;margin-top:4px}
+  .tgrid{grid-template-columns:repeat(4,1fr);gap:6px}
+  .tcard{padding:9px 8px;break-inside:avoid}
+  .tcard .tn{font-size:10.5pt}.tcard .tt{font-size:8pt}.tcard .tc{font-size:7pt}
+  .tcard .trole{font-size:7.6pt}
+  .tbars{height:30px;margin:8px 0 6px}
+  .tarow{grid-template-columns:66px 1fr 30px}
+  .rkb{padding:9px 11px;font-size:8.8pt;line-height:1.55;break-inside:avoid}
+  #teampanel,.teamcta,.codebox{display:none!important}
 }
 </style>
 </head>
@@ -482,6 +608,17 @@ canvas#shot{display:none}
     <div class="fx" id="fxbox"></div>
   </div>
 
+  <!-- ══ 상세 분석 ══ -->
+  <div class="sect">
+    <span class="eyebrow">더 깊이 보기</span>
+    <div class="card dopen">
+      <p style="font-size:15px">위까지가 <b>요약</b>입니다. 아래를 펼치면 요인별 상세, 업무 단계별 패턴,
+      리더십·갈등·환경·협업까지 <b>11개 항목</b>의 심층 리포트가 나옵니다.</p>
+      <button class="btn wide dbtn" id="depthbtn" onclick="toggleDepth()">상세 분석 펼쳐 보기</button>
+    </div>
+    <div id="depthwrap"><div id="depth"></div></div>
+  </div>
+
   <div class="adslot noprint">AD SLOT · 728 × 90</div>
 
   <div class="btnrow noprint">
@@ -509,6 +646,22 @@ canvas#shot{display:none}
           <button class="btn" onclick="runMatch()">궁합 보기</button>
         </div>
         <p class="cerr" id="cerr"></p>
+      </div>
+
+      <hr class="hr" style="margin:20px 0 16px">
+      <div class="teamcta">
+        <p style="font-size:14.5px;color:var(--ink2)">셋 이상이면 <b>팀 구조</b>가 보입니다.
+        누가 어느 축을 맡고, 어디가 비어 있고, 어디에 일이 몰리는지 나옵니다.</p>
+        <button class="btn sec wide" id="teamopen" onclick="openTeam()">팀으로 보기 (2~8명)</button>
+      </div>
+
+      <div id="teampanel">
+        <div id="teambox"></div>
+        <div class="tbtns">
+          <button class="ghost tadd" onclick="addRow()">＋ 인원 추가</button>
+          <button class="btn" onclick="runTeam()">팀 분석 보기</button>
+        </div>
+        <p class="cerr" id="terr"></p>
       </div>
     </div>
   </div>
@@ -574,6 +727,63 @@ canvas#shot{display:none}
       사람을 배치하거나 평가하는 근거로 쓰지 마세요.</p>
     </div>
   </div>
+</section>
+
+
+<!-- ══════ 팀 분석 ══════ -->
+<section id="team">
+  <div class="pr prhead">
+    <span class="t">팀 행동유형 분석</span>
+    <span class="m" id="tprmeta"></span>
+  </div>
+
+  <div class="mhead">
+    <span class="eyebrow">이 팀은 어떻게 굴러가나</span>
+    <h1 class="mtitle">팀 구조 요약</h1>
+    <p class="rline">각자의 성향이 아니라 <b>팀 전체에서 어느 축이 채워지고 어디가 비는지</b>를 봅니다.</p>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">구성</span>
+    <div class="card" id="tsum"></div>
+    <p class="gnote" id="tstruct" style="border:0;padding-top:12px"></p>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">이 팀의 강점</span>
+    <div class="card"><ul class="pts" id="tstrong"></ul></div>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">구조적 리스크</span>
+    <div class="card" id="trisk"></div>
+  </div>
+
+  <div class="sect">
+    <span class="eyebrow">더 깊이 보기</span>
+    <div class="card dopen">
+      <p style="font-size:15px">위까지가 <b>요약</b>입니다. 아래를 펼치면 1:1 관계 전수 비교,
+      업무 단계별 배분, 회의 운영법, 팀 규칙까지 나옵니다.</p>
+      <button class="btn wide dbtn" id="tdepthbtn" onclick="toggleTDepth()">상세 분석 펼쳐 보기</button>
+    </div>
+    <div id="tdepthwrap"><div id="tdepth"></div></div>
+  </div>
+
+  <div class="btnrow noprint">
+    <button class="btn" onclick="doPrint()">팀 리포트 PDF · 인쇄</button>
+    <button class="btn sec" onclick="editTeam()">구성원 수정</button>
+    <button class="btn sec" onclick="backFromTeam()">내 결과로 돌아가기</button>
+    <button class="btn sec" onclick="location.reload()">처음부터</button>
+  </div>
+
+  <div class="sect">
+    <div class="card">
+      <p class="disc">팀 분석은 <b>각자의 강도 등급을 모아 비교</b>한 것입니다. 개인의 능력이나 성과를 나타내지 않습니다.
+      채용·평가·인사 배치의 근거로 쓰지 마세요. 역할 분담과 대화의 출발점으로만 쓰십시오.</p>
+    </div>
+  </div>
+
+  <div class="pr prfoot" id="tprfoot"></div>
 </section>
 
 <canvas id="shot" width="1080" height="1350"></canvas>
@@ -1666,6 +1876,10 @@ function doPrint(){
         "", [["주소 복사하기", copyURL],["닫기", closeModal, true]]);
     return;
   }
+  const vis = ["team","match","result"].find(id=>{
+    const el=document.getElementById(id); return el && el.style.display==="block";
+  }) || "result";
+  document.body.setAttribute("data-pr", vis);
   window.print();
 }
 
@@ -2081,6 +2295,1016 @@ function saveCard(){
 
     deliverCard(c, "행동유형_"+T.t+".png");
   }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   상세 분석 — 요인×강도 사전을 조립해 개인 심층 리포트를 만든다
+   ══════════════════════════════════════════════════════════════ */
+const DEPTH = {
+ "D": {
+  "vhi": {
+   "core": "결단·속도·경쟁을 가장 앞에 둡니다. 멈춰 있는 판을 먼저 흔드는 쪽입니다.",
+   "plus": [
+    "막힌 자리에서 먼저 결론을 냅니다",
+    "불확실해도 움직이며 정보를 채웁니다",
+    "책임지는 자리를 피하지 않습니다"
+   ],
+   "minus": [
+    "설명 없이 통보가 되기 쉽습니다",
+    "속도가 다른 사람을 능력 부족으로 읽습니다",
+    "되돌리기 어려운 결정을 혼자 내립니다"
+   ],
+   "fix": "결정 자체보다 결정을 공유하는 데 5분만 더 쓰면 같은 속도로 더 멀리 갑니다.",
+   "say": [
+    "\"이렇게 정하려는데, 걸리는 부분 있으면 지금 말해 주세요.\"",
+    "\"제가 놓친 게 있으면 30분 안에 알려 주세요.\""
+   ],
+   "seen": "강하고 분명한 사람으로 보입니다. 다만 처음 만난 사람에게는 압박감을 줄 수 있습니다.",
+   "press": "말이 짧아지고 상의 없이 혼자 처리해 버립니다."
+  },
+  "hi": {
+   "core": "필요할 때 결정을 내리고 밀어붙입니다. 앞에 서는 것을 부담스러워하지 않습니다.",
+   "plus": [
+    "목표가 분명하면 속도가 붙습니다",
+    "반대가 있어도 자기 안을 들고 갑니다",
+    "급한 상황에서 먼저 움직입니다"
+   ],
+   "minus": [
+    "근거 확인을 건너뛸 때가 있습니다",
+    "말이 세게 나가 상대가 감정으로 받습니다"
+   ],
+   "fix": "결론과 함께 판단 과정을 한 줄이라도 붙이면 저항이 절반으로 줄어듭니다.",
+   "say": [
+    "\"결론은 A입니다. 이유는 일정과 비용 두 가지입니다.\""
+   ],
+   "seen": "추진력 있고 믿을 만한 사람으로 보입니다.",
+   "press": "더 세게 밀어붙이며 혼자 감당하려 합니다."
+  },
+  "mid": {
+   "core": "상황에 따라 주도하기도, 물러서기도 합니다. 결정 자체보다 상황을 봅니다.",
+   "plus": [
+    "필요할 때는 결정하고 아닐 때는 맡깁니다",
+    "독단으로 흐르지 않습니다"
+   ],
+   "minus": [
+    "결정권이 모호하면 아무도 안 정하는 상태가 됩니다"
+   ],
+   "fix": "누가 결정하는지가 불분명한 자리에서는 먼저 \"제가 정하겠습니다\"를 말해 두세요.",
+   "say": [
+    "\"이 건은 제가 정하겠습니다. 이견 있으면 오늘까지 주세요.\""
+   ],
+   "seen": "무난하고 협조적인 사람으로 보입니다.",
+   "press": "결정을 미루고 상황이 정리되기를 기다립니다."
+  },
+  "lo": {
+   "core": "경쟁과 압박을 앞세우지 않습니다. 충분히 듣고 나서 판단하는 쪽입니다.",
+   "plus": [
+    "독단적으로 결정하지 않습니다",
+    "상대 의견을 실제로 반영합니다",
+    "성급한 판단으로 생기는 실수가 적습니다"
+   ],
+   "minus": [
+    "결론 낼 시기를 놓칩니다",
+    "권한이 있는데도 남의 결정을 기다립니다",
+    "부당한 요구에 즉시 거절하지 못합니다"
+   ],
+   "fix": "모두가 만족할 때까지 기다리지 말고, 필요한 정보가 모이면 결정하는 연습이 필요합니다.",
+   "say": [
+    "\"의견은 충분히 들었습니다. 이 방향으로 가겠습니다.\"",
+    "\"추가 논의보다 오늘 결론을 내는 게 낫습니다.\""
+   ],
+   "seen": "차분하고 무리하지 않는 사람으로 보입니다. 의견이 없어 보인다는 오해를 받을 수 있습니다.",
+   "press": "결정을 더 미루고 갈등을 피합니다."
+  },
+  "vlo": {
+   "core": "앞에서 밀어붙이는 방식을 거의 쓰지 않습니다. 결정보다 합의를 우선합니다.",
+   "plus": [
+    "권위로 누르지 않아 사람들이 편하게 말합니다",
+    "강한 상대 앞에서도 감정적으로 맞서지 않습니다",
+    "과정과 관계를 결과만큼 봅니다"
+   ],
+   "minus": [
+    "책임과 권한이 있어도 결정을 넘깁니다",
+    "갈등을 피하려 문제 제기를 늦춥니다",
+    "목표가 불분명한 업무까지 계속 수행합니다"
+   ],
+   "fix": "결단력이 없는 게 아니라 결론까지 시간이 긴 것입니다. **의견 수렴 종료일을 미리 못 박아 두세요.**",
+   "say": [
+    "\"관계와 별개로 이 요구는 수용하기 어렵습니다.\"",
+    "\"제가 담당할 수 있는 범위는 여기까지입니다.\""
+   ],
+   "seen": "조심스럽고 예의 바른 사람으로 보입니다. 결정력이 부족해 보인다는 오해가 가장 흔합니다.",
+   "press": "요청을 거절하지 못한 채 조용히 떠안습니다."
+  }
+ },
+ "I": {
+  "vhi": {
+   "core": "사람과 표현이 일하는 방식의 중심입니다. 관계에서 기회가 나옵니다.",
+   "plus": [
+    "처음 만난 사람과도 금방 대화가 됩니다",
+    "가라앉은 자리를 되살립니다",
+    "거절을 개인적으로 받지 않습니다"
+   ],
+   "minus": [
+    "말이 앞서 약속 범위가 실제 리소스보다 커집니다",
+    "기록과 마무리가 뒤로 밀립니다",
+    "혼자 있는 시간에 급격히 흔들립니다"
+   ],
+   "fix": "말한 것을 그날 안에 적어 두는 습관 하나로 신뢰가 크게 올라갑니다.",
+   "say": [
+    "\"이건 제가 확인하고 내일 확답드리겠습니다.\""
+   ],
+   "seen": "밝고 사람을 편하게 만드는 사람으로 보입니다. 가볍다는 오해가 따라옵니다.",
+   "press": "사람을 더 만나 풀려 하고 정작 할 일이 밀립니다."
+  },
+  "hi": {
+   "core": "말과 관계로 일을 풉니다. 설명이 곧 설득이 되는 편입니다.",
+   "plus": [
+    "상대의 관심사를 빨리 읽습니다",
+    "분위기를 만들어 협조를 얻어냅니다"
+   ],
+   "minus": [
+    "약속한 범위가 커집니다",
+    "반응 없는 상대 앞에서 동력이 떨어집니다"
+   ],
+   "fix": "말하기 전에 실행 가능한 범위를 한 번 확인하면 신뢰가 오래갑니다.",
+   "say": [
+    "\"가능해 보이는데, 일정만 확인하고 확답드릴게요.\""
+   ],
+   "seen": "친화적이고 대외 활동에 강한 사람으로 보입니다.",
+   "press": "더 크게 말하고 더 크게 약속합니다."
+  },
+  "mid": {
+   "core": "필요하면 표현하고, 아니면 듣습니다. 관계의 폭보다 상황을 봅니다.",
+   "plus": [
+    "앞에 설 수도, 뒤에 있을 수도 있습니다",
+    "과한 자기표현을 하지 않습니다"
+   ],
+   "minus": [
+    "존재감이 필요한 자리에서 묻힐 수 있습니다"
+   ],
+   "fix": "성과를 낸 자리에서는 짧게라도 본인이 설명하세요. 안 하면 아무도 모릅니다.",
+   "say": [
+    "\"이 부분은 제가 맡아서 이렇게 처리했습니다.\""
+   ],
+   "seen": "무난하고 안정적인 사람으로 보입니다.",
+   "press": "말수를 줄이고 필요한 말만 합니다."
+  },
+  "lo": {
+   "core": "말과 분위기를 전면에 내세우지 않습니다. 소수와 깊게 가는 쪽입니다.",
+   "plus": [
+    "상대의 말을 끝까지 듣습니다",
+    "과장하지 않아 신뢰가 쌓입니다",
+    "준비된 설명에서 안정적입니다"
+   ],
+   "minus": [
+    "좋은 성과를 내고도 설명하지 않아 평가에서 손해를 봅니다",
+    "회의에서 발언 시점을 놓칩니다",
+    "침묵이 동의로 해석됩니다"
+   ],
+   "fix": "많은 말을 할 필요는 없습니다. 다만 핵심 순간에 **내 판단·동의 여부·필요한 조건** 세 가지는 분명히 하세요.",
+   "say": [
+    "\"저는 이 방향이 낫다고 봅니다. 이유는 하나입니다.\"",
+    "\"동의한 것이 아니라 검토 중입니다.\""
+   ],
+   "seen": "조용하고 신중한 사람으로 보입니다. 처음에는 말수가 적어 보입니다.",
+   "press": "말수가 줄고 혼자 처리하는 시간이 늘어납니다."
+  },
+  "vlo": {
+   "core": "사교나 설득을 자기 방식으로 보지 않습니다. 행동과 결과로 보여주는 쪽입니다.",
+   "plus": [
+    "자기홍보 없이 실적으로 증명합니다",
+    "한번 맺은 관계가 오래갑니다",
+    "감정에 휘둘리지 않고 사실을 봅니다"
+   ],
+   "minus": [
+    "적극적인 사람이 본인 의견을 대신 정의합니다",
+    "불만을 조용히 처리해 상대가 문제를 모릅니다",
+    "대외 접점에서 기회를 놓칩니다"
+   ],
+   "fix": "설득이 필요한 자리는 피하기보다 **미리 준비해서** 들어가세요. 즉석이 약한 것이지 설명이 약한 게 아닙니다.",
+   "say": [
+    "\"자료로 정리해서 내일 공유드리겠습니다.\""
+   ],
+   "seen": "말이 없고 조심스러운 사람으로 보입니다. 자신감 부족으로 오해받기 쉽습니다.",
+   "press": "사람과 거리를 두고 혼자 처리합니다."
+  }
+ },
+ "S": {
+  "vhi": {
+   "core": "지속성과 일관성이 일의 기준입니다. 시작된 일을 무너지지 않게 지킵니다.",
+   "plus": [
+    "맡은 일을 오래 같은 품질로 유지합니다",
+    "팀 안의 감정 마찰을 조용히 흡수합니다",
+    "담당자나 환경이 바뀌어도 맥락을 보존합니다",
+    "눈에 띄지 않는 후속 관리까지 책임집니다"
+   ],
+   "minus": [
+    "부당한 요구에도 거절을 미룹니다",
+    "불만을 말하지 않고 안에 쌓습니다",
+    "다른 사람의 미완료 업무를 대신 처리합니다",
+    "방향이 자주 바뀌면 눈에 띄게 소모됩니다"
+   ],
+   "fix": "**참는 것과 동의하는 것은 다릅니다.** 불만이 100까지 쌓인 뒤가 아니라 20~30일 때 표현해야 합니다.",
+   "say": [
+    "\"취지는 이해하지만 이 방식에는 동의하지 않습니다.\"",
+    "\"이번에는 조정하지만 같은 요청을 반복 수용하기는 어렵습니다.\"",
+    "\"현재 일정에서는 어렵고 다음 주부터 가능합니다.\""
+   ],
+   "seen": "믿고 맡길 수 있고 말을 바꾸지 않는 사람으로 보입니다. 야망이 없어 보인다는 오해가 따라옵니다.",
+   "press": "겉으로는 괜찮다고 하면서 안에서 무너집니다. **폭발이 아니라 조용한 소진**이 이 유형의 위험입니다."
+  },
+  "hi": {
+   "core": "꾸준함과 협조를 우선합니다. 급하게 바꾸기보다 유지하는 쪽입니다.",
+   "plus": [
+    "긴 호흡의 일을 같은 강도로 끌고 갑니다",
+    "상대가 말을 마칠 때까지 듣습니다",
+    "반복되는 마찰에 쉽게 지치지 않습니다"
+   ],
+   "minus": [
+    "거절을 못 해 일이 몰립니다",
+    "방향이 틀렸을 때도 관성으로 갑니다"
+   ],
+   "fix": "중간 점검 시점을 미리 정해 두면 잘못된 방향을 오래 끌고 가지 않게 됩니다.",
+   "say": [
+    "\"그건 제가 지금 맡기 어렵습니다.\""
+   ],
+   "seen": "편안하고 신뢰가 가는 사람으로 보입니다.",
+   "press": "말없이 더 많이 일하다 소진됩니다."
+  },
+  "mid": {
+   "core": "안정과 변화 사이에서 균형을 잡습니다. 상황에 따라 속도를 조절합니다.",
+   "plus": [
+    "필요하면 바꾸고 아니면 유지합니다",
+    "변화 자체를 거부하지 않습니다"
+   ],
+   "minus": [
+    "기준이 없으면 그때그때 흔들립니다"
+   ],
+   "fix": "무엇을 지키고 무엇을 바꿀지 본인 기준을 한 줄로 정해 두면 판단이 빨라집니다.",
+   "say": [],
+   "seen": "유연하고 무난한 사람으로 보입니다.",
+   "press": "일시적으로 반응이 느려집니다."
+  },
+  "lo": {
+   "core": "변화를 반기고 속도를 냅니다. 같은 자리에 오래 머무는 것을 답답해합니다.",
+   "plus": [
+    "새로운 방식으로 빨리 갈아탑니다",
+    "정체된 상황을 못 견디고 움직입니다"
+   ],
+   "minus": [
+    "시작한 것이 끝나기 전에 다음을 벌입니다",
+    "주변 사람이 변화 속도를 못 따라옵니다",
+    "후속 관리가 약합니다"
+   ],
+   "fix": "바꾸기 전에 **한 번 알려 주는 것**만으로 팀의 피로가 크게 줄어듭니다.",
+   "say": [
+    "\"이렇게 바꾸려는데, 지금 진행 중인 것에 영향 있으면 말해 주세요.\""
+   ],
+   "seen": "역동적이고 빠른 사람으로 보입니다. 변덕스럽다는 오해를 받습니다.",
+   "press": "판을 갈아엎고 새로 시작하려 합니다."
+  },
+  "vlo": {
+   "core": "한자리에 머무는 방식을 거의 쓰지 않습니다. 계속 새로운 것으로 갑니다.",
+   "plus": [
+    "환경이 바뀌어도 흔들리지 않습니다",
+    "위기 상황에서 빠르게 전환합니다"
+   ],
+   "minus": [
+    "오래 걸리는 일에서 급격히 흥미를 잃습니다",
+    "같이 일하는 사람이 계속 뒷수습을 합니다",
+    "관계 유지에 시간을 쓰지 않습니다"
+   ],
+   "fix": "벌인 것 하나를 닫기 전에 새로 벌이지 않는 규칙을 스스로 만들면 성과가 쌓입니다.",
+   "say": [],
+   "seen": "에너지가 넘치는 사람으로 보입니다. 진득하지 못하다는 평이 따라올 수 있습니다.",
+   "press": "완전히 다른 판으로 옮겨 갑니다."
+  }
+ },
+ "C": {
+  "vhi": {
+   "core": "근거와 기준이 서야 움직입니다. 확인하지 않은 것을 사실로 말하지 않습니다.",
+   "plus": [
+    "남들이 지나친 허점을 먼저 찾습니다",
+    "기준을 문서로 남겨 반복 가능하게 만듭니다",
+    "한번 검증한 것은 뒤에서 사고가 안 납니다"
+   ],
+   "minus": [
+    "기준에 못 미치면 착수 자체를 미룹니다",
+    "지적이 사람에 대한 평가로 전달됩니다",
+    "완결도를 지키느라 마감이 늦어집니다"
+   ],
+   "fix": "**지금 아는 것으로 내리는 최선의 결정**도 정확한 판단입니다. 완벽한 정보는 오지 않습니다.",
+   "say": [
+    "\"70%까지 확인했고 나머지는 진행하며 보겠습니다.\"",
+    "\"이 부분은 기준 미달입니다. 대안은 이겁니다.\""
+   ],
+   "seen": "정확하고 빈틈없는 사람으로 보입니다. 까다롭다는 인상을 줄 수 있습니다.",
+   "press": "더 확인하려 하고 결정이 멈춥니다."
+  },
+  "hi": {
+   "core": "기준과 정확도를 중요하게 봅니다. 확인한 뒤에 움직이는 쪽입니다.",
+   "plus": [
+    "근거를 갖춘 뒤 판단합니다",
+    "예외와 누락을 먼저 잡아냅니다"
+   ],
+   "minus": [
+    "검토가 길어져 속도가 떨어집니다",
+    "지적 방식이 딱딱하게 전달됩니다"
+   ],
+   "fix": "지적 하나에 대안 하나를 붙이면 저항이 협조로 바뀝니다.",
+   "say": [
+    "\"여기가 걸립니다. 이렇게 바꾸면 해결됩니다.\""
+   ],
+   "seen": "꼼꼼하고 신뢰할 수 있는 사람으로 보입니다.",
+   "press": "규정을 방패로 삼고 소통을 줄입니다."
+  },
+  "mid": {
+   "core": "기준은 확인하되 형식에 매이지 않습니다. 큰 흐름과 세부 사이에서 균형을 잡습니다.",
+   "plus": [
+    "필요한 검토는 하되 완벽을 요구하지 않습니다",
+    "실현 가능한 수준을 선택합니다",
+    "기존 절차를 존중하면서 필요하면 조정합니다"
+   ],
+   "minus": [
+    "익숙해지면 검증보다 \"지금까지 문제없었다\"는 경험을 더 믿습니다"
+   ],
+   "fix": "장기 운영에서는 **정기적으로 기준을 다시 보는 일정**을 강제로 넣어 두세요.",
+   "say": [],
+   "seen": "균형 잡힌 실무형으로 보입니다.",
+   "press": "기존 방식을 더 꽉 붙잡습니다."
+  },
+  "lo": {
+   "core": "세부와 절차보다 큰 그림과 속도를 봅니다. 일단 가면서 맞추는 쪽입니다.",
+   "plus": [
+    "완벽하지 않아도 착수합니다",
+    "형식에 시간을 낭비하지 않습니다"
+   ],
+   "minus": [
+    "확인 없이 넘어가 뒤에서 사고가 납니다",
+    "기록과 근거가 약해 나중에 설명이 안 됩니다"
+   ],
+   "fix": "**돌이킬 수 없는 것 한 가지**만 정해 두고 그건 반드시 확인하세요. 나머지는 지금처럼 가도 됩니다.",
+   "say": [
+    "\"이건 되돌릴 수 없으니 이것만 확인하고 가겠습니다.\""
+   ],
+   "seen": "시원시원하고 빠른 사람으로 보입니다. 대충 한다는 오해를 받을 수 있습니다.",
+   "press": "확인을 더 건너뛰고 속도로 밀어붙입니다."
+  },
+  "vlo": {
+   "core": "기준·절차·검증을 거의 앞세우지 않습니다. 감과 속도로 판단합니다.",
+   "plus": [
+    "결정이 빠르고 막히지 않습니다",
+    "형식주의에 발목 잡히지 않습니다"
+   ],
+   "minus": [
+    "같은 실수가 반복됩니다",
+    "약속한 조건이 기록되지 않아 분쟁이 생깁니다",
+    "품질 편차가 큽니다"
+   ],
+   "fix": "본인이 확인하는 대신 **확인하는 사람이나 절차를 옆에 두세요.** 성향을 바꾸는 것보다 이게 빠릅니다.",
+   "say": [],
+   "seen": "추진력 있는 사람으로 보입니다. 꼼꼼하지 못하다는 평이 따라옵니다.",
+   "press": "더 빨리 움직여 상황을 덮으려 합니다."
+  }
+ }
+};
+const SECT  = {
+ "D": {
+  "work": {
+   "start": [
+    "목표와 성과 기준을 먼저 확인합니다",
+    "권한 범위를 명확히 하려 합니다",
+    "정보가 70%만 모여도 착수합니다"
+   ],
+   "mid": [
+    "장애물이 나오면 우회로를 찾아 계속 갑니다",
+    "진행이 느린 구간을 직접 개입해 뚫습니다",
+    "중간 보고보다 결과로 말합니다"
+   ],
+   "end": [
+    "마감 직전 속도가 더 올라갑니다",
+    "완성도보다 기한을 우선할 때가 있습니다",
+    "끝나면 바로 다음 판을 봅니다"
+   ]
+  },
+  "lead": {
+   "style": "지시·돌파형 리더십",
+   "plus": [
+    "방향을 빠르게 정해 팀이 헤매지 않습니다",
+    "책임을 앞에서 집니다",
+    "위기 상황에서 결정을 내립니다"
+   ],
+   "risk": [
+    "설명 없이 통보가 되어 팀이 수동적으로 변합니다",
+    "성과가 안 나는 사람을 빨리 포기합니다",
+    "본인 속도를 기준으로 팀을 평가합니다"
+   ],
+   "need": "필요한 것은 더 강한 추진이 아니라 **결정의 배경을 한 줄 공유하는 습관**입니다."
+  },
+  "conf": [
+   "정면으로 문제를 제기합니다",
+   "감정보다 사실과 결론을 말합니다",
+   "빠르게 결론 내고 넘어갑니다",
+   "상대가 회피하면 답답해합니다",
+   "같은 문제가 반복되면 관계를 정리합니다"
+  ],
+  "fitenv": [
+   "권한과 책임이 명확한 조직",
+   "성과가 숫자로 찍히는 업무",
+   "빠른 의사결정이 가능한 규모",
+   "경쟁 상황이 있는 시장"
+  ],
+  "badenv": [
+   "결정권이 불분명한 조직",
+   "합의에 오래 걸리는 문화",
+   "성과가 측정되지 않는 업무",
+   "반복적이고 변화 없는 업무"
+  ],
+  "collab": {
+   "D": "둘 다 주도하려 해 충돌합니다. **최종 결정권자를 미리 정해 두는 것**이 유일한 해법입니다.",
+   "I": "추진과 확산이 붙어 시작 국면이 강해집니다. 다만 둘 다 마무리가 약하니 후속 담당을 따로 두세요.",
+   "S": "가장 흔한 갈등 조합입니다. 속도 차이를 성의 문제로 읽지 마세요. **결정 시점을 미리 알려 주는 것**만으로 대부분 해소됩니다.",
+   "C": "속도와 검증이 부딪힙니다. **필수 확인과 선택적 개선을 구분**하면 둘 다 살아납니다."
+  }
+ },
+ "I": {
+  "work": {
+   "start": [
+    "관련된 사람이 누구인지 먼저 봅니다",
+    "대화로 상황을 파악합니다",
+    "분위기를 만들며 시작합니다"
+   ],
+   "mid": [
+    "막히면 사람을 통해 풉니다",
+    "외부 협조를 빠르게 끌어옵니다",
+    "기록보다 대화로 조율합니다"
+   ],
+   "end": [
+    "마감보다 관계가 상하지 않는 쪽을 택합니다",
+    "혼자 남아 마무리하는 것을 힘들어합니다",
+    "결과 공유와 설명은 잘합니다"
+   ]
+  },
+  "lead": {
+   "style": "관계·동기부여형 리더십",
+   "plus": [
+    "팀 분위기를 살립니다",
+    "구성원의 상태를 빨리 알아챕니다",
+    "외부에서 기회를 물어옵니다"
+   ],
+   "risk": [
+    "모두를 만족시키려다 결정이 늦어집니다",
+    "불편한 피드백을 미룹니다",
+    "약속이 실무 역량보다 앞서갑니다"
+   ],
+   "need": "필요한 것은 더 강한 동기부여가 아니라 **약속 전에 실행 가능성을 확인하는 절차**입니다."
+  },
+  "conf": [
+   "먼저 분위기를 풀고 대화를 시작합니다",
+   "감정을 표현하며 접근합니다",
+   "관계가 상하는 것을 가장 꺼립니다",
+   "논리보다 공감으로 풀려 합니다",
+   "해결 안 되면 사람을 통해 우회합니다"
+  ],
+  "fitenv": [
+   "사람을 계속 만나는 업무",
+   "설득과 발표가 성과가 되는 자리",
+   "팀 분위기가 중요한 조직",
+   "새 관계를 계속 만드는 일"
+  ],
+  "badenv": [
+   "혼자 오래 앉아 있는 업무",
+   "반응이 없는 상대를 상대하는 일",
+   "숫자와 규정만으로 평가받는 자리",
+   "관계 없이 문서로만 소통하는 조직"
+  ],
+  "collab": {
+   "D": "에너지가 맞아 시작이 빠릅니다. 다만 둘 다 벌이는 쪽이라 **누가 닫을지**를 정해야 합니다.",
+   "I": "분위기는 최고지만 결론이 안 납니다. **끝에 정리하는 역할**을 회의마다 지정하세요.",
+   "S": "가장 편안한 조합입니다. 다만 둘 다 불편한 얘기를 미뤄 문제가 늦게 드러납니다.",
+   "C": "표현과 근거가 부딪힙니다. **말로 정할 것과 기록으로 남길 것**을 나누면 서로 편해집니다."
+  }
+ },
+ "S": {
+  "work": {
+   "start": [
+    "왜 하는지, 기존에 어떻게 해왔는지 먼저 확인합니다",
+    "역할과 책임 범위를 분명히 하려 합니다",
+    "정보가 불충분하면 불안이 커집니다"
+   ],
+   "mid": [
+    "정해진 일정과 루틴을 유지합니다",
+    "누락된 후속 업무를 챙깁니다",
+    "변경 이력을 기억하고 보존합니다",
+    "팀원 간 마찰을 조정합니다"
+   ],
+   "end": [
+    "부족한 부분을 직접 보완합니다",
+    "다른 사람의 실수를 조용히 수정합니다",
+    "외부에는 괜찮다고 하지만 내부적으로 피로합니다"
+   ]
+  },
+  "lead": {
+   "style": "안정·지원형 리더십",
+   "plus": [
+    "사람을 쉽게 포기하지 않습니다",
+    "일관된 기준과 태도를 유지합니다",
+    "위기에서 조직을 진정시킵니다",
+    "경험과 맥락을 조직 안에 축적합니다"
+   ],
+   "risk": [
+    "문제 있는 구성원을 너무 오래 기다립니다",
+    "명확한 피드백을 늦춥니다",
+    "업무를 회수해 직접 처리합니다",
+    "팀이 리더의 한계를 모릅니다"
+   ],
+   "need": "필요한 것은 강압성이 아니라 **명확한 기대치와 조기 피드백**입니다."
+  },
+  "conf": [
+   "상대의 설명을 충분히 듣습니다",
+   "감정이 가라앉을 때까지 기다립니다",
+   "가능한 범위에서 양보하거나 조정합니다",
+   "본인의 불편을 바로 표현하지 않습니다",
+   "반복되면 피로가 내부에 누적됩니다",
+   "한계를 넘으면 조용히 거리를 둡니다"
+  ],
+  "fitenv": [
+   "장기 프로젝트 운영",
+   "고객·회원·파트너 관계 유지",
+   "품질 기준을 지켜야 하는 업무",
+   "역할과 절차가 분명한 조직"
+  ],
+  "badenv": [
+   "매일 우선순위가 바뀌는 조직",
+   "합의된 사항이 계속 번복되는 프로젝트",
+   "큰 목소리로 압박하는 리더",
+   "역할과 책임이 불분명한 업무",
+   "끝없이 시작만 하고 마무리하지 않는 팀"
+  ],
+  "collab": {
+   "D": "속도와 표현 방식이 부담스러울 수 있습니다. 겉으로 동의하고 안에 쌓지 마세요. **일정과 위험을 짧게 전달**하는 게 가장 잘 통합니다.",
+   "I": "관계는 편하지만 일이 일방적으로 넘어오기 쉽습니다. **담당자와 마감일을 그 자리에서 확정**하세요.",
+   "S": "신뢰는 높지만 둘 다 어려운 결정을 미룹니다. **결정 종료 시점을 명시**해야 합니다.",
+   "C": "품질과 안정에서 잘 맞습니다. 다만 검토가 길어지면 속도가 지나치게 느려집니다."
+  }
+ },
+ "C": {
+  "work": {
+   "start": [
+    "자료와 선례를 먼저 확인합니다",
+    "기준과 범위를 문서로 정리합니다",
+    "불확실한 조건을 먼저 질문합니다"
+   ],
+   "mid": [
+    "단계마다 검증하며 진행합니다",
+    "예외 상황을 미리 열거합니다",
+    "기록을 남겨 나중에 설명 가능하게 만듭니다"
+   ],
+   "end": [
+    "기준 미달이면 통과시키지 않습니다",
+    "마지막까지 완결도를 올리려 합니다",
+    "마감보다 품질을 택할 때가 있습니다"
+   ]
+  },
+  "lead": {
+   "style": "기준·검증형 리더십",
+   "plus": [
+    "판단 기준이 흔들리지 않습니다",
+    "팀의 품질 하한선을 지킵니다",
+    "반복 문제를 절차로 없앱니다"
+   ],
+   "risk": [
+    "요구 수준이 높아 팀이 지칩니다",
+    "일정 압박과 정면으로 충돌합니다",
+    "개선안 없이 문제만 지적합니다"
+   ],
+   "need": "필요한 것은 더 높은 기준이 아니라 **무엇을 통과시킬지 등급을 나누는 판단**입니다."
+  },
+  "conf": [
+   "사실관계부터 정리합니다",
+   "감정 표현을 자제합니다",
+   "근거를 들어 반박합니다",
+   "기준이 흔들리는 것을 가장 싫어합니다",
+   "합의가 안 되면 기록으로 남기고 물러섭니다"
+  ],
+  "fitenv": [
+   "정확도가 결과를 좌우하는 업무",
+   "기준과 절차가 있는 조직",
+   "검증과 분석이 성과가 되는 자리",
+   "장기적으로 품질을 쌓는 일"
+  ],
+  "badenv": [
+   "근거 없이 밀어붙이는 문화",
+   "기준이 자주 바뀌는 조직",
+   "즉흥적 판단을 요구하는 자리",
+   "결과만 보고 과정을 무시하는 평가"
+  ],
+  "collab": {
+   "D": "검증과 속도가 부딪힙니다. **어디까지 확인하고 갈지 기준선을 먼저 합의**하세요.",
+   "I": "근거와 분위기가 부딪힙니다. 상대의 표현을 가벼움으로 읽지 마세요.",
+   "S": "안정과 품질에서 잘 맞습니다. 다만 둘 다 착수가 늦어질 수 있습니다.",
+   "C": "기준이 같아 편하지만 둘 다 확인하려 해 일정이 밀립니다. **\"이 정도면 간다\"는 선**을 미리 정하세요."
+  }
+ }
+};
+
+const BANDNAME = {vlo:"매우 낮음", lo:"낮음", mid:"중립", hi:"높음", vhi:"매우 높음"};
+
+/* 조사 — 받침 유무로 이/가, 을/를, 은/는, 과/와 를 고른다.
+   끝의 괄호·따옴표·태그는 떼고 판정한다. 한글이 아니면 받침 없음으로 본다. */
+function jongSeong(s){
+  let t = String(s).replace(/<[^>]*>/g,"").trim();
+  t = t.replace(/\s*[（(\[【][^)）\]】]*[)）\]】]\s*$/,"");
+  t = t.replace(/["'”’」』\]\)\.]+$/,"").trim();
+  const c = t.slice(-1);
+  if(!c) return false;
+  const cp = c.charCodeAt(0);
+  if(cp>=0xAC00 && cp<=0xD7A3) return (cp-0xAC00)%28 !== 0;
+  return false;
+}
+const _jo = (s,a,b)=> jongSeong(s) ? a : b;
+const IGA  = s=>_jo(s,"이","가");
+const EUL  = s=>_jo(s,"을","를");
+const EUN  = s=>_jo(s,"은","는");
+const GWA  = s=>_jo(s,"과","와");
+
+function band(v){ return v<=2?"vlo" : v===3?"lo" : v===4?"mid" : v<=6?"hi" : "vhi"; }
+function esc(t){ return String(t).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>"); }
+function ul(arr){ return `<ul class="pts">${arr.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>`; }
+
+function acc(title, inner, open){
+  return `<details class="dtl"${open?" open":""}><summary>${title}</summary><div class="dbody">${inner}</div></details>`;
+}
+
+function renderDepth(){
+  const lead = R.flat ? R.rank[0] : R.code.split("/")[0];
+  const sg   = R.sg, g3 = R.g3;
+  const sorted = [...F].sort((a,b)=> sg[b]-sg[a] || g3[b]-g3[a]);
+  const top = sorted[0], bottom = sorted[3];
+  const S = SECT[lead];
+  let out = "";
+
+  /* 1 · 결과의 핵심 구조 */
+  const rows = F.map(f=>`<tr>
+      <td><span class="fk"><i style="background:${FCOL[f]}"></i>${FNAME[f]} ${f}</span></td>
+      <td class="num"><span class="seg" style="background:${FBG[f]};color:${FCOL[f]}">${sg[f]}</span></td>
+      <td style="font-size:13.5px;color:var(--sub)">${BANDNAME[band(sg[f])]}</td>
+      <td style="font-size:13.5px">${DEPTH[f][band(sg[f])].core}</td></tr>`).join("");
+  const order = sorted.map(f=>FNAME[f]).join(" → ");
+  out += acc("1 · 결과의 핵심 구조",
+    `<table style="margin-bottom:16px"><thead><tr><th>요인</th><th class="num">강도</th><th>수준</th><th>핵심 의미</th></tr></thead><tbody>${rows}</tbody></table>
+     <p>이 프로파일은 <b>${FNAME[top]}(${top})${IGA(FNAME[top])} 가장 높고 ${FNAME[bottom]}(${bottom})${IGA(FNAME[bottom])} 가장 낮은</b> 형태입니다.
+     따라서 행동의 기본 순서는 대체로 <b>${order}</b> 방향으로 작동합니다.</p>
+     <p class="dnote">강도 4가 중립대입니다. 5 이상은 평소 앞세우는 방향, 3 이하는 잘 꺼내지 않는 방향입니다.
+     한 축이 낮다는 것은 그 능력이 없다는 뜻이 아니라, <b>기본값으로 먼저 쓰지 않는다</b>는 뜻입니다.</p>`, true);
+
+  /* 2 · 가장 강한 방향 */
+  const D1=DEPTH[top][band(sg[top])];
+  out += acc(`2 · 가장 강한 방향 — ${FNAME[top]} ${sg[top]}`,
+    `<p>${esc(D1.core)}</p>
+     <h4>자연스럽게 잘하는 것</h4>${ul(D1.plus)}
+     <h4>이렇게 작동하면 위험합니다</h4>${ul(D1.minus)}
+     <div class="hi"><b>보완 지점</b><br>${esc(D1.fix)}</div>`);
+
+  /* 3 · 그래프 세 개 읽는 법 */
+  const bigGap = F.filter(f=> Math.abs(sg[f] - segRaw(R.g1[f])) >= 2);
+  const g1hi = F.filter(f=>segRaw(R.g1[f])>=5);
+  const g2hi = F.filter(f=>segRaw(R.g2[f])>=5);
+  out += acc("3 · 그래프 세 개를 어떻게 읽나",
+    `<h4>그래프 Ⅰ · 남에게 보이는 나</h4>
+     <p>스스로 <b>“나 같다”</b>고 고른 횟수입니다. 주변 사람이 평소 보는 모습에 가깝습니다.</p>
+     ${g1hi.length ? ul(g1hi.map(f=>`<b>${FNAME[f]}</b>${IGA(FNAME[f])} 겉으로 뚜렷하게 드러납니다 — ${DEPTH[f][band(sg[f])].seen}`))
+       : `<p class="dnote">겉으로 특별히 두드러지는 축이 없습니다. 상황에 맞춰 조절하는 편으로 보입니다.</p>`}
+     <h4>그래프 Ⅱ · 눌러 두는 나</h4>
+     <p><b>“나답지 않다”</b>고 고른 횟수입니다. <b>숨겨진 성격이나 무의식이 아닙니다.</b>
+     이 방식을 자신의 대표적인 모습으로 인식하지 않는다는 뜻에 가깝습니다.</p>
+     ${g2hi.length ? ul(g2hi.map(f=>`<b>${FNAME[f]} 방식</b>을 “나답지 않다”고 강하게 골랐습니다. 실제로는 할 수 있는 일까지 스스로 제한하고 있지 않은지 볼 필요가 있습니다.`))
+       : `<p class="dnote">특별히 강하게 배제한 방식이 없습니다.</p>`}
+     <h4>그래프 Ⅲ · 실제 쓰는 나</h4>
+     <p>Ⅰ에서 Ⅱ를 뺀 값이고, 유형 판정은 이것을 씁니다.
+     ${bigGap.length ? `<b>${bigGap.map(f=>FNAME[f]).join("·")}</b> 축에서 Ⅰ과 Ⅲ의 차이가 큽니다.
+        겉으로 드러내는 방식과 실제로 편한 방식 사이에 간극이 있다는 뜻이라, 그 자리에서 에너지 소모가 클 수 있습니다.`
+        : `Ⅰ과 Ⅲ의 모양이 비슷합니다. <b>겉과 속이 일치하는 편</b>이라 주변에서 예측 가능한 사람으로 봅니다.`}</p>`);
+
+  /* 4 · 요인별 상세 */
+  let each = "";
+  sorted.forEach(f=>{
+    const d = DEPTH[f][band(sg[f])];
+    each += `<div class="fblk">
+      <div class="fbh"><i style="background:${FCOL[f]}"></i><b>${FLONG[f]}</b>
+        <span class="seg" style="background:${FBG[f]};color:${FCOL[f]}">${sg[f]}</span>
+        <span class="bn">${BANDNAME[band(sg[f])]}</span></div>
+      <p>${esc(d.core)}</p>
+      <h5>이렇게 작동할 때 강합니다</h5>${ul(d.plus)}
+      <h5>이렇게 작동하면 손해입니다</h5>${ul(d.minus)}
+      <div class="hi"><b>보완</b> ${esc(d.fix)}</div>
+      ${d.say.length ? `<h5>이럴 때 이렇게 말하세요</h5>${ul(d.say)}` : ""}
+    </div>`;
+  });
+  out += acc("4 · 네 방향 각각의 상세 분석", each);
+
+  /* 5 · 업무 패턴 */
+  out += acc("5 · 업무 시작부터 마감까지",
+    `<h4>착수 단계</h4>${ul(S.work.start)}
+     <h4>진행 단계</h4>${ul(S.work.mid)}
+     <h4>마감 단계</h4>${ul(S.work.end)}`);
+
+  /* 6 · 리더십 */
+  out += acc(`6 · 리더십 스타일 — ${S.lead.style}`,
+    `<h4>리더로서의 강점</h4>${ul(S.lead.plus)}
+     <h4>리더로서의 위험</h4>${ul(S.lead.risk)}
+     <div class="hi">${esc(S.lead.need)}</div>`);
+
+  /* 7 · 갈등 */
+  out += acc("7 · 갈등 상황에서의 흐름",
+    `<p>갈등이 생기면 대체로 이 순서로 움직입니다.</p>
+     <ol class="ord">${S.conf.map(t=>`<li>${esc(t)}</li>`).join("")}</ol>`);
+
+  /* 8 · 압박 */
+  out += acc("8 · 압박받을 때 나타나는 신호",
+    `<div class="hi"><b>${esc(DEPTH[top][band(sg[top])].press)}</b></div>
+     <h4>초기 신호</h4>${ul(sorted.filter(f=>sg[f]>=5||sg[f]<=3).map(f=>`<b>${FNAME[f]} ${sg[f]}</b> — ${DEPTH[f][band(sg[f])].press}`))}
+     <p class="dnote">압박을 줄이는 방법은 더 참는 것이 아니라 <b>업무량과 관계의 경계를 일찍 말하는 것</b>입니다.</p>`);
+
+  /* 9 · 환경 */
+  out += acc("9 · 잘 맞는 환경 · 피로한 환경",
+    `<div class="two2">
+      <div><h4>강점이 살아나는 환경</h4>${ul(S.fitenv)}</div>
+      <div><h4>소진되기 쉬운 환경</h4>${ul(S.badenv)}</div>
+     </div>
+     <p class="dnote">능력과 별개로 환경이 맞지 않으면 성과가 나오지 않습니다. 이 목록은 <b>자리를 고를 때</b> 쓰는 것입니다.</p>`);
+
+  /* 10 · 협업 */
+  out += acc("10 · 다른 유형과 협업할 때",
+    F.map(f=>`<div class="fblk"><div class="fbh"><i style="background:${FCOL[f]}"></i><b>${FNAME[f]}(${f})${IGA(FNAME[f])} 높은 사람과</b></div>
+      <p>${esc(S.collab[f])}</p></div>`).join(""));
+
+  /* 11 · 성장 과제 */
+  const grow = [];
+  if(sg.D<=3) grow.push("**결정 시한을 정하세요.** 모두의 합의를 기다리지 말고 의견 수렴 종료일을 먼저 못 박습니다.");
+  if(sg.D>=6) grow.push("**결정의 배경을 한 줄 공유하세요.** 같은 속도로 저항이 절반이 됩니다.");
+  if(sg.I<=3) grow.push("**본인 성과를 언어화하세요.** 조용히 낸 결과는 아무도 자동으로 알아주지 않습니다.");
+  if(sg.I>=6) grow.push("**말한 것을 그날 안에 기록하세요.** 신뢰가 여기서 갈립니다.");
+  if(sg.S>=6) grow.push("**불편함을 20~30 단계에서 말하세요.** 100까지 쌓고 말하면 이미 관계가 상해 있습니다.");
+  if(sg.S>=6) grow.push("**대신 처리하지 마세요.** 계속 회수하면 본인은 소진되고 상대는 성장하지 않습니다.");
+  if(sg.S<=3) grow.push("**바꾸기 전에 한 번 알려 주세요.** 주변의 피로가 크게 줄어듭니다.");
+  if(sg.C>=6) grow.push("**무엇을 통과시킬지 등급을 나누세요.** 모든 것을 같은 기준으로 보면 일정이 무너집니다.");
+  if(sg.C<=3) grow.push("**되돌릴 수 없는 것 하나만 정해 반드시 확인하세요.** 나머지는 지금 방식대로 가도 됩니다.");
+  grow.push("**안정과 관성을 구분하세요.** 지금 방식을 유지하는 이유가 효과적이어서인지 익숙해서인지 정기적으로 확인합니다.");
+  out += acc("11 · 성장 과제", ul(grow));
+
+  document.getElementById("depth").innerHTML = out;
+}
+
+function toggleDepth(){
+  const box = document.getElementById("depthwrap");
+  const btn = document.getElementById("depthbtn");
+  const on = box.style.display !== "block";
+  if(on && !box.dataset.built){ renderDepth(); box.dataset.built="1"; }
+  box.style.display = on ? "block" : "none";
+  btn.textContent = on ? "상세 분석 접기" : "상세 분석 펼쳐 보기";
+  btn.classList.toggle("open", on);
+  if(on) setTimeout(()=>box.scrollIntoView({block:"start",behavior:"smooth"}),60);
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   팀 분석 — 3명 이상을 넣고 팀 구조·리스크·배분을 본다
+   ══════════════════════════════════════════════════════════════ */
+let TEAM = [];   // [{name, code, sg, type}]
+
+function teamRow(i, name, code){
+  return `<div class="trow" data-i="${i}">
+    <input class="tname" placeholder="이름 ${i+1}" value="${name||""}" maxlength="12">
+    <input class="tcode" placeholder="코드 (예: DI-6622)" value="${code||""}" spellcheck="false" autocomplete="off">
+    <button class="ghost trm" onclick="rmRow(${i})" title="삭제">✕</button>
+  </div>`;
+}
+function openTeam(){
+  const box=document.getElementById("teambox");
+  if(!box.dataset.built){
+    const me = R ? {name:"나", code:myCode()} : {name:"",code:""};
+    box.innerHTML = teamRow(0, me.name, me.code) + teamRow(1,"","") + teamRow(2,"","");
+    box.dataset.built="1";
+  }
+  document.getElementById("teampanel").style.display="block";
+  document.getElementById("teamopen").style.display="none";
+  box.scrollIntoView({block:"center",behavior:"smooth"});
+}
+function addRow(){
+  const box=document.getElementById("teambox");
+  if(box.querySelectorAll(".trow").length>=8){ document.getElementById("terr").textContent="최대 8명까지 넣을 수 있습니다."; return; }
+  box.insertAdjacentHTML("beforeend", teamRow(box.querySelectorAll(".trow").length,"",""));
+}
+function rmRow(i){
+  const box=document.getElementById("teambox"), rows=[...box.querySelectorAll(".trow")];
+  if(rows.length<=2){ document.getElementById("terr").textContent="최소 2명은 있어야 합니다."; return; }
+  rows[i] && rows[i].remove();
+  [...box.querySelectorAll(".trow")].forEach((r,n)=>{ r.dataset.i=n; r.querySelector(".trm").setAttribute("onclick",`rmRow(${n})`); });
+}
+
+function runTeam(){
+  const err=document.getElementById("terr"); err.textContent="";
+  const rows=[...document.querySelectorAll("#teambox .trow")];
+  const list=[], bad=[];
+  rows.forEach((r,n)=>{
+    const nm=(r.querySelector(".tname").value||"").trim() || ("구성원 "+(n+1));
+    const cd=(r.querySelector(".tcode").value||"").trim();
+    if(!cd) return;
+    const p=parseCode(cd);
+    if(!p){ bad.push(nm); return; }
+    list.push({name:nm, code:p.code, sg:p.sg, type:TYPES[p.code].t, flat:p.flat});
+  });
+  if(bad.length){ err.textContent = bad.join(", ")+" 의 코드를 확인해 주세요. 예: DI-6622"; return; }
+  if(list.length<2){ err.textContent="코드를 2명 이상 넣어 주세요."; return; }
+  TEAM=list; renderTeam();
+}
+
+function renderTeam(){
+  const T=TEAM, n=T.length;
+  const avg={}; F.forEach(f=> avg[f]= T.reduce((s,p)=>s+p.sg[f],0)/n );
+  const owner={};  F.forEach(f=>{ owner[f]=[...T].sort((a,b)=>b.sg[f]-a.sg[f])[0]; });
+  const covered = F.filter(f=> T.some(p=>p.sg[f]>=5));
+  const holes   = F.filter(f=> !T.some(p=>p.sg[f]>=5));
+  const crowded = F.filter(f=> T.filter(p=>p.sg[f]>=6).length>=2);
+  const quiet   = [...T].sort((a,b)=> (b.sg.S+b.sg.C) - (a.sg.S+a.sg.C) )[0];
+  const loud    = [...T].sort((a,b)=> (b.sg.D+b.sg.I) - (a.sg.D+a.sg.I) )[0];
+
+  /* ── 요약 ── */
+  document.getElementById("tsum").innerHTML = `
+    <div class="tgrid">
+      ${T.map(p=>`<div class="tcard">
+        <div class="tn">${p.name}</div>
+        <div class="tt">${p.type}</div>
+        <div class="tc mono">${p.flat?"BAL":p.code.replace(/\//g,"")}-${F.map(f=>p.sg[f]).join("")}</div>
+        <div class="tbars">${F.map(f=>`<span class="tb" title="${FNAME[f]} ${p.sg[f]}">
+          <i style="height:${p.sg[f]/7*100}%;background:${FCOL[f]}"></i></span>`).join("")}</div>
+        <div class="trole">${FROLE[topFactor(p)]}</div>
+      </div>`).join("")}
+    </div>
+
+    <div class="tavg">
+      <div class="tah">팀 평균</div>
+      ${F.map(f=>`<div class="tarow"><span class="lb"><i style="background:${FCOL[f]}"></i>${FNAME[f]}</span>
+        <span class="tabar"><i style="width:${avg[f]/7*100}%;background:${FCOL[f]}"></i></span>
+        <span class="tav mono">${avg[f].toFixed(1)}</span></div>`).join("")}
+    </div>`;
+
+  /* 구조 한 줄 */
+  const flow = covered.map(f=>`<b>${owner[f].name}</b>${IGA(owner[f].name)} ${FDOM[f]}`).join(" · ");
+  const lastDom = covered.length ? FDOM[covered[covered.length-1]] : "";
+  document.getElementById("tstruct").innerHTML =
+    holes.length===0
+      ? `네 방향이 모두 채워져 있습니다. ${flow}${EUL(lastDom)} 맡으면 한 바퀴가 그대로 돕니다.`
+      : (covered.length
+          ? `${flow}${EUL(lastDom)} 맡습니다. 다만 <b>${holes.map(f=>FDOM[f]).join(" · ")}</b>${EUN(FDOM[holes[holes.length-1]])} 아무도 채우지 않습니다.`
+          : `뚜렷하게 앞서는 축이 없습니다. <b>${holes.map(f=>FDOM[f]).join(" · ")}</b>${EUN(FDOM[holes[holes.length-1]])} 아무도 채우지 않습니다.`);
+
+  /* ── 강점 ── */
+  const st=[];
+  covered.forEach(f=> st.push(`<b>${FDOM[f]}</b> — ${owner[f].name}(${FNAME[f]} ${owner[f].sg[f]})${IGA(owner[f].name)} 이 축을 끌고 갑니다. ${FBOTH[f]}`));
+  if(covered.length>=3) st.push("네 방향 중 셋 이상이 채워져 있어 <b>한 팀 안에서 시작부터 마감까지</b>가 가능합니다. 외부에 맡길 구간이 적습니다.");
+  if(!st.length) st.push("뚜렷한 강세 축이 없습니다. 대신 극단적인 충돌도 적습니다. <b>업무 경험과 관심</b>으로 역할을 나누는 편이 낫습니다.");
+  document.getElementById("tstrong").innerHTML = ul(st);
+
+  /* ── 리스크 ── */
+  const rk=[];
+  holes.forEach(f=> rk.push(`<b>공백 — ${FDOM[f]}</b><br>${FGAP[f]} 이 축은 <b>사람이 아니라 절차</b>로 메우거나 외부에서 채워야 합니다.`));
+  crowded.forEach(f=>{
+    const who=T.filter(p=>p.sg[f]>=6).map(p=>p.name).join(", ");
+    rk.push(`<b>과밀 — ${FDOM[f]}</b><br>${who}${IGA(who)} 모두 이 축이 높습니다. ${FBOTHRISK[f]}`);
+  });
+  if(quiet && (quiet.sg.S>=5) && loud && loud!==quiet && (loud.sg.D>=5||loud.sg.I>=5)){
+    rk.push(`<b>보이지 않는 일이 ${quiet.name}에게 몰립니다</b><br>`
+      +`${loud.name}${IGA(loud.name)} 판을 열고 ${quiet.name}${IGA(quiet.name)} 후속을 떠안는 구조가 되기 쉽습니다. `
+      +`${quiet.name}${EUN(quiet.name)} 불만을 늦게 말하므로 <b>“별말 없으니 괜찮다”는 판단이 이 팀에서 가장 위험합니다.</b> `
+      +`일정 지연 예방·누락 처리·변경 이력 관리 같은 항목을 <b>공식 성과로 기록</b>하세요.`);
+  }
+  const decider = [...T].sort((a,b)=>b.sg.D-a.sg.D)[0];
+  if(decider.sg.D<=3) rk.push(`<b>결정이 늦어집니다</b><br>D(주도)가 5 이상인 사람이 없습니다. 회의가 결론 없이 끝나기 쉽습니다. 안건마다 <b>결정권자와 결정 시한</b>을 먼저 정하세요.`);
+  if(!rk.length) rk.push("구조적 리스크가 뚜렷하지 않습니다. 다만 역할이 불분명하면 어떤 조합이든 흔들립니다.");
+  document.getElementById("trisk").innerHTML = rk.map(t=>`<div class="rkb">${t}</div>`).join("");
+
+  /* ── 상세 ── */
+  let d="";
+
+  /* 1:1 전수 */
+  let pairs="";
+  for(let i=0;i<n;i++) for(let j=i+1;j<n;j++){
+    const a=T[i], b=T[j];
+    const same=F.filter(f=>a.sg[f]>=5&&b.sg[f]>=5);
+    const gap =F.filter(f=>a.sg[f]<=3&&b.sg[f]<=3);
+    const comp=F.filter(f=>(a.sg[f]>=5&&b.sg[f]<=3)||(a.sg[f]<=3&&b.sg[f]>=5));
+    const cl  =F.filter(f=>Math.abs(a.sg[f]-b.sg[f])>=3);
+    let rel="flat";
+    if(comp.length>=2) rel="comp"; else if(same.length>=2&&comp.length===0) rel="twin";
+    else if(comp.length>=1||same.length>=1) rel="mixed";
+    pairs += `<div class="fblk">
+      <div class="fbh"><b>${a.name} ↔ ${b.name}</b><span class="relb">${REL[rel][0]}</span></div>
+      <p>${REL[rel][1]}</p>
+      ${same.length?`<p><b>같이 강한 곳</b> — ${same.map(f=>FDOM[f]).join(" · ")}</p>`:""}
+      ${comp.length?`<p><b>서로 메우는 곳</b> — ${comp.map(f=>`${FDOM[f]}(${a.sg[f]>=5?a.name:b.name})`).join(" · ")}</p>`:""}
+      ${gap.length ?`<p><b>둘 다 빈 곳</b> — ${gap.map(f=>FDOM[f]).join(" · ")}</p>`:""}
+      ${cl.length  ?`<p class="cl2"><b>부딪히는 지점</b> — ${cl.map(f=>FDOM[f]).join(" · ")}<br>${FCLASH[cl[0]]}</p>`:""}
+    </div>`;
+  }
+  d += acc(`1 · 1:1 관계 전수 (${n*(n-1)/2}개 조합)`, pairs, true);
+
+  /* 업무 단계별 배분 */
+  const stage = (label, order) => {
+    const items = order.map(f=>{
+      const o=owner[f];
+      if(o.sg[f] < 5) return `<b class="cl2">${FROLE[f]} — 맡을 사람이 없습니다</b> `
+        + `<span class="dim">(가장 높은 사람도 ${o.name} ${FNAME[f]} ${o.sg[f]})</span><br>`
+        + `이 구간은 사람이 아니라 <b>체크리스트·마감일·외부 검토</b>로 메우세요.`;
+      return `<b>${o.name}</b> — ${FROLE[f]} <span class="dim">(${FNAME[f]} ${o.sg[f]})</span>`;
+    });
+    return `<h4>${label}</h4>${ul(items)}`;
+  };
+  d += acc("2 · 업무 단계별 권장 배분",
+    stage("착수 — 기회 발굴과 방향 설정", ["I","D"]) +
+    stage("실행 — 구조화와 진행", ["C","S"]) +
+    stage("마감 — 완결과 후속", ["S","C"]) +
+    `<p class="dnote">같은 사람이 여러 단계에 겹쳐 나오면 그 사람에게 부하가 몰린다는 뜻입니다.
+     겹치는 항목 중 하나는 <b>두 번째로 높은 사람</b>에게 넘기세요.</p>`);
+
+  /* 회의 운영 */
+  const hiI = T.filter(p=>p.sg.I>=5).map(p=>p.name);
+  const hiC = T.filter(p=>p.sg.C>=5).map(p=>p.name);
+  const hiS = T.filter(p=>p.sg.S>=5).map(p=>p.name);
+  d += acc("3 · 회의 운영법",
+    `<h4>1단계 · 확장</h4>
+     <p>${hiI.length?`<b>${hiI.join(", ")}</b>의 발산을 막지 마세요.`:"아이디어를 먼저 열어 두세요."} 이 단계에서는 확정하지 않습니다.</p>
+     ${ul(["아이디어와 가능성","고객 가치와 차별성","해볼 만한 실험"])}
+     <h4>2단계 · 수렴</h4>
+     <p>${hiC.length?`<b>${hiC.join(", ")}</b>${IGA(hiC.join(", "))} 이 단계를 맡는 것이 자연스럽습니다.`:"이 단계를 맡을 사람을 정해 두세요. 아무도 안 하면 확장만 하다 끝납니다."}</p>
+     ${ul(["실행 가능성과 일정","예산과 담당자","예상 위험"])}
+     <h4>회의 종료 전 반드시 확인</h4>
+     ${ul(["무엇이 확정됐는가","확정되지 않은 것은 무엇인가","누가 담당하는가","언제까지 완료하는가","외부에 말해도 되는 범위는 어디까지인가"])}
+     ${hiS.length?`<div class="hi"><b>${hiS.join(", ")}</b>${EUN(hiS.join(", "))} 반대 의견을 바로 말하지 않는 편입니다.
+      회의 끝에 <b>“동의하지 않는 부분 있으면 지금”</b>이라고 한 번 물어야 실제 합의가 됩니다.</div>`:""}`);
+
+  /* 팀 규칙 */
+  const rules=[
+    "**아이디어와 약속을 구분한다.** 아이디어는 검토 가능, 제안은 확인 중, 확정은 일정·예산·담당자 승인 완료.",
+    "**침묵을 동의로 간주하지 않는다.** 특히 S가 높은 구성원의 침묵은 동의가 아니다.",
+    "**추가 업무는 기존 업무와 교환한다.** 새 일을 넣을 때 무엇을 늦출지 같이 정한다.",
+    "**문제는 30% 단계에서 공유한다.** 감당 못 할 때가 아니라 부담이 커지기 시작할 때 말한다.",
+    "**약속한 사람이 초기 실행까지 책임진다.** 밖에서 만든 약속을 바로 넘기지 않는다."
+  ];
+  holes.forEach(f=> rules.push(`**${FDOM[f]}${EUN(FDOM[f])} 절차로 메운다.** 아무도 이 축이 높지 않으므로 체크리스트나 외부 검토를 고정한다.`));
+  if(decider.sg.D>=5) rules.push(`**최종 결정권은 ${decider.name}.** 다만 결정 배경을 한 줄 남긴다.`);
+  d += acc("4 · 이 팀에 필요한 규칙", ul(rules));
+
+  d += acc("5 · 종합",
+    `<p>${T.map(p=>`<b>${p.name}</b>(${p.type})`).join(" · ")} 조합입니다.</p>
+     <p>${holes.length===0
+       ? "네 방향이 모두 덮여 있어 <b>구조적으로 완결된 팀</b>입니다. 성패는 성향이 아니라 역할을 얼마나 명확히 나누느냐에 달려 있습니다."
+       : `<b>${holes.map(f=>FDOM[f]).join(" · ")}</b>${IGA(FDOM[holes[holes.length-1]])} 비어 있습니다. 이 축을 채우지 않으면 다른 축이 아무리 강해도 그 지점에서 반복해 막힙니다.`}</p>
+     <div class="hi">이 팀의 성과를 높이는 핵심은 성격을 바꾸는 것이 아니라 세 가지를 명확히 하는 것입니다.<br>
+       <b>대외 약속의 승인 절차 · 업무별 최종 책임자 · 불만과 과부하를 조기에 말하는 규칙</b></div>`);
+
+  document.getElementById("tdepth").innerHTML = d;
+  document.getElementById("tdepthwrap").style.display="none";
+  document.getElementById("tdepthbtn").textContent="상세 분석 펼쳐 보기";
+  document.getElementById("tdepthbtn").classList.remove("open");
+
+  const dt=new Date();
+  const stamp=`${dt.getFullYear()}.${String(dt.getMonth()+1).padStart(2,"0")}.${String(dt.getDate()).padStart(2,"0")}`;
+  document.getElementById("tprmeta").textContent = `${n}명  ·  ${stamp}`;
+  document.getElementById("tprfoot").innerHTML =
+    `팀 행동유형 분석 · ${T.map(p=>p.name).join(" · ")} · ${stamp}<br>`
+    + `DISC 4요인 모델(Marston, 1928) 구조 기반 자체 제작 검사. 공인 검사가 아니며 강도 구간은 잠정값입니다. `
+    + `채용·평가 등 개인에게 불이익이 갈 수 있는 결정의 근거로 사용하지 마십시오. · HayDay`;
+
+  intro.style.display="none"; quiz.style.display="none";
+  result.style.display="none"; document.getElementById("match").style.display="none";
+  document.getElementById("team").style.display="block";
+  window.scrollTo(0,0);
+}
+function topFactor(p){ return [...F].sort((a,b)=>p.sg[b]-p.sg[a])[0]; }
+function toggleTDepth(){
+  const box=document.getElementById("tdepthwrap"), btn=document.getElementById("tdepthbtn");
+  const on = box.style.display!=="block";
+  box.style.display = on?"block":"none";
+  btn.textContent = on?"상세 분석 접기":"상세 분석 펼쳐 보기";
+  btn.classList.toggle("open", on);
+  if(on) setTimeout(()=>box.scrollIntoView({block:"start",behavior:"smooth"}),60);
+}
+function backFromTeam(){
+  document.getElementById("team").style.display="none";
+  if(R){ result.style.display="block"; } else { intro.style.display="block"; }
+  window.scrollTo(0,0);
+}
+function editTeam(){
+  document.getElementById("team").style.display="none";
+  if(R){ result.style.display="block"; } else { intro.style.display="block"; }
+  const panel=document.getElementById("teampanel");
+  panel.style.display="block";
+  document.getElementById("teamopen").style.display="none";
+  setTimeout(()=>panel.scrollIntoView({block:"center",behavior:"smooth"}),60);
 }
 
 </script>
