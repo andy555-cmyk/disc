@@ -45,7 +45,7 @@ FAVICON = ("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMj
 
 # 방문 집계 — Cloudflare Web Analytics (쿠키 없음). 대표가 토큰을 발급하면 index.html·privacy.html과 같이 주석을 풀고 토큰을 넣는다.
 ANALYTICS = """<!-- 방문 집계 · Cloudflare Web Analytics (쿠키·개인식별자 없음). 토큰 발급 뒤 아래 주석을 풀고 CF_TOKEN_HERE를 바꾼다.
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CF_TOKEN_HERE"}'></script>
+<script defer type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CF_TOKEN_HERE"}'></script>
 -->"""
 
 CSS = """
