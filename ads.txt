@@ -1,0 +1,2 @@
+# 구글 애드센스 ads.txt — 승인 뒤 퍼블리셔 ID(pub-…)를 넣고 아래 줄의 주석을 푼다.
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
