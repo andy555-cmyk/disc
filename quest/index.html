@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>오피스 원정대 · 시험판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#FBF6EC;--ink:#1F2A44;--sub:#5A6072;--line:#E7DFCF;--card:#fff;--or:#E8743B;--te:#2A9D8F;
+--D:#9F2F2D;--I:#956400;--S:#346538;--C:#1F6C9F;--Db:#FDEBEC;--Ib:#FBF3DB;--Sb:#EDF3EC;--Cb:#E1F3FE}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,sans-serif;font-size:17px;line-height:1.55;word-break:keep-all}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:32px;line-height:1.25;margin:6px 0 8px;text-align:center}
+h2{font-size:23px;margin:34px 0 12px;text-align:center}
+.lead{text-align:center;color:var(--sub);margin:0 0 6px}
+.cred{text-align:center;color:var(--sub);font-size:14px;margin:8px 0 0}
+.kick{text-align:center;color:var(--or);font-weight:700;font-size:15px}
+.btn{display:inline-block;border:0;border-radius:14px;padding:14px 20px;font:inherit;font-weight:700;cursor:pointer;background:var(--ink);color:#fff}
+.btn.or{background:var(--or)}.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.35;cursor:default}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+input{font:inherit;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);width:100%;max-width:320px;text-align:center;text-transform:uppercase}
+.err{color:var(--D);font-size:14px;text-align:center;min-height:20px;margin-top:6px}
+/* 사람 카드 */
+.team{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.pc{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;position:relative;transition:transform .12s}
+.pc.sel{border-color:var(--or);box-shadow:0 0 0 3px rgba(232,116,59,.18);transform:translateY(-2px)}
+.pc.used2{opacity:.45}
+.pc .nm{font-weight:800;font-size:17px}.pc .job{font-size:14px;color:var(--sub)}
+.pc .tag{position:absolute;top:10px;right:10px;font-size:12px;color:var(--sub)}
+.bars{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
+.bar{font-size:12px;text-align:center;border-radius:8px;padding:3px 0;font-weight:700}
+.uses{font-size:12px;color:var(--sub);margin-top:6px}
+/* 관문 */
+.gate{background:var(--card);border-radius:18px;padding:14px;margin-top:12px;border:1.5px solid var(--line)}
+.gtop{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.gname{font-weight:800;font-size:18px}
+.gneed{font-size:14px;color:var(--sub);white-space:nowrap}
+.ghelp{font-size:14px;color:var(--sub);margin:4px 0 10px}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.slot{border:2px dashed var(--line);border-radius:12px;padding:10px;text-align:center;cursor:pointer;min-height:58px;font-size:15px}
+.slot b{display:block;font-size:12px;color:var(--sub);font-weight:600}
+.slot.full{border-style:solid;border-color:var(--ink);background:#FFFDF8}
+.slot.hot{border-color:var(--or)}
+.meter{height:12px;border-radius:6px;background:#F0EADC;margin-top:10px;position:relative;overflow:hidden}
+.meter i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:var(--te);transition:width .25s}
+.meter u{position:absolute;top:-2px;bottom:-2px;width:3px;background:var(--ink)}
+.mtxt{font-size:14px;margin-top:4px;color:var(--sub)}
+.mtxt.ok{color:var(--S);font-weight:700}
+/* 결과 */
+.grade{font-size:110px;font-weight:900;text-align:center;line-height:1;margin:10px 0 0}
+.gS{color:#C8902A}.gA{color:var(--te)}.gB{color:var(--C)}.gC{color:var(--or)}.gD{color:var(--D)}
+.res{background:var(--card);border-radius:18px;padding:16px;margin-top:12px}
+.res p{margin:6px 0}
+.rl{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:6px 0;border-bottom:1px solid #F1EBDD}
+.rl:last-child{border-bottom:0}.rl .who{font-size:14px;color:var(--sub);display:block}.rl .sc{white-space:nowrap;font-weight:700}
+.pill{font-weight:700}
+.note{font-size:14px;color:var(--sub);text-align:center;margin-top:24px}
+.quests{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qb{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;text-align:left;font:inherit}
+.qb.on{border-color:var(--or)}
+.qb b{display:block}.qb span{font-size:13px;color:var(--sub)}
+.how{background:#fff;border-radius:16px;padding:14px 16px;margin-top:12px;font-size:15px}
+.how summary{font-weight:700;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:15px;display:none;white-space:nowrap}
+.dock{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 6px;margin:12px -16px 0;padding-left:16px;padding-right:16px;border-bottom:1px solid var(--line)}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 4px;text-align:center;cursor:pointer;font-size:15px;font-weight:800;line-height:1.3}
+.chip small{display:block;font-size:12px;font-weight:600;color:var(--sub)}
+.chip.sel{border-color:var(--or);background:#FFF4EC}.chip.used2{opacity:.4}
+.selinfo{font-size:14px;text-align:center;margin-top:6px;min-height:22px;color:var(--sub)}
+@media(min-width:640px){.team{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ── 진단과 같은 축. 게임 이름만 바꿈 ── */
+const F=["D","I","S","C"];
+const GN={D:"돌파",I:"연결",S:"버팀",C:"검증"};
+const GL={D:"결정을 먼저 내리고 밀고 나감",I:"사람을 붙이고 설득해 길을 엶",S:"긴 일을 끝까지 유지함",C:"확인하고 기준을 세워 사고를 막음"};
+const JOB1={D:"돌격대장",I:"섭외왕",S:"버팀목",C:"검수관"};
+const JOB2={DI:"선봉장",ID:"깃발잡이",DS:"개척자",SD:"수비대장",DC:"저격수",CD:"감리관",IS:"중재자",SI:"살림꾼",IC:"전령",CI:"해설가",SC:"장인",CS:"기록관"};
+/* 꾀 카드 = 진단 처방 문장 */
+const CARD={D:"결정 시한을 달력에 못 박기",I:"끝에 정리 담당 정하기",S:"정기적으로 꺼내는 자리 만들기",C:"검수를 사람 대신 절차로"};
+/* 가상 동료 — 진짜 친구가 오면 자리를 넘김 */
+const NPCS=[
+ {name:"박 대리",code:"D",sg:{D:6,I:4,S:3,C:3},npc:true},
+ {name:"이 주임",code:"I",sg:{D:3,I:6,S:4,C:3},npc:true},
+ {name:"최 과장",code:"S",sg:{D:3,I:3,S:6,C:4},npc:true}];
+/* 퀘스트: [이름, 주 방식, 도움 방식, 통과선, 도움 설명] */
+const QUESTS=[
+ {id:"launch",t:"출시 D-7",d:"일주일 뒤 서비스 출시",g:[
+  ["출시일 못 박기","D","C",7,"근거 숫자를 쥔 사람이 옆에 있으면 결정이 빨라져요"],
+  ["협력사 설득","I","S",6,"끝까지 연락을 이어 갈 사람이 있으면 약속이 지켜져요"],
+  ["마감 주간 버티기","S","D",6,"우선순위를 잘라 주는 사람이 있으면 덜 지쳐요"],
+  ["최종 오류 점검","C","I",7,"현장 이야기를 모아 오는 사람이 있으면 빠진 곳이 보여요"]]},
+ {id:"ws",t:"워크숍 준비",d:"전 직원 1박 2일 워크숍",g:[
+  ["참가자 모으기","I","C",8,"일정·명단을 정리하는 사람이 있으면 빠지는 사람이 없어요"],
+  ["당일 진행 유지","S","I",6,"분위기를 띄우는 사람이 있으면 시간이 덜 처져요"],
+  ["장소 정하기","D","S",6,"사람들 사정을 챙기는 사람이 있으면 뒷말이 없어요"],
+  ["예산 맞추기","C","D",6,"과감히 빼자고 말하는 사람이 있으면 숫자가 맞아요"]]},
+ {id:"audit",t:"감사 대응",d:"다음 주 외부 감사",g:[
+  ["서류 대조","C","S",8,"지치지 않고 같이 넘겨 줄 사람이 있으면 끝까지 봐요"],
+  ["긴 질의 버티기","S","C",6,"기준을 정리해 둔 사람이 있으면 흔들리지 않아요"],
+  ["감사관 응대","I","D",6,"결론부터 말해 주는 사람이 있으면 말이 꼬이지 않아요"],
+  ["개선안 결정","D","I",6,"반대하는 쪽을 설득할 사람이 있으면 결정이 서요"]]},
+ {id:"pt",t:"경쟁 PT",d:"큰 계약이 걸린 발표",g:[
+  ["승부수 정하기","D","I",8,"듣는 쪽 반응을 읽는 사람이 있으면 과녁이 맞아요"],
+  ["발표하기","I","C",7,"숫자 근거를 받쳐 주는 사람이 있으면 질문에 안 밀려요"],
+  ["장표 검수","C","D",6,"여기서 끊자고 말하는 사람이 있으면 마감을 지켜요"],
+  ["리허설 반복","S","I",5,"웃게 만드는 사람이 있으면 열 번도 버텨요"]]},
+ {id:"move",t:"사무실 이사",d:"한 달 안에 층 전체 이사",g:[
+  ["이삿날까지 버티기","S","D",8,"정할 건 빨리 정하는 사람이 있으면 일이 안 쌓여요"],
+  ["자리 배치 결정","D","C",6,"도면 숫자를 쥔 사람이 있으면 다시 안 옮겨요"],
+  ["짐 목록 대조","C","S",6,"꾸준히 같이 세는 사람이 있으면 하나도 안 빠져요"],
+  ["부서 간 조율","I","S",6,"서운한 사람을 챙기는 사람이 있으면 다툼이 줄어요"]]},
+ {id:"onb",t:"신입 온보딩",d:"신입 세 명이 들어온다",g:[
+  ["첫 주 환영","I","S",8,"옆에 오래 있어 줄 사람이 있으면 마음을 열어요"],
+  ["한 달 동행","S","C",7,"할 일 목록을 만드는 사람이 있으면 길을 안 잃어요"],
+  ["업무 매뉴얼","C","I",6,"신입 눈높이로 물어보는 사람이 있으면 읽히는 글이 돼요"],
+  ["첫 과제 맡기기","D","S",5,"부담을 덜어 주는 사람이 있으면 겁먹지 않아요"]]}
+];
+const HELP=2, MAXUSE=2, CARDS=2, CARDV=2;
+
+/* ── 코드: 진단 결과 코드(예 DI-6622) ── */
+function parseCode(str){
+ const t=(str||"").toUpperCase().replace(/[^A-Z0-9]/g,"");
+ const m=t.match(/^(BAL|[DISC]{1,3})([1-7]{4})$/); if(!m) return null;
+ const sg={}; F.forEach((f,i)=>sg[f]=+m[2][i]);
+ return {code:m[1],sg};
+}
+function job(p){
+ if(p.code==="BAL") return "모험가";
+ if(p.code.length===1) return JOB1[p.code];
+ if(p.code.length===2) return JOB2[p.code];
+ return "멀티플레이어";
+}
+/* ── 상태: 기기 안에만 저장 ── */
+let S={me:null,friends:[],q:0,a:null,sel:null,stage:"start"};
+function load(){try{const s=JSON.parse(localStorage.getItem("quest1")||"{}");S.me=s.me||null;S.friends=s.friends||[];}catch(e){}}
+function save(){try{localStorage.setItem("quest1",JSON.stringify({me:S.me,friends:S.friends}));}catch(e){}}
+function team(){
+ const t=[{...S.me,name:"나",me:true}];
+ S.friends.slice(0,3).forEach(f=>t.push(f));
+ NPCS.forEach(n=>{ if(t.length<4) t.push(n); });
+ return t;
+}
+function resetAssign(){S.a=QUESTS[S.q].g.map(()=>({a:-1,h:-1}));S.sel=null;}
+function uses(i){return S.a.reduce((n,s)=>n+(s.a===i)+(s.h===i),0);}
+function gval(T,gi,a,h){const g=QUESTS[S.q].g[gi];if(a<0)return 0;return T[a].sg[g[1]]+(h>=0&&T[h].sg[g[2]]>=5?HELP:0);}
+function judge(vals,q){
+ let cards=CARDS,fail=0;const used=[];
+ const order=vals.map((v,i)=>[q.g[i][3]-v,i]).filter(x=>x[0]>0).sort((x,y)=>x[0]-y[0]);
+ const failed=new Set();
+ for(const[s,i]of order){const c=Math.ceil(s/CARDV);if(c<=cards){cards-=c;for(let k=0;k<c;k++)used.push(i);}else{fail++;failed.add(i);}}
+ let g=fail>=2?"D":fail===1?"C":used.length?"B":vals.every((v,i)=>v>q.g[i][3])?"S":"A";
+ return {g,used,failed};
+}
+const RANK={S:0,A:1,B:2,C:3,D:4};
+function bestFor(T,q){
+ const m=T.length,opts=[];for(let a=0;a<m;a++){opts.push([a,-1]);for(let c=0;c<m;c++)if(c!==a)opts.push([a,c]);}
+ let best="D";
+ (function rec(i,use,vals){
+  if(i===4){const g=judge(vals,q).g;if(RANK[g]<RANK[best])best=g;return;}
+  const gt=q.g[i];
+  for(const[a,c]of opts){if(use[a]>=MAXUSE||(c>=0&&use[c]>=MAXUSE))continue;use[a]++;if(c>=0)use[c]++;
+   rec(i+1,use,[...vals,T[a].sg[gt[1]]+(c>=0&&T[c].sg[gt[2]]>=5?HELP:0)]);use[a]--;if(c>=0)use[c]--;if(best==="S")return;}
+ })(0,new Array(m).fill(0),[]);
+ return best;
+}
+/* ── 화면 ── */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(t){const e=$("#toast");e.textContent=t;e.style.display="block";clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display="none",1800);}
+function bars(sg){return `<div class="bars">${F.map(f=>`<div class="bar" style="background:var(--${f}b);color:var(--${f})">${GN[f]} ${sg[f]}</div>`).join("")}</div>`;}
+const CRED=`<p class="cred">1928년 마스턴 행동 이론에서 출발한 4요인 행동유형 진단 · 기업 팀 구성 워크숍 방식을 2분 원정으로</p>`;
+
+function renderStart(){
+ $("#app").innerHTML=`
+ <div class="kick">오피스 원정대 · 시험판</div>
+ <h1>우리 팀이 원정대가 된다면?</h1>
+ <p class="lead">내 진단 결과가 캐릭터가 되고<br>누구를 어느 관문에 보낼지 내가 정해요</p>
+ ${CRED}
+ <h2>내 진단 코드를 넣어 주세요</h2>
+ <p class="lead" style="font-size:15px">진단 결과 화면의 「내 코드」 예: DI-6622</p>
+ <div class="row"><input id="code" placeholder="예: CS-3367" value="${S.me?esc(S.me.raw):""}"></div>
+ <div class="err" id="err"></div>
+ <div class="row"><button class="btn or" onclick="startWith()">원정 떠나기</button>
+ <button class="btn ghost" onclick="sample()">예시 캐릭터로 해 보기</button></div>
+ <div class="row"><a class="btn ghost" href="../" style="text-decoration:none">아직 진단 안 했어요 (14문항 · 3분)</a></div>
+ <p class="note">결과는 이 기기에만 저장돼요<br>성향을 보는 것이지 실력을 재는 게 아니에요<br>채용·평가에 쓰지 마세요</p>`;
+}
+function startWith(){
+ const raw=$("#code").value;const p=parseCode(raw);
+ if(!p){$("#err").textContent="코드를 다시 확인해 주세요. 예: DI-6622";return;}
+ S.me={...p,raw:raw.toUpperCase()};save();S.stage="team";render();
+}
+function sample(){const pool=["C-3357","DC-6235","IS-3665","S-3463","DI-6633"];const r=pool[Math.floor(Math.random()*pool.length)];
+ S.me={...parseCode(r),raw:r};save();S.stage="team";render();}
+
+function renderTeam(){
+ const T=team();
+ $("#app").innerHTML=`
+ <div class="kick">오피스 원정대 · 시험판</div>
+ <h1>내 직업은 「${esc(job(S.me))}」</h1>
+ <p class="lead">${F.filter(f=>S.me.sg[f]>=5).sort((a,b)=>S.me.sg[b]-S.me.sg[a]).map(f=>`${GN[f]}: ${GL[f]}`).join("<br>")||"모든 방식이 중간 — 어디든 메우는 사람"}</p>
+ ${bars(S.me.sg)}
+ <h2>우리 원정대</h2>
+ <div class="team">${T.map(p=>`<div class="pc">${p.me?"":`<span class="tag">${p.npc?"가상 동료":"친구"}</span>`}<div class="nm">${esc(p.name)}</div><div class="job">${esc(job(p))}</div>${bars(p.sg)}</div>`).join("")}</div>
+ <p class="lead" style="font-size:15px;margin-top:10px">가상 동료 자리는 진짜 친구가 들어오면 바뀌어요</p>
+ <h2>어떤 일을 해 볼까요?</h2>
+ <div class="quests">${QUESTS.map((q,i)=>`<button class="qb ${i===S.q?"on":""}" onclick="S.q=${i};renderTeam()"><b>${q.t}</b><span>${q.d}</span></button>`).join("")}</div>
+ <div class="row"><button class="btn or" onclick="S.stage='board';resetAssign();render()">관문 보러 가기</button></div>
+ ${friendBox()}`;
+}
+function friendBox(){
+ return `<h2>친구 넣기</h2>
+ <p class="lead" style="font-size:15px">친구가 진단을 마치면 코드를 받아 넣어 주세요 · 최대 3명</p>
+ <div class="row"><input id="fname" placeholder="이름 또는 별명" style="text-transform:none;max-width:160px"><input id="fcode" placeholder="코드 DI-6622" style="max-width:160px"></div>
+ <div class="err" id="ferr"></div>
+ <div class="row"><button class="btn ghost" onclick="addFriend()">원정대에 넣기</button>
+ <button class="btn ghost" onclick="invite()">친구에게 진단 링크 보내기</button>
+ ${S.friends.length?`<button class="btn ghost" onclick="S.friends=[];save();render()">친구 비우기</button>`:""}</div>`;
+}
+function addFriend(){
+ const n=($("#fname").value||"").trim().slice(0,8)||"친구";const p=parseCode($("#fcode").value);
+ if(!p){$("#ferr").textContent="코드를 다시 확인해 주세요";return;}
+ if(S.friends.length>=3){$("#ferr").textContent="친구는 3명까지예요";return;}
+ S.friends.push({...p,name:n});save();toast(`${n} 합류 · 가상 동료 한 명과 교대`);render();
+}
+function invite(weak){
+ const base=location.origin+location.pathname.replace(/quest\/.*$/,"");
+ const text=weak?`우리 원정대 「${weak}」 칸이 약해. 진단하고 코드 보내 주면 네 자리에서 다시 계산돼`:`우리 팀 원정대 해 보자. 3분 진단하고 코드 보내 줘`;
+ const url=base;
+ if(navigator.share){navigator.share({title:"오피스 원정대",text,url}).catch(()=>{});}
+ else{navigator.clipboard&&navigator.clipboard.writeText(text+" "+url).then(()=>toast("초대 문구를 복사했어요"));}
+}
+
+function brag(){
+ const q=QUESTS[S.q],g=S.last.r.g,url=location.origin+location.pathname;
+ const text=`「${q.t}」 원정 ${g}등급 받았어. 너라면 누구를 어디에 보낼래?`;
+ if(navigator.share){navigator.share({title:"오피스 원정대",text,url}).catch(()=>{});}
+ else{navigator.clipboard&&navigator.clipboard.writeText(text+" "+url).then(()=>toast("결과 문구를 복사했어요"));}
+}
+function renderBoard(){
+ const q=QUESTS[S.q],T=team();
+ $("#app").innerHTML=`
+ <div class="kick">${q.t} · ${q.d}</div>
+ <h1 style="font-size:26px">누구를 어느 관문에 보낼까</h1>
+ <p class="lead" style="font-size:15px">사람을 누르고 → 칸을 누르세요 · 한 사람은 최대 두 번까지</p>
+ <div class="dock"><div class="chips">${T.map((p,i)=>{const u=uses(i);return `<div class="chip ${S.sel===i?"sel":""} ${u>=MAXUSE?"used2":""}" onclick="pick(${i})">${esc(p.name)}<small>출동 ${u}/${MAXUSE}</small></div>`}).join("")}</div>
+ <div class="selinfo">${S.sel===null?"사람을 먼저 눌러 주세요":`<b style="color:var(--ink)">${esc(T[S.sel].name)}</b> · `+F.map(f=>`<span style="color:var(--${f});font-weight:700">${GN[f]} ${T[S.sel].sg[f]}</span>`).join(" · ")}</div></div>
+ ${q.g.map((g,gi)=>{const s=S.a[gi],v=gval(T,gi,s.a,s.h),th=g[3],max=10;
+  const hb=s.h>=0&&T[s.h].sg[g[2]]>=5;
+  return `<div class="gate">
+   <div class="gtop"><span class="gname">${gi+1}. ${g[0]}</span><span class="gneed">${GN[g[1]]} ${th} 이상</span></div>
+   <div class="ghelp">보조는 <b style="color:var(--${g[2]})">${GN[g[2]]} 5 이상</b>이면 +${HELP} · ${g[4]}</div>
+   <div class="slots">
+    <div class="slot ${s.a>=0?"full":""} ${S.sel!==null?"hot":""}" onclick="put(${gi},'a')"><b>담당 · ${GN[g[1]]}</b>${s.a>=0?esc(T[s.a].name)+" "+T[s.a].sg[g[1]]:"비어 있음"}</div>
+    <div class="slot ${s.h>=0?"full":""} ${S.sel!==null?"hot":""}" onclick="put(${gi},'h')"><b>보조 · ${GN[g[2]]}</b>${s.h>=0?esc(T[s.h].name)+(hb?" +"+HELP:" +0"):"비어 있음"}</div>
+   </div>
+   <div class="meter"><i style="width:${Math.min(100,v/max*100)}%"></i><u style="left:${th/max*100}%"></u></div>
+   <div class="mtxt ${v>=th?"ok":""}">${s.a<0?"담당을 정해 주세요":v>=th?`${v} — 통과${v>th?" (여유)":""}`:`${v} — ${th-v} 모자람 (꾀 카드로 메울 수 있어요)`}</div>
+  </div>`}).join("")}
+ <div class="row"><button class="btn or" ${S.a.every(s=>s.a>=0)?"":"disabled"} onclick="go()">출발!</button>
+ <button class="btn ghost" onclick="resetAssign();render()">다시 배치</button>
+ <button class="btn ghost" onclick="S.stage='team';render()">팀·퀘스트 바꾸기</button></div>
+ <details class="how"><summary>어떻게 계산하나요</summary>
+ <p>관문 값 = 담당의 그 방식 값 + 보조의 도움 방식이 5 이상이면 +${HELP}. 5는 진단에서 「주요인」으로 보는 기준선과 같아요.</p>
+ <p>모자라면 꾀 카드 ${CARDS}장(장당 +${CARDV})이 자동으로 쓰여요. 꾀 카드는 진단의 처방 문장이에요 — 예: 「${CARD.D}」.</p>
+ <p>S 꾀 없이 전부 여유 통과 · A 꾀 없이 통과 · B 꾀를 써서 통과 · C 관문 하나 실패 · D 둘 이상 실패. 운(주사위)은 없어요.</p></details>`;
+}
+function pick(i){if(uses(i)>=MAXUSE&&S.sel!==i){toast("이 사람은 이미 두 번 나갔어요 · 일이 한 사람에게 몰려요");return;}S.sel=S.sel===i?null:i;renderBoard();}
+function put(gi,role){
+ const s=S.a[gi];
+ if(S.sel===null){ if(s[role]>=0){s[role]=-1;renderBoard();} else toast("먼저 위에서 사람을 눌러 주세요"); return;}
+ const i=S.sel;const other=role==="a"?"h":"a";
+ if(s[other]===i){toast("한 관문에서 담당과 보조를 같이 할 수는 없어요");return;}
+ if(s[role]!==i&&uses(i)>=MAXUSE){toast("이 사람은 이미 두 번 나갔어요");return;}
+ s[role]=i;S.sel=uses(i)>=MAXUSE?null:i;renderBoard();
+}
+function go(){
+ const q=QUESTS[S.q],T=team();
+ const vals=q.g.map((g,gi)=>gval(T,gi,S.a[gi].a,S.a[gi].h));
+ const r=judge(vals,q);const best=bestFor(T,q);
+ S.last={vals,r,best};S.stage="result";render();window.scrollTo(0,0);
+}
+function renderResult(){
+ const q=QUESTS[S.q],T=team(),{vals,r,best}=S.last;
+ const failedG=[...r.failed].map(i=>q.g[i]);
+ const weak=failedG[0]||(r.used.length?q.g[r.used[0]]:null);
+ const cardLines=[...new Set(r.used)].map(i=>`<p>· ${q.g[i][0]}: 꾀 카드 「${CARD[q.g[i][1]]}」 사용 (하루 늦어짐)</p>`).join("");
+ const better=RANK[best]<RANK[r.g];
+ $("#app").innerHTML=`
+ <div class="kick">${q.t} 결과</div>
+ <div class="grade g${r.g}">${r.g}</div>
+ <p class="lead" style="font-size:19px;font-weight:700;margin-top:6px">${{S:"전 관문 여유 통과 — 완벽한 배치",A:"꾀 없이 전부 통과",B:"꾀를 써서 통과했어요",C:"관문 하나에서 막혔어요",D:"관문 여러 곳에서 막혔어요"}[r.g]}</p>
+ <div class="res">
+ ${q.g.map((g,gi)=>{const s=S.a[gi];return `<div class="rl"><span><span class="pill">${g[0]}</span><span class="who">${esc(T[s.a].name)}${s.h>=0?" + "+esc(T[s.h].name):""}</span></span><span class="sc">${vals[gi]} / ${g[3]} ${r.failed.has(gi)?"실패":vals[gi]>=g[3]?"통과":"꾀로 통과"}</span></div>`}).join("")}
+ ${cardLines}
+ </div>
+ <div class="res" style="background:${better?"#FFF4EC":"#EEF7F3"}">
+ ${better?`<p><b>이 팀으로는 ${best}까지 가능해요.</b> 보조를 「도움 방식」이 강한 사람으로 바꿔 보세요.</p>`:`<p><b>이 팀이 낼 수 있는 최고 등급이에요.</b>${r.g!=="S"?" 더 올리려면 새 사람이 필요해요.":""}</p>`}
+ ${weak?`<p>약한 칸: <b>${GN[weak[1]]}</b> (${weak[0]}) — ${GN[weak[1]]}${weak[1]==="D"?"가":"이"} 강한 친구가 들어오면 다시 계산돼요</p>`:""}
+ </div>
+ <div class="row"><button class="btn or" onclick="S.stage='board';render()">배치 바꿔 다시</button>
+ ${weak?`<button class="btn" onclick="invite('${GN[weak[1]]}')">빈칸 친구 부르기</button>`:`<button class="btn" onclick="brag()">결과 보내기</button>`}</div>
+ <div class="row"><button class="btn ghost" onclick="S.q=(S.q+1)%QUESTS.length;resetAssign();S.stage='board';render()">다음 퀘스트</button>
+ <button class="btn ghost" onclick="S.stage='team';render()">팀 보기</button></div>
+ <p class="note">성향을 보는 것이지 실력을 재는 게 아니에요<br>채용·평가에 쓰지 마세요</p>`;
+}
+let lastStage="";
+function render(){if(S.stage!==lastStage){lastStage=S.stage;window.scrollTo(0,0);}({start:renderStart,team:renderTeam,board:renderBoard,result:renderResult})[S.stage]();}
+load();
+(function(){const p=new URLSearchParams(location.search).get("me");const c=p&&parseCode(p);if(c){S.me={...c,raw:p.toUpperCase()};save();}
+ if(S.me){S.stage="team";}render();})();
+</script>
+</body>
+</html>
