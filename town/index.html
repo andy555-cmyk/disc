@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>이생동 · 시험판</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#FBF6EC;--ink:#1F2A44;--sub:#5A6072;--line:#E7DFCF;--or:#E8743B;--te:#2A9D8F;--red:#B23A3A;--blue:#1F6C9F}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,sans-serif;font-size:17px;line-height:1.55;word-break:keep-all}
+.wrap{max-width:720px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:30px;line-height:1.3;margin:6px 0 10px;text-align:center}
+h2{font-size:22px;margin:30px 0 12px;text-align:center}
+.kick{text-align:center;color:var(--or);font-weight:700;font-size:15px}
+.lead{text-align:center;color:var(--sub);margin:0 0 6px}
+.btn{display:inline-block;border:0;border-radius:14px;padding:14px 20px;font:inherit;font-weight:700;cursor:pointer;background:var(--ink);color:#fff;text-decoration:none}
+.btn.or{background:var(--or)}.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.35;cursor:default}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+input{font:inherit;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);width:100%;max-width:340px;text-align:center}
+.card{background:#fff;border-radius:18px;padding:16px;margin-top:12px;border:1.5px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.opt{background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 8px;cursor:pointer;text-align:center;font:inherit;font-size:15px;font-weight:700;color:var(--ink)}
+.opt.on{border-color:var(--or);background:#FFF4EC}
+.opt small{display:block;font-weight:500;color:var(--sub);font-size:13px;margin-top:2px}
+.opts{display:grid;grid-template-columns:1fr;gap:8px}
+.opts .opt{text-align:left;padding:12px 14px}
+.tag{font-size:12px;font-weight:600;padding:1px 6px;border-radius:6px;margin-left:4px;white-space:nowrap}
+.tr{background:#E6F2EE;color:#1E6B5F}.ta{background:#F3EEE3;color:#7A6A4A}
+.big{font-size:22px;font-weight:800}
+.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #F1EBDD;align-items:baseline}
+.stat:last-child{border-bottom:0}.stat b{white-space:nowrap}
+.news{background:#1F2A44;color:#fff;border-radius:16px;padding:14px 16px;margin-top:12px}
+.news p{margin:4px 0}.news .tr{background:#2E3B5C;color:#9FE0D2}
+.news b{font-size:19px}
+.chart{width:100%;height:auto;display:block;margin-top:6px}
+.end1{font-size:26px;font-weight:900;text-align:center;line-height:1.35;margin:10px 0}
+.note{font-size:14px;color:var(--sub);text-align:center;margin-top:22px}
+.err{color:var(--red);font-size:15px;text-align:center;min-height:22px;margin-top:6px}
+.sug{max-width:340px;margin:6px auto 0;text-align:left}
+.sug button{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:4px;font:inherit;cursor:pointer}
+.legend{font-size:14px;color:var(--sub);display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:4px;border-radius:2px;vertical-align:middle;margin-right:4px}
+details{margin-top:12px;background:#fff;border-radius:14px;padding:12px 14px;font-size:15px}
+details summary{font-weight:700;cursor:pointer}
+@media(max-width:420px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">불러오는 중</div>
+<script src="engine.js"></script>
+<script>
+const E=ENG, $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const R='<span class="tag tr">실제</span>', A='<span class="tag ta">가정</span>';
+const won=v=>{if(Math.round(v)===0)return "0원";const s=v<0?"−":"";v=Math.abs(Math.round(v));return s+(v>=10000?(Math.floor(v/10000)+"억"+(v%10000?" "+(v%10000).toLocaleString()+"만":"")):v.toLocaleString()+"만")+" 원";};
+let DONG={},DATA={},G={};
+async function loadInd(i){if(!DATA[i])DATA[i]=await (await fetch(`data/${i}.json`)).json();return DATA[i];}
+function bounds(i){const d=DATA[i];if(d._b)return d._b;const v=[];for(const c in d.d){const b=E.baseline(d,c);if(b)v.push(b.per.slice(0,4).reduce((a,x)=>a+x,0)/4);}v.sort((a,b)=>a-b);
+ return d._b=[v[Math.floor(v.length*.05)],v[Math.floor(v.length*.95)]];}
+/* 기간: 2021 상반기·하반기, 2022~2025 */
+const PER=[[0,6],[6,12],[12,24],[24,36],[36,48],[48,60]];
+const PNM=["2021년 1~6월","2021년 7~12월","2022년","2023년","2024년","2025년"];
+const DNM=["2021년 7월","2022년","2023년","2024년","2025년"];
+const pNews=(b,p)=>{const [a,z]=PER[p],qs=[];for(let q=a/3;q<z/3;q++)qs.push(q);
+ const opens=qs.reduce((x,i)=>x+b.o[i],0),closes=qs.reduce((x,i)=>x+b.c[i],0),avg=qs.reduce((x,i)=>x+b.per[i],0)/qs.length;
+ let prev=null;if(p>0){const [pa,pz]=PER[p-1];let t=0,n=0;for(let q=pa/3;q<pz/3;q++){t+=b.per[q];n++;}prev=t/n;}
+ return {opens,closes,avg,chg:prev?Math.round((avg/prev-1)*100):null};};
+
+/* ── 1. 첫 화면 ── */
+function renderStart(){
+ const inv=G.vs?`<div class="card" style="background:#FFF4EC"><b>${esc(DONG[G.vs.d]||"")} ${E.IND[G.vs.i].nm}</b> 대결 신청이 왔어요<br>친구는 5년 동안 <b>${won(Math.abs(G.vs.g))}</b>${G.vs.g>=0?" 벌었어요":" 잃었어요"} · 같은 동네 같은 업종으로 해 보세요
+ <div class="row"><button class="btn or" onclick="pickDong('${G.vs.d}');pickInd('${G.vs.i}')">같은 판 시작</button></div></div>`:"";
+ $("#app").innerHTML=`
+ <div class="kick">이생동 · 시험판</div>
+ <h1>우리 동네 지난 5년에<br>가게를 차렸다면</h1>
+ <p class="lead">2021~2025년 서울 실제 매출 흐름 위에서<br>내 가게 장부로 5년을 버텨 봐요</p>
+ ${inv}
+ <h2>어느 동네?</h2>
+ <div class="row" style="margin-top:0"><input id="q" placeholder="동 이름 (예: 망원1동)" oninput="sug()" autocomplete="off"></div>
+ <div class="sug" id="sug"></div>
+ <div class="err" id="err"></div>
+ <h2>무슨 가게?</h2>
+ <div class="grid">${Object.entries(E.IND).map(([k,v])=>`<button class="opt ${G.ind===k?"on":""}" onclick="pickInd('${k}')">${v.nm}</button>`).join("")}</div>
+ <div id="peek"></div>
+ <p class="note">숫자 출처 서울시 상권분석서비스 추정매출·점포(행정동, 2021~2025)<br>기기에 아무것도 보내지 않아요 · 위치 권한 안 받아요</p>`;
+ if(G.dong){$("#q").value=DONG[G.dong];}
+ peek();
+}
+function sug(){const t=$("#q").value.trim();G.dong=null;if(!t){$("#sug").innerHTML="";peek();return;}
+ const m=Object.entries(DONG).filter(([c,n])=>n.includes(t)).slice(0,6);
+ $("#sug").innerHTML=m.map(([c,n])=>`<button onclick="pickDong('${c}')">${esc(n)} <span style="color:var(--sub);font-size:14px">${E.GU[c.slice(0,5)]||""}</span></button>`).join("")||`<p class="lead" style="font-size:15px">서울 행정동만 있어요</p>`;}
+function pickDong(c){G.dong=c;if($("#q")){$("#q").value=DONG[c];$("#sug").innerHTML="";}peek();}
+async function pickInd(k){G.ind=k;document.querySelectorAll(".grid .opt").forEach((b,i)=>b.classList.toggle("on",Object.keys(E.IND)[i]===k));await loadInd(k);peek();}
+function peek(){
+ const el=$("#peek");if(!el)return;if(!G.dong||!G.ind||!DATA[G.ind]){el.innerHTML="";return;}
+ const b=E.baseline(DATA[G.ind],G.dong);$("#err").textContent="";
+ if(!b){el.innerHTML=`<div class="card">이 동은 이 업종 자료가 없어요</div>`;return;}
+ const [lo,hi]=bounds(G.ind);const b0=b.per.slice(0,4).reduce((a,v)=>a+v,0)/4;
+ const cr=Math.round(E.realCloseRate(b)*100), nm=DONG[G.dong], ind=E.IND[G.ind].nm, where=b.gu?`${b.gnm} 전체`:nm;
+ const out=b0<lo||b0>hi;
+ el.innerHTML=`<div class="card">
+  <p class="big" style="margin:0 0 6px">${esc(where)} ${ind}, 지난 5년 해마다 평균 ${cr}%가 문을 닫았어요${R}</p>
+  ${b.gu?`<p style="color:var(--or);font-weight:700;margin:4px 0">${esc(nm)} ${ind}은 평균 ${b.nAvg<1?"1곳 미만":b.nAvg+"곳"}뿐이라 「구 기준」 숫자로 해요</p>`:""}
+  <div class="stat"><span>평균 가게 수</span><b>${b.nAvg.toLocaleString()}곳${R}</b></div>
+  <div class="stat"><span>가게 하나 월 매출 (2021년 평균)</span><b>${won(b0)}${R}</b></div>
+  <div class="stat"><span>같은 가게 월 매출 (2025년 평균)</span><b>${won(b.per.slice(16).reduce((a,v)=>a+v,0)/4)}${R}</b></div>
+  ${out?`<p style="color:var(--red);margin:8px 0 0">이 동네 숫자는 서울 전체에서 너무 튀어서 게임에서 뺐어요 · 다른 동이나 업종을 골라 주세요</p>`:
+  `<div class="row"><button class="btn or" onclick="toSetup()">이 동네에서 차리기</button></div>`}
+ </div>`;
+}
+/* ── 2. 개업 설정 ── */
+function toSetup(){G.b=E.baseline(DATA[G.ind],G.dong);G.setup=G.setup&&G.setup.ind===G.ind?G.setup:{ind:G.ind,loc:null,hours:null,staff:null,fund:null};G.stage="setup";render();}
+function renderSetup(){
+ const b=G.b,s=G.setup,I=E.IND[G.ind],nm=DONG[G.dong];
+ const b0=b.per.slice(0,4).reduce((a,v)=>a+v,0)/4;
+ const share=h=>E.HOURS[h].slots.reduce((a,i)=>a+b.t[i],0);
+ const ready=s.loc&&s.hours&&s.staff!==null&&s.fund;
+ let money="";
+ if(s.loc){const rent=Math.round(b0*E.LOC[s.loc].rent),dep=rent*6,need=I.ent+dep,loan=Math.max(0,need+3000-5000)+(s.fund===10000?3000:0);
+  money=`<div class="card"><div class="stat"><span>월세</span><b>${won(rent)}${A}</b></div>
+  <div class="stat"><span>보증금 (월세 6달치, 나갈 때 돌려받음)</span><b>${won(dep)}${A}</b></div>
+  <div class="stat"><span>인테리어·장비</span><b>${won(I.ent)}${A}</b></div>
+  <div class="stat"><span>내 돈</span><b>5,000만 원</b></div>
+  ${s.fund?`<div class="stat"><span>빌린 돈 (연 5%)</span><b>${loan?won(loan):"없음"}${A}</b></div>`:""}</div>`;}
+ $("#app").innerHTML=`
+ <div class="kick">${esc(nm)} · ${I.nm}${b.gu?" · 구 기준":""}</div>
+ <h1>가게를 어떻게 열까</h1>
+ <h2>자리</h2>
+ <div class="opts">${Object.entries(E.LOC).map(([k,v])=>`<button class="opt ${s.loc===k?"on":""}" onclick="G.setup.loc='${k}';render()">${v.nm}<small>손님 ${v.sales>=1?"+":"−"}${Math.round(Math.abs(v.sales-1)*100)}% · 월세 ${won(b0*v.rent)}${A}</small></button>`).join("")}</div>
+ <h2>영업시간</h2>
+ <p class="lead" style="font-size:15px">이 동네 ${I.nm} 매출이 그 시간에 얼마나 몰리는지${R}</p>
+ <div class="opts">${Object.entries(E.HOURS).map(([k,v])=>`<button class="opt ${s.hours===k?"on":""}" onclick="G.setup.hours='${k}';render()">${v.nm}<small>이 시간대에 매출 ${share(k)}%${R}</small></button>`).join("")}</div>
+ <h2>직원</h2>
+ <div class="grid" style="grid-template-columns:repeat(3,1fr)">${[0,1,2].map(n=>`<button class="opt ${s.staff===n?"on":""}" onclick="G.setup.staff=${n};render()">${n?n+"명":"나 혼자"}<small>${n?"월 "+won(E.MINWAGE[2021]*209/1e4*n)+" (최저임금)":"손이 모자라 −20%"}</small></button>`).join("")}</div>
+ <h2>여유 자금</h2>
+ <div class="opts">
+  <button class="opt ${s.fund===5000?"on":""}" onclick="G.setup.fund=5000;render()">딱 필요한 만큼만 빌리기<small>이자는 적지만 한 해만 나빠도 바닥나요</small></button>
+  <button class="opt ${s.fund===10000?"on":""}" onclick="G.setup.fund=10000;render()">3,000만 원 더 빌려 두기<small>버틸 힘이 생기지만 이자가 계속 나가요</small></button></div>
+ ${money}
+ <div class="row"><button class="btn or" ${ready?"":"disabled"} onclick="startRun()">2021년 1월 개업</button>
+ <button class="btn ghost" onclick="G.stage='start';render()">동네·업종 바꾸기</button></div>
+ <p class="note">사장 생활비 월 ${E.LIVING}만 원이 매달 나가요${A}<br>매출 흐름은 이 동네 실제 숫자 그대로예요</p>`;
+}
+/* ── 3. 5년 진행 ── */
+function startRun(){G.acts=[];G.p=0;G.stage="year";G.alt=null;render();}
+function cur(){return E.play(G.b,G.setup,G.acts);}
+function chart(runs,upto){
+ const W=360,H=170,P=44;const all=runs.flatMap(r=>r.months.slice(0,upto).map(m=>m.cash));const mx=Math.max(1000,...all),mn=Math.min(0,...all);
+ const x=i=>P+(W-P-8)*i/59, y=v=>8+(H-36)*(1-(v-mn)/(mx-mn));
+ const cols=["#E8743B","#1F6C9F"];
+ let s=`<svg class="chart" viewBox="0 0 ${W} ${H}"><line x1="${P}" x2="${W-8}" y1="${y(0)}" y2="${y(0)}" stroke="#B23A3A" stroke-dasharray="4 4"/>`;
+ for(let k=0;k<5;k++)s+=`<text x="${x(k*12+6)}" y="${H-8}" font-size="13" text-anchor="middle" fill="#5A6072">${2021+k}</text>`;
+ s+=`<text x="${P-4}" y="${y(mx)+12}" font-size="12" text-anchor="end" fill="#5A6072">${Math.round(mx/1000)}천만</text><text x="${P-4}" y="${y(0)+4}" font-size="12" text-anchor="end" fill="#B23A3A">0</text>`;
+ runs.forEach((r,j)=>{const ms=r.months.slice(0,upto);if(!ms.length)return;s+=`<polyline fill="none" stroke="${cols[j]}" stroke-width="2.5" points="${ms.map((m,i)=>x(i)+","+y(m.cash)).join(" ")}"/>`;});
+ return s+"</svg>";
+}
+function renderYear(){
+ const r=cur(),p=G.p,[from,upto]=PER[p],n=pNews(G.b,p),I=E.IND[G.ind];
+ const ym=r.months.slice(from,upto),sum=k=>ym.reduce((a,m)=>a+m[k],0),last=ym.length?ym[ym.length-1].cash:0;
+ const closedNow=r.bankrupt&&r.lived<=upto;
+ $("#app").innerHTML=`
+ <div class="kick">${esc(DONG[G.dong])} ${I.nm} · ${p+1} / 6</div>
+ <h1>${PNM[p]}</h1>
+ <div class="news">
+  <p style="font-size:14px;opacity:.8">이 동네 ${I.nm} 실제 숫자${R}</p>
+  <p>새로 연 곳 <b>${n.opens}곳</b> · 문 닫은 곳 <b>${n.closes}곳</b></p>
+  <p>가게 하나 월 매출 <b>${won(n.avg)}</b>${n.chg===null?"":` <span style="white-space:nowrap">(${n.chg>=0?"+":""}${n.chg}%)</span>`}</p>
+ </div>
+ <div class="card">
+  ${chart([r],upto)}
+  <div class="stat"><span>이 기간 내 매출</span><b>${won(sum("sales"))}</b></div>
+  <div class="stat"><span>나간 돈 (원가·월세·인건비·생활비·이자)</span><b>${won(sum("cost"))}</b></div>
+  <div class="stat"><span>통장 잔고</span><b style="color:${last<0?"var(--red)":"var(--ink)"}">${won(last)}</b></div>
+ </div>
+ ${closedNow?`<div class="card" style="border-color:var(--red)"><b style="color:var(--red)">잔고가 석 달 연속 바닥 — 문을 닫았어요</b></div>
+  <div class="row"><button class="btn or" onclick="G.stage='end';render()">결과 보기</button></div>`:
+ p<5?`<h2>${DNM[p]}부터 어떻게 할까</h2>
+  <div class="opts">${Object.entries(E.ACT).map(([k,v])=>`<button class="opt" onclick="act('${k}')">${v.nm}<small>${v.d}</small></button>`).join("")}</div>`:
+  `<div class="row"><button class="btn or" onclick="G.stage='end';render()">5년 결과 보기</button></div>`}
+ <details><summary>내 가게 매출은 어떻게 정하나요</summary>
+ <p>이 동네 같은 업종 가게 하나의 그 분기 실제 월 매출${R} × 단골 붙는 정도(처음 70% → 매달 +2%, 최대 110%)${A} × 자리·영업시간·직원 배수${A}</p>
+ <p>영업시간 배수는 이 동네 시간대별 실제 매출 비중${R}으로 계산해요</p></details>`;
+}
+function act(k){G.acts.push(k);if(k==="close"){G.stage="end";render();return;}G.p++;render();window.scrollTo(0,0);}
+/* ── 4. 결과 ── */
+function decisive(r){let worst=null;for(let k=0;k<5;k++){const ms=r.months.slice(k*12,k*12+12);if(!ms.length)break;const d=ms[ms.length-1].cash-(k?r.months[k*12-1].cash:ms[0].cash);if(!worst||d<worst.d)worst={y:2021+k,d};}return worst;}
+function renderEnd(){
+ const r=cur(),I=E.IND[G.ind],nm=DONG[G.dong],cr=Math.round(E.realCloseRate(G.b)*100);
+ const yrs=Math.floor(r.lived/12),mo=r.lived%12, life=r.lived>=60?"5년 내내 영업":`${yrs?yrs+"년 ":""}${mo?mo+"개월":""} 만에 ${r.quit?"스스로 접음":"폐업"}`;
+ const dv=decisive(r), why=dv?`${dv.y}년에 잔고가 가장 크게 ${dv.d<0?"줄었어요":"늘었어요"} (${won(dv.d)})`:"";
+ const actTxt=G.acts.length?G.acts.map((a,i)=>`${DNM[i]} ${E.ACT[a].nm}`).join(" · "):"선택 없이 끝남";
+ const vs=G.vs&&G.vs.d===G.dong&&G.vs.i===G.ind?G.vs:null;
+ G.lastGain=r.gain;
+ $("#app").innerHTML=`
+ <div class="kick">${esc(nm)} · ${I.nm} · 결과</div>
+ <p class="end1">${esc(nm)} ${I.nm} ${life}<br>내 돈 ${r.gain>=0?"+":""}${won(r.gain)}</p>
+ <p class="lead" style="font-size:15px">처음 넣은 내 돈 5,000만 원에서 늘거나 준 돈<br>생활비 월 ${E.LIVING}만 원은 매달 뺐어요</p>
+ <div class="card">${chart(G.alt?[r,G.alt.r]:[r],60)}
+  ${G.alt?`<div class="legend"><span><i style="background:#E8743B"></i>이번 판 ${won(r.gain)}</span><span><i style="background:#1F6C9F"></i>지난 판 ${won(G.alt.r.gain)}</span></div>
+  <p style="text-align:center;margin:8px 0 0"><b>${G.alt.what}</b> 하나 바꿔서 <b style="color:${r.gain>=G.alt.r.gain?"var(--te)":"var(--red)"}">${r.gain>=G.alt.r.gain?"+":""}${won(r.gain-G.alt.r.gain)}</b></p>`:""}
+ </div>
+ <div class="card">
+  <div class="stat"><span>내 결과</span><b>${life}</b></div>
+  <div class="stat" style="display:block"><span>결정적인 해</span><br><b style="white-space:normal">${why}</b></div>
+  <div class="stat"><span>실제 이 동네 ${I.nm}${G.b.gu?" (구 기준)":""}</span><b>해마다 ${cr}% 폐업${R}</b></div>
+  ${vs?`<div class="stat"><span>친구 결과</span><b>${won(vs.g)} · 나보다 ${won(Math.abs(r.gain-vs.g))} ${r.gain>=vs.g?"적음":"많음"}</b></div>`:""}
+  <p style="font-size:14px;color:var(--sub);margin:8px 0 0">내 선택: ${actTxt}</p>
+ </div>
+ <h2>한 선택만 바꿔 다시</h2>
+ <p class="lead" style="font-size:15px">같은 5년, 같은 동네 — 어느 해 결정을 바꿔 볼까요</p>
+ <div class="opts">${G.acts.map((a,i)=>`<button class="opt" onclick="redo(${i})">${DNM[i]} 「${E.ACT[a].nm}」 바꾸기</button>`).join("")||""}
+ <button class="opt" onclick="G.stage='setup';render()">개업 설정 바꾸기<small>자리·영업시간·직원·여유 자금</small></button></div>
+ <div class="row"><button class="btn or" onclick="share()">친구에게 같은 판 보내기</button>
+ <button class="btn ghost" onclick="G.alt=null;G.stage='start';render()">다른 동네·업종</button></div>
+ <details><summary>게임 가정표 전부 보기</summary>
+ <p>원가·기타 운영비 비율 ${I.nm} ${Math.round(I.mat*100)}%${A} · 인테리어·장비 ${won(I.ent)}${A}</p>
+ <p>자리: 큰길 손님 +15% 월세 매출의 20% · 골목 −8% 12% · 2층 −28% 7%${A} · 월세 해마다 +4%${A}</p>
+ <p>직원 0명 매출 −20%, 2명 +12%${A} · 인건비 = 그해 최저임금 × 209시간${R}</p>
+ <p>가격 −10% 손님 +12% · 메뉴 늘리기 매출 +6% 원가 4%↑ · 배달 매출 +18% 수수료 25%${A}</p>
+ <p>대출 연 5%${A} · 잔고가 석 달 연속 0 아래면 폐업${A}</p>
+ <p>원가 비율은 업종마다 「그대로 버티기」 판의 서울 동 중앙값이 5년 +3천만 원이 되도록 맞춘 숫자예요</p>
+ <p>매출 기준 = 서울시 상권분석서비스 추정매출 ÷ 유사업종 점포 수 (카드 결제 기반 추정치)${R}</p></details>
+ <p class="note">게임 결과예요 · 실제 창업 판단은 실제 숫자만 보세요</p>`;
+}
+function redo(i){
+ const prev=cur(),old=G.acts[i];
+ const choices=Object.keys(E.ACT).filter(k=>k!==old);
+ $("#app").innerHTML=`<div class="kick">${DNM[i]}로 돌아가기</div><h1>${DNM[i]}에 「${E.ACT[old].nm}」 대신</h1>
+ <div class="opts">${choices.map(k=>`<button class="opt" onclick="redo2(${i},'${k}')">${E.ACT[k].nm}<small>${E.ACT[k].d}</small></button>`).join("")}</div>
+ <div class="row"><button class="btn ghost" onclick="render()">취소</button></div>`;
+ G._prev=prev;window.scrollTo(0,0);
+}
+function redo2(i,k){
+ const what=`${DNM[i]} 「${E.ACT[G.acts[i]].nm}」→「${E.ACT[k].nm}」`;
+ G.alt={r:G._prev,what};
+ /* 같은 역사·같은 다른 결정, 그 해 결정만 교체. 바꾼 뒤 해들은 원래 선택 유지 */
+ G.acts[i]=k; if(k==="close")G.acts=G.acts.slice(0,i+1);
+ G.stage="end";render();window.scrollTo(0,0);
+}
+function share(){
+ const r=cur(),u=new URL(location.href.split("?")[0]);
+ u.searchParams.set("d",G.dong);u.searchParams.set("i",G.ind);u.searchParams.set("g",String(r.gain));
+ const text=`${DONG[G.dong]}에서 ${E.IND[G.ind].nm} 5년 — 나는 ${r.gain>=0?"+":""}${won(r.gain)} · 같은 동네 같은 5년, 너는?`;
+ if(navigator.share)navigator.share({title:"이생동",text,url:u.toString()}).catch(()=>{});
+ else navigator.clipboard&&navigator.clipboard.writeText(text+" "+u).then(()=>alert("링크를 복사했어요"));
+}
+function render(){({start:renderStart,setup:renderSetup,year:renderYear,end:renderEnd})[G.stage||"start"]();}
+(async()=>{
+ DONG=await (await fetch("data/dong.json")).json();
+ const p=new URLSearchParams(location.search);
+ if(p.get("d")&&p.get("i")&&E.IND[p.get("i")]&&DONG[p.get("d")]){G.vs={d:p.get("d"),i:p.get("i"),g:+p.get("g")||0};await loadInd(G.vs.i);}
+ G.stage="start";render();
+})();
+</script>
+</body>
+</html>
