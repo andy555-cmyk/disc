@@ -59,7 +59,7 @@ const won=v=>{if(Math.round(v)===0)return "0원";const s=v<0?"−":"";v=Math.abs
 let DONG={},DATA={},G={};
 async function loadInd(i){if(!DATA[i])DATA[i]=await (await fetch(`data/${i}.json`)).json();return DATA[i];}
 function bounds(i){const d=DATA[i];if(d._b)return d._b;const v=[];for(const c in d.d){const b=E.baseline(d,c);if(b)v.push(b.per.slice(0,4).reduce((a,x)=>a+x,0)/4);}v.sort((a,b)=>a-b);
- return d._b=[v[Math.floor(v.length*.05)],v[Math.floor(v.length*.95)]];}
+ return d._b=[v[Math.floor(v.length*.01)],v[Math.min(v.length-1,Math.floor(v.length*.99))]];}
 /* 기간: 2021 상반기·하반기, 2022~2025 */
 const PER=[[0,6],[6,12],[12,24],[24,36],[36,48],[48,60]];
 const PNM=["2021년 1~6월","2021년 7~12월","2022년","2023년","2024년","2025년"];
